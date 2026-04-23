@@ -81,10 +81,7 @@
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="category-checkboxes"></div>
         </fieldset>
 
-        <div>
-          <label class="block mb-1">Description (optional, max 500 chars)</label>
-          <textarea id="description" maxlength="500" rows="4" class="w-full bg-muted border border-slate-600 rounded px-3 py-2"></textarea>
-        </div>
+        <!-- Description field removed per requirement -->
 
         <div>
           <div class="cf-turnstile" data-theme="dark" data-size="flexible" data-appearance="interaction-only"></div>
@@ -104,9 +101,9 @@
     <div class="max-w-6xl mx-auto px-4 py-4 text-sm text-slate-300 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
       <div class="flex gap-4">
         <a href="about.html" class="hover:text-white underline underline-offset-2">About</a>
-        <a href="https://github.com/YOUR-USERNAME/namehim-app" class="hover:text-white underline underline-offset-2">GitHub</a>
+        <a href="https://github.com/austintamargo/namehim-app" class="hover:text-white underline underline-offset-2">GitHub</a>
       </div>
-      <p>Open source</p>
+      <p>Open source – fork and improve</p>
     </div>
   </footer>
 
@@ -125,10 +122,11 @@
       '#/submit': 'page-submit'
     };
 
+   
     const config = {
-      SUPABASE_URL: window.NAMEHIM_CONFIG?.SUPABASE_URL || https://cmmggaprguusffiphegy.supabase.co,
-      SUPABASE_ANON_KEY: window.NAMEHIM_CONFIG?.SUPABASE_ANON_KEY || sb_publishable_G9Doh6gciyFVT1NDum55ZA_8ryL3fOw,
-      TURNSTILE_SITE_KEY: window.NAMEHIM_CONFIG?.TURNSTILE_SITE_KEY || 0x4AAAAAADCC51BDmfY6JgSc
+      SUPABASE_URL: 'https://cmmggaprguusffiphegy.supabase.co',
+      SUPABASE_ANON_KEY: 'sb_publishable_G9Doh6gciyFVT1NDum55ZA_8ryL3fOw',
+      TURNSTILE_SITE_KEY: '0x4AAAAAADCC51BDmfY6JgSc'
     };
 
     const supabase = window.supabase.createClient(config.SUPABASE_URL, config.SUPABASE_ANON_KEY);
@@ -264,7 +262,6 @@
       const name = document.getElementById('name').value.trim();
       const city = document.getElementById('city').value.trim();
       const state = document.getElementById('state').value.trim().toUpperCase();
-      const description = document.getElementById('description').value.trim();
       const categories = Array.from(document.querySelectorAll('input[name="categories"]:checked')).map(el => el.value);
 
       if (!categories.length) {
@@ -280,7 +277,6 @@
         city,
         state,
         categories,
-        description: description || null,
         submitter_uuid: localStorage.getItem('submitter_id')
       };
 
@@ -309,6 +305,7 @@
         if (!button) return;
         const reportId = button.dataset.reportId;
         console.log(`Report this entry clicked for report id: ${reportId}`);
+        // Future: send to a moderation table
       });
     }
 
