@@ -280,8 +280,9 @@
     .footer-inner a { color: inherit; }
 
     @media (max-width: 760px) {
-  .table-wrap {
-    overflow-x: visible;
+  table {
+    min-width: 0;     /* remove the 760px minimum */
+    width: 100%;      /* allow it to shrink to the container */
   }
   table, thead, tbody, tr, th, td {
     display: block;
