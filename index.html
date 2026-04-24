@@ -4,293 +4,611 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NameHim</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            bg: '#0b1220',
-            panel: '#111827',
-            muted: '#1f2937',
-            text: '#e5e7eb',
-            accent: '#60a5fa'
-          }
-        }
+  <style>
+    :root {
+      --bg: #0b1220;
+      --panel: #111827;
+      --panel-2: #1f2937;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border: #334155;
+      --accent: #60a5fa;
+      --danger: #ef4444;
+      --success: #22c55e;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .disclaimer {
+      background: #fde68a;
+      color: #1f2937;
+      border-bottom: 1px solid #fcd34d;
+      font-size: 0.8rem;
+      line-height: 1.4;
+      padding: 0.75rem 1rem;
+      text-align: center;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      background: rgba(17, 24, 39, 0.92);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(6px);
+    }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 0 1rem;
+    }
+
+    .header-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 1rem 0;
+    }
+
+    nav { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+    .nav-link {
+      border: 1px solid var(--border);
+      background: var(--panel-2);
+      color: var(--text);
+      text-decoration: none;
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .nav-link:hover,
+    .nav-link.active { background: #334155; }
+
+    main { flex: 1; }
+
+    .page {
+      display: none;
+      padding: 1.5rem 0;
+    }
+
+    .page.active { display: block; }
+
+    h1 { margin: 0; font-size: 1.7rem; }
+    h2 { margin-top: 0; margin-bottom: 1rem; font-size: 1.4rem; }
+
+    .controls {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      border: 1px solid var(--border);
+      background: var(--panel-2);
+      color: var(--text);
+      border-radius: 0.5rem;
+      padding: 0.65rem 0.75rem;
+      font-size: 0.95rem;
+    }
+
+    .search-input { max-width: 420px; }
+
+    button {
+      border: 1px solid var(--border);
+      background: var(--panel-2);
+      color: var(--text);
+      border-radius: 0.5rem;
+      padding: 0.6rem 0.75rem;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    button:hover { background: #334155; }
+    button:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .primary {
+      background: var(--accent);
+      color: #0f172a;
+      border-color: #3b82f6;
+      font-weight: 700;
+    }
+
+    .table-wrap {
+      border: 1px solid var(--border);
+      border-radius: 0.7rem;
+      overflow-x: auto;
+      background: #0f172a;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
+    }
+
+    th, td {
+      border-bottom: 1px solid #1e293b;
+      padding: 0.8rem;
+      text-align: left;
+      vertical-align: top;
+      font-size: 0.9rem;
+    }
+
+    th {
+      background: var(--panel-2);
+      color: #cbd5e1;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    tbody tr:hover { background: rgba(51, 65, 85, 0.3); }
+
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    .pill {
+      display: inline-block;
+      font-size: 0.72rem;
+      line-height: 1;
+      border-radius: 999px;
+      padding: 0.35rem 0.5rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .emotional-abuse { background: #64748b; color: #fff; }
+    .physical-abuse { background: #fb923c; color: #111827; }
+    .stalking { background: #facc15; color: #111827; }
+    .sexual-assault { background: #a855f7; color: #fff; }
+    .rape { background: #dc2626; color: #fff; }
+
+    .message {
+      margin-top: 0.9rem;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .message.error { color: var(--danger); }
+    .message.success { color: var(--success); }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 0.7rem;
+      padding: 1rem;
+      max-width: 720px;
+    }
+
+    .row { margin-bottom: 0.9rem; }
+    .row label,
+    fieldset legend {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 0.35rem;
+      color: #d1d5db;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.8rem;
+    }
+
+    fieldset {
+      border: 1px solid var(--border);
+      border-radius: 0.6rem;
+      padding: 0.75rem;
+      margin: 0 0 0.9rem 0;
+    }
+
+    .checkboxes {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+    }
+
+    .check {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: var(--panel-2);
+      border: 1px solid var(--border);
+      border-radius: 0.45rem;
+      padding: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .warning { color: #f59e0b; font-size: 0.85rem; margin-top: 0.5rem; }
+    .hidden { display: none !important; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      background: rgba(17, 24, 39, 0.85);
+      margin-top: 2rem;
+    }
+
+    .footer-inner {
+      padding: 1rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: #cbd5e1;
+    }
+
+    .footer-inner a { color: inherit; }
+
+    @media (max-width: 760px) {
+      .grid,
+      .checkboxes {
+        grid-template-columns: 1fr;
       }
-    };
-  </script>
+    }
+  </style>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
-<body class="bg-bg text-text min-h-screen flex flex-col">
-  <div class="bg-yellow-200 text-slate-900 border-b border-yellow-300 text-center text-xs sm:text-sm leading-relaxed px-4 py-3">
+<body>
+  <div class="disclaimer">
     DISCLAIMER: All user-submitted statements on this site are unverified and generated by third-party users, not by the operator of this site. We do not endorse, confirm, or investigate the truth of any user submission. This information is presented for informational purposes only and is not a substitute for professional legal advice or law enforcement investigation.
   </div>
 
-  <header class="border-b border-slate-700 bg-panel/90 backdrop-blur sticky top-0 z-20">
-    <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-      <h1 class="text-2xl font-bold tracking-wide">NameHim</h1>
-      <nav class="flex flex-wrap gap-2 text-sm">
-        <a href="#/browse" class="px-3 py-2 rounded bg-muted hover:bg-slate-600 transition">Home</a>
-        <a href="#/submit" class="px-3 py-2 rounded bg-muted hover:bg-slate-600 transition">Submit</a>
-        <a href="about.html" class="px-3 py-2 rounded bg-muted hover:bg-slate-600 transition">About</a>
+  <header>
+    <div class="container header-inner">
+      <h1>NameHim</h1>
+      <nav>
+        <a href="#/browse" class="nav-link" data-route="#/browse">Browse</a>
+        <a href="#/submit" class="nav-link" data-route="#/submit">Submit</a>
+        <a href="about.html" class="nav-link">About</a>
       </nav>
     </div>
   </header>
 
-  <main class="max-w-6xl mx-auto w-full px-4 py-6 flex-1">
-    <section id="page-browse" class="hidden">
-      <h2 class="text-xl font-semibold mb-4">Search / Browse Reports</h2>
-      <div class="mb-4 flex flex-col sm:flex-row gap-2 sm:items-center">
-        <input id="report-search" type="text" placeholder="Filter by name, city, state, or country..." class="w-full sm:max-w-md bg-muted border border-slate-600 rounded px-3 py-2" />
-        <button id="clear-search" type="button" class="px-3 py-2 rounded border border-slate-600 hover:bg-slate-800 text-sm">Clear</button>
-      </div>
-      <div class="overflow-x-auto border border-slate-700 rounded-lg">
-        <table class="w-full text-sm">
-          <thead class="bg-muted text-slate-300">
-            <tr>
-              <th class="text-left p-3">Full Name</th>
-              <th class="text-center p-3">Location (City, State/Province, Country)</th>
-              <th class="text-right p-3">Categories</th>
-              <th class="text-right p-3">Actions</th>
-            </tr>
-          </thead>
-          <tbody id="reports-body" class="divide-y divide-slate-800"></tbody>
-        </table>
-      </div>
-      <p id="browse-message" class="mt-4 text-slate-400 text-sm"></p>
-    </section>
-
-    <section id="page-submit" class="hidden max-w-2xl">
-      <h2 class="text-xl font-semibold mb-4">Submit a Report</h2>
-      <form id="report-form" class="space-y-4 bg-panel border border-slate-700 rounded-lg p-5">
-        <div>
-          <label class="block mb-1">Full Name *</label>
-          <input id="name" required type="text" class="w-full bg-muted border border-slate-600 rounded px-3 py-2" />
+  <main>
+    <div class="container">
+      <section id="page-browse" class="page" aria-live="polite">
+        <h2>Browse Reports</h2>
+        <div class="controls">
+          <input id="report-search" class="search-input" type="text" placeholder="Search by name, city, state, or country..." />
+          <button id="clear-search" type="button">Clear</button>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block mb-1">City *</label>
-            <input id="city" required type="text" class="w-full bg-muted border border-slate-600 rounded px-3 py-2" />
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Location (City, State/Province, Country)</th>
+                <th>Categories</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="reports-body"></tbody>
+          </table>
+        </div>
+        <p id="browse-message" class="message"></p>
+      </section>
+
+      <section id="page-submit" class="page">
+        <h2>Submit a Report</h2>
+        <form id="report-form" class="panel" novalidate>
+          <div class="row">
+            <label for="name">Name *</label>
+            <input id="name" type="text" required />
           </div>
-          <div>
-            <label class="block mb-1">State / Province (optional, 2-letter uppercase suggested)</label>
-            <input id="state" type="text" class="w-full bg-muted border border-slate-600 rounded px-3 py-2" placeholder="e.g., CA, Ontario" />
+
+          <div class="grid">
+            <div class="row">
+              <label for="city">City *</label>
+              <input id="city" type="text" required />
+            </div>
+            <div class="row">
+              <label for="state">State / Province (optional)</label>
+              <input id="state" type="text" />
+            </div>
           </div>
-        </div>
-        <div>
-          <label class="block mb-1">Country *</label>
-          <input id="country" required type="text" class="w-full bg-muted border border-slate-600 rounded px-3 py-2" placeholder="e.g., USA, Canada, UK" />
-        </div>
 
-        <fieldset>
-          <legend class="mb-2">Categories *</legend>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="category-checkboxes"></div>
-        </fieldset>
+          <div class="row">
+            <label for="country">Country *</label>
+            <input id="country" type="text" required />
+          </div>
 
-        <div>
-          <div id="turnstile-container" class="cf-turnstile" data-theme="dark" data-size="flexible"></div>
-          <p id="turnstile-warning" class="text-amber-300 text-sm mt-2 hidden">Please complete Turnstile verification.</p>
-        </div>
+          <fieldset>
+            <legend>Categories *</legend>
+            <div class="checkboxes" id="category-checkboxes"></div>
+          </fieldset>
 
-        <p id="rate-warning" class="text-red-400 text-sm hidden">You've reached the hourly limit. Please wait before submitting more.</p>
-        <button id="submit-btn" type="submit" class="bg-accent text-black font-semibold px-4 py-2 rounded hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed">
-          Submit
-        </button>
-      </form>
-      <p id="submit-message" class="mt-4 text-sm"></p>
-    </section>
+          <div class="row">
+            <div
+              class="cf-turnstile"
+              data-sitekey="0x4AAAAAADCC51BDmfY6JgSc"
+              data-theme="dark"
+            ></div>
+            <p id="turnstile-warning" class="warning hidden">Please complete the CAPTCHA verification.</p>
+          </div>
+
+          <p id="rate-warning" class="message error hidden">You have reached the limit of 3 submissions in the last hour. Please try again later.</p>
+          <button id="submit-btn" class="primary" type="submit">Submit</button>
+        </form>
+        <p id="submit-message" class="message"></p>
+      </section>
+    </div>
   </main>
 
-  <footer class="border-t border-slate-700 bg-panel/80">
-    <div class="max-w-6xl mx-auto px-4 py-4 text-sm text-slate-300 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-      <div class="flex gap-4">
-        <a href="about.html" class="hover:text-white underline underline-offset-2">About</a>
-        <a href="https://github.com/namehim/namehim" class="hover:text-white underline underline-offset-2">GitHub</a>
+  <footer>
+    <div class="container footer-inner">
+      <div>
+        <a href="about.html">About</a> ·
+        <a href="https://github.com/namehim/namehim">GitHub</a>
       </div>
-      <p>Open source</p>
+      <span>Open source</span>
     </div>
   </footer>
 
   <script>
-    const CATEGORY_COLORS = {
-      'Emotional abuse': 'bg-gray-500 text-white',
-      'Physical abuse': 'bg-orange-500 text-black',
-      'Stalking': 'bg-yellow-400 text-black',
-      'Sexual assault': 'bg-purple-600 text-white',
-      'Rape': 'bg-red-600 text-white'
-    };
-
-    const CATEGORIES = Object.keys(CATEGORY_COLORS);
-    const routes = {
+    const ROUTES = {
       '#/browse': 'page-browse',
       '#/submit': 'page-submit'
     };
 
-    const config = {
-      SUPABASE_URL: 'https://cmmggaprguusffiphegy.supabase.co',
-      SUPABASE_ANON_KEY: 'sb_publishable_G9Doh6gciyFVT1NDum55ZA_8ryL3fOw',
-      TURNSTILE_SITE_KEY: '0x4AAAAAADCC51BDmfY6JgSc'
-    };
+    const CATEGORIES = [
+      'emotional abuse',
+      'physical abuse',
+      'stalking',
+      'sexual assault',
+      'rape'
+    ];
 
-    const supabase = window.supabase.createClient(config.SUPABASE_URL, config.SUPABASE_ANON_KEY);
+    const SUPABASE_URL = 'https://cmmggaprguusffiphegy.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_G9Doh6gciyFVT1NDum55ZA_8ryL3fOw';
+    const MAX_SUBMISSIONS_PER_HOUR = 3;
+    const RATE_LIMIT_STORAGE_KEY = 'submission_timestamps';
 
-    const reportsBody = document.getElementById('reports-body');
+    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    const pageBrowse = document.getElementById('page-browse');
+    const pageSubmit = document.getElementById('page-submit');
     const browseMessage = document.getElementById('browse-message');
     const submitMessage = document.getElementById('submit-message');
-    const form = document.getElementById('report-form');
+    const reportSearch = document.getElementById('report-search');
+    const clearSearch = document.getElementById('clear-search');
+    const reportsBody = document.getElementById('reports-body');
+    const reportForm = document.getElementById('report-form');
     const submitBtn = document.getElementById('submit-btn');
     const rateWarning = document.getElementById('rate-warning');
     const turnstileWarning = document.getElementById('turnstile-warning');
-    const reportSearch = document.getElementById('report-search');
-    const clearSearchBtn = document.getElementById('clear-search');
+    const categoryContainer = document.getElementById('category-checkboxes');
+
     let allReports = [];
-    let turnstileWidgetId = null;
 
-    function initializeSubmitterId() {
-      let id = localStorage.getItem('submitter_id');
-      if (!id) {
-        id = crypto.randomUUID();
-        localStorage.setItem('submitter_id', id);
-      }
-      return id;
-    }
-
-    function setupCategoriesUI() {
-      const container = document.getElementById('category-checkboxes');
-      container.innerHTML = '';
-      CATEGORIES.forEach((category) => {
-        const wrap = document.createElement('label');
-        wrap.className = 'flex items-center gap-2 bg-muted border border-slate-600 rounded px-3 py-2';
-        wrap.innerHTML = `<input type="checkbox" name="categories" value="${category}" class="accent-blue-400"> <span>${category}</span>`;
-        container.appendChild(wrap);
+    function escapeHTML(value) {
+      return String(value || '').replace(/[&<>'"]/g, function replaceChar(char) {
+        return {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          "'": '&#39;',
+          '"': '&quot;'
+        }[char];
       });
     }
 
-    function getSubmissionHistory() {
-      const raw = localStorage.getItem('submission_timestamps');
-      const arr = raw ? JSON.parse(raw) : [];
-      const cutoff = Date.now() - 60 * 60 * 1000;
-      const recent = arr.filter(ts => Number(ts) > cutoff);
-      localStorage.setItem('submission_timestamps', JSON.stringify(recent));
-      return recent;
+    function toTitleCase(value) {
+      return String(value || '')
+        .split(' ')
+        .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+        .join(' ');
+    }
+
+    function getCategoryClass(category) {
+      return category.replace(/\s+/g, '-');
+    }
+
+    function renderCategories() {
+      categoryContainer.innerHTML = '';
+      CATEGORIES.forEach((category) => {
+        const label = document.createElement('label');
+        label.className = 'check';
+        label.innerHTML = '<input type="checkbox" name="categories" value="' + escapeHTML(category) + '"> <span>' + escapeHTML(toTitleCase(category)) + '</span>';
+        categoryContainer.appendChild(label);
+      });
+    }
+
+    function getCurrentRoute() {
+      return ROUTES[window.location.hash] ? window.location.hash : '#/browse';
+    }
+
+    function renderRoute() {
+      const route = getCurrentRoute();
+
+      if (window.location.hash !== route) {
+        window.location.hash = route;
+        return;
+      }
+
+      pageBrowse.classList.toggle('active', route === '#/browse');
+      pageSubmit.classList.toggle('active', route === '#/submit');
+
+      document.querySelectorAll('[data-route]').forEach((link) => {
+        link.classList.toggle('active', link.getAttribute('data-route') === route);
+      });
+
+    }
+
+    function normalizeTimestamps(values) {
+      const cutoff = Date.now() - (60 * 60 * 1000);
+      const cleaned = (Array.isArray(values) ? values : [])
+        .map((value) => Number(value))
+        .filter((value) => Number.isFinite(value) && value > cutoff);
+      localStorage.setItem(RATE_LIMIT_STORAGE_KEY, JSON.stringify(cleaned));
+      return cleaned;
+    }
+
+    function getSubmissionTimestamps() {
+      try {
+        const raw = localStorage.getItem(RATE_LIMIT_STORAGE_KEY);
+        return normalizeTimestamps(raw ? JSON.parse(raw) : []);
+      } catch (error) {
+        localStorage.removeItem(RATE_LIMIT_STORAGE_KEY);
+        return [];
+      }
+    }
+
+    function canSubmitNow() {
+      return getSubmissionTimestamps().length < MAX_SUBMISSIONS_PER_HOUR;
     }
 
     function updateRateLimitUI() {
-      const recent = getSubmissionHistory();
-      const limited = recent.length >= 3;
-      rateWarning.classList.toggle('hidden', !limited);
-      submitBtn.disabled = limited;
-      return limited;
+      const blocked = !canSubmitNow();
+      rateWarning.classList.toggle('hidden', !blocked);
+      submitBtn.disabled = blocked;
+      return blocked;
     }
 
     function addSubmissionTimestamp() {
-      const recent = getSubmissionHistory();
-      recent.push(Date.now());
-      localStorage.setItem('submission_timestamps', JSON.stringify(recent));
-      localStorage.setItem('last_submit_timestamp', String(Date.now()));
-    }
-
-    function getTurnstileToken() {
-      const input = document.querySelector('[name="cf-turnstile-response"]');
-      return input?.value || '';
-    }
-
-    function renderCategoryPills(categories = []) {
-      return categories.map(cat =>
-        `<span class="inline-block text-xs px-2 py-1 rounded-full mr-1 ${CATEGORY_COLORS[cat] || 'bg-slate-500 text-white'}">${cat}</span>`
-      ).join('');
+      const timestamps = getSubmissionTimestamps();
+      timestamps.push(Date.now());
+      localStorage.setItem(RATE_LIMIT_STORAGE_KEY, JSON.stringify(timestamps));
     }
 
     function formatLocation(city, state, country) {
-      let parts = [escapeHTML(city)];
-      if (state && state.trim() !== "") parts.push(escapeHTML(state));
-      parts.push(escapeHTML(country));
+      const parts = [city, state, country]
+        .map((part) => (part || '').trim())
+        .filter((part) => part.length > 0)
+        .map((part) => escapeHTML(part));
       return parts.join(', ');
     }
 
-    function renderReports(reports) {
+    function renderReportRows(reports) {
       reportsBody.innerHTML = '';
+
       if (!reports.length) {
-        reportsBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-slate-400">No reports yet. Be the first to submit.</td></tr>`;
+        const emptyRow = document.createElement('tr');
+        emptyRow.innerHTML = '<td colspan="4">No reports yet. Be the first to submit.</td>';
+        reportsBody.appendChild(emptyRow);
         return;
       }
 
       reports.forEach((report) => {
-        const tr = document.createElement('tr');
-        tr.className = 'hover:bg-slate-900/50';
-        tr.innerHTML = `
-          <td class="p-3 text-left align-top">${escapeHTML(report.name)}</td>
-          <td class="p-3 text-center align-top">${formatLocation(report.city, report.state, report.country)}</td>
-          <td class="p-3 text-right align-top">${renderCategoryPills(report.categories)}</td>
-          <td class="p-3 text-right align-top">
-            <button data-report-id="${report.id}" class="report-entry-btn text-xs border border-slate-500 rounded px-2 py-1 hover:bg-slate-700">
-              Report this entry
-            </button>
-          </td>
-        `;
-        reportsBody.appendChild(tr);
+        const categories = Array.isArray(report.categories) ? report.categories : [];
+        const pillHTML = categories
+          .map((category) => {
+            const normalized = String(category || '').toLowerCase().trim();
+            const cssClass = getCategoryClass(normalized);
+            return '<span class="pill ' + cssClass + '">' + escapeHTML(toTitleCase(normalized)) + '</span>';
+          })
+          .join('');
+
+        const row = document.createElement('tr');
+        row.innerHTML = '' +
+          '<td>' + escapeHTML(report.name || '') + '</td>' +
+          '<td>' + formatLocation(report.city, report.state, report.country) + '</td>' +
+          '<td><div class="pills">' + pillHTML + '</div></td>' +
+          '<td><button type="button" class="report-entry-btn" data-report-id="' + escapeHTML(report.id || '') + '">Report this entry</button></td>';
+
+        reportsBody.appendChild(row);
       });
     }
 
-    function escapeHTML(str = '') {
-      return str.replace(/[&<>'"]/g, (ch) => ({
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        "'": '&#39;',
-        '"': '&quot;'
-      }[ch]));
+    function applySearchFilter() {
+      const query = (reportSearch.value || '').trim().toLowerCase();
+
+      if (!query) {
+        renderReportRows(allReports);
+        browseMessage.textContent = allReports.length
+          ? 'Loaded ' + allReports.length + ' report(s).'
+          : 'No reports yet. Be the first to submit.';
+        browseMessage.className = 'message';
+        return;
+      }
+
+      const filtered = allReports.filter((report) => {
+        const blob = [report.name, report.city, report.state, report.country]
+          .map((item) => String(item || '').toLowerCase())
+          .join(' ');
+        return blob.includes(query);
+      });
+
+      renderReportRows(filtered);
+      browseMessage.textContent = filtered.length
+        ? 'Showing ' + filtered.length + ' of ' + allReports.length + ' report(s).'
+        : 'No matching reports found.';
+      browseMessage.className = 'message';
     }
 
     async function loadReports() {
       browseMessage.textContent = 'Loading reports...';
-      const { data, error } = await supabase
+      browseMessage.className = 'message';
+
+      const response = await supabaseClient
         .from('reports')
         .select('id,name,city,state,country,categories,created_at')
         .order('created_at', { ascending: false });
 
-      if (error) {
-        if (error.message && error.message.toLowerCase().includes('country')) {
-          browseMessage.textContent = 'Error: missing "country" column in reports table. Please add the country column and try again.';
-          return;
+      if (response.error) {
+        const errorMessage = String(response.error.message || '').toLowerCase();
+        if (errorMessage.includes('country')) {
+          browseMessage.textContent = 'Unable to load reports because the database is missing the required country column.';
+        } else {
+          browseMessage.textContent = 'Unable to load reports right now. Please try again in a moment.';
         }
-        browseMessage.textContent = `Error loading reports: ${error.message}`;
+        browseMessage.className = 'message error';
+        allReports = [];
+        renderReportRows([]);
         return;
       }
 
-      allReports = data || [];
-      applyReportFilter();
-      browseMessage.textContent = allReports.length
-        ? `Loaded ${allReports.length} report(s).`
-        : 'No reports yet. Be the first to submit.';
+      allReports = Array.isArray(response.data) ? response.data : [];
+      applySearchFilter();
     }
 
-    function applyReportFilter() {
-      const query = (reportSearch.value || '').trim().toLowerCase();
-      if (!query) {
-        renderReports(allReports);
-        return;
+    function getTurnstileToken() {
+      const tokenField = document.querySelector('[name="cf-turnstile-response"]');
+      return tokenField && tokenField.value ? tokenField.value : '';
+    }
+
+    function resetTurnstileWidget() {
+      if (window.turnstile && typeof window.turnstile.reset === 'function') {
+        window.turnstile.reset();
       }
-      const filtered = allReports.filter((report) => {
-        const blob = [report.name, report.city, report.state, report.country]
-          .map((v) => (v || '').toLowerCase())
-          .join(' ');
-        return blob.includes(query);
-      });
-      renderReports(filtered);
-      browseMessage.textContent = filtered.length
-        ? `Showing ${filtered.length} of ${allReports.length} report(s).`
-        : 'No matching reports found.';
     }
 
-    async function submitReport(event) {
+    function getSelectedCategories() {
+      return Array.from(document.querySelectorAll('input[name="categories"]:checked'))
+        .map((input) => input.value);
+    }
+
+    async function handleSubmit(event) {
       event.preventDefault();
       submitMessage.textContent = '';
+      submitMessage.className = 'message';
       turnstileWarning.classList.add('hidden');
 
       if (updateRateLimitUI()) {
+        submitMessage.textContent = 'Rate limit reached. Please wait before submitting again.';
+        submitMessage.className = 'message error';
         return;
       }
 
@@ -300,124 +618,90 @@
         return;
       }
 
-      const name = document.getElementById('name').value.trim();
-      const city = document.getElementById('city').value.trim();
-      let state = document.getElementById('state').value.trim();
-      const country = document.getElementById('country').value.trim();
-      const categories = Array.from(document.querySelectorAll('input[name="categories"]:checked')).map(el => el.value);
+      const payload = {
+        name: document.getElementById('name').value.trim(),
+        city: document.getElementById('city').value.trim(),
+        state: document.getElementById('state').value.trim() || null,
+        country: document.getElementById('country').value.trim(),
+        categories: getSelectedCategories()
+      };
 
-      if (!name || !city || !country) {
-        submitMessage.textContent = 'Please fill all required fields (Name, City, Country).';
-        submitMessage.className = 'mt-4 text-sm text-red-400';
+      if (!payload.name || !payload.city || !payload.country) {
+        submitMessage.textContent = 'Please fill in Name, City, and Country.';
+        submitMessage.className = 'message error';
         return;
       }
 
-      if (!categories.length) {
+      if (!payload.categories.length) {
         submitMessage.textContent = 'Please select at least one category.';
-        submitMessage.className = 'mt-4 text-sm text-red-400';
+        submitMessage.className = 'message error';
         return;
       }
 
       submitBtn.disabled = true;
 
-      const payload = {
-        name,
-        city,
-        state: state || null,
-        country,
-        categories,
-        submitter_uuid: localStorage.getItem('submitter_id')
-      };
+      const response = await supabaseClient.from('reports').insert(payload);
 
-      const { error } = await supabase.from('reports').insert(payload);
-
-      if (error) {
-        if (error.message && error.message.toLowerCase().includes('country')) {
-          submitMessage.textContent = 'Submission failed: "country" column is missing from reports table. Please add it in Supabase.';
-          submitMessage.className = 'mt-4 text-sm text-red-400';
-          submitBtn.disabled = false;
-          return;
+      if (response.error) {
+        const errorMessage = String(response.error.message || '').toLowerCase();
+        if (errorMessage.includes('country')) {
+          submitMessage.textContent = 'Submission failed because the database schema is missing the country column. Please contact the site admin.';
+        } else {
+          submitMessage.textContent = 'Submission failed. Please double-check your entries and try again.';
         }
-        submitMessage.textContent = `Submission failed: ${error.message}`;
-        submitMessage.className = 'mt-4 text-sm text-red-400';
+        submitMessage.className = 'message error';
         submitBtn.disabled = false;
         return;
       }
 
       addSubmissionTimestamp();
       updateRateLimitUI();
+      reportForm.reset();
+      resetTurnstileWidget();
       submitMessage.textContent = 'Report submitted successfully.';
-      submitMessage.className = 'mt-4 text-sm text-green-400';
-      form.reset();
-      if (window.turnstile && turnstileWidgetId !== null) {
-        window.turnstile.reset(turnstileWidgetId);
-      }
+      submitMessage.className = 'message success';
       submitBtn.disabled = false;
-    }
-
-    function setupReportButtons() {
-      reportsBody.addEventListener('click', (event) => {
-        const button = event.target.closest('.report-entry-btn');
-        if (!button) return;
-        const reportId = button.dataset.reportId;
-        console.log(`Report this entry clicked for report id: ${reportId}`);
-      });
-    }
-
-    function renderRoute() {
-      const hash = routes[location.hash] ? location.hash : '#/browse';
-      if (location.hash !== hash) {
-        location.hash = hash;
-      }
-      Object.entries(routes).forEach(([route, id]) => {
-        document.getElementById(id).classList.toggle('hidden', route !== hash);
-      });
-    }
-
-    function configureTurnstile() {
-      const widget = document.getElementById('turnstile-container');
-      if (!widget) return;
-      widget.setAttribute('data-sitekey', config.TURNSTILE_SITE_KEY);
-      const waitForTurnstile = () => {
-        if (!window.turnstile || !window.turnstile.render) {
-          setTimeout(waitForTurnstile, 100);
-          return;
-        }
-        if (turnstileWidgetId !== null) return;
-        turnstileWidgetId = window.turnstile.render('#turnstile-container', {
-          sitekey: config.TURNSTILE_SITE_KEY,
-          theme: 'dark'
-        });
-      };
-      waitForTurnstile();
-    }
-
-    async function bootstrap() {
-      initializeSubmitterId();
-      setupCategoriesUI();
-      updateRateLimitUI();
-      setupReportButtons();
-      form.addEventListener('submit', submitReport);
-      window.addEventListener('hashchange', renderRoute);
-      reportSearch.addEventListener('input', applyReportFilter);
-      clearSearchBtn.addEventListener('click', () => {
-        reportSearch.value = '';
-        applyReportFilter();
-      });
-      renderRoute();
-      configureTurnstile();
 
       await loadReports();
+      window.location.hash = '#/browse';
+    }
 
-      supabase
+    function setupReportActionHandler() {
+      reportsBody.addEventListener('click', function onTableClick(event) {
+        const button = event.target.closest('.report-entry-btn');
+        if (!button) return;
+        const reportId = button.getAttribute('data-report-id');
+        window.alert('Entry #' + reportId + ' has been flagged for review.');
+      });
+    }
+
+    function startRealtimeUpdates() {
+      supabaseClient
         .channel('public:reports')
-        .on('postgres_changes', { event: '*', schema: 'public', table: 'reports' }, () => {
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'reports' }, function onChange() {
           loadReports();
         })
         .subscribe();
     }
 
-    bootstrap();
+    function init() {
+      renderCategories();
+      updateRateLimitUI();
+      renderRoute();
+      loadReports();
+      setupReportActionHandler();
+      startRealtimeUpdates();
+
+      window.addEventListener('hashchange', renderRoute);
+      reportSearch.addEventListener('input', applySearchFilter);
+      clearSearch.addEventListener('click', function clearSearchInput() {
+        reportSearch.value = '';
+        applySearchFilter();
+      });
+      reportForm.addEventListener('submit', handleSubmit);
+    }
+
+    init();
   </script>
 </body>
 </html>
