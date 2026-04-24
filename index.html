@@ -801,32 +801,38 @@
     }
 
     async function loadReports() {
-      browseMessage.textContent = 'Loading reports...';
-      browseMessage.className = 'message';
+  browseMessage.textContent = 'Loading reports...';
+  browseMessage.className = 'message';
 
-      const response = await supabaseClient
-        .from('reports')
-        .select('id,name,city,state,country,categories,created_at')
-        .order('created_at', { ascending: false });
+  const WORKER_URL = 'https://api.namehim.app/filtered-reports';
 
-      if (response.error) {
-        const errorMessage = String(response.error.message || '').toLowerCase();
-        if (errorMessage.includes('country')) {
-          browseMessage.textContent = 'Unable to load reports because the database is missing the required country column.';
-        } else {
-          browseMessage.textContent = 'Unable to load reports right now. Please try again in a moment.';
-        }
-        browseMessage.className = 'message error';
-        allReports = [];
-        updateReportCount(0);
-        renderReportRows([]);
-        return;
-      }
-
-      allReports = Array.isArray(response.data) ? response.data : [];
-      updateReportCount(allReports.length);
-      applySearchFilter();
+  try {
+    const response = await fetch(WORKER_URL);
+    if (!response.ok) {
+      throw new Error(`Worker returned ${response.status}`);
     }
+    const reports = await response.json();
+
+    if (!Array.isArray(reports)) {
+      throw new Error('Worker did not return an array');
+    }
+
+    allReports = reports;
+    updateReportCount(allReports.length);
+    applySearchFilter();
+    browseMessage.textContent = allReports.length
+      ? `Loaded ${allReports.length} report(s).`
+      : 'No reports yet. Be the first to submit.';
+    browseMessage.className = 'message';
+  } catch (error) {
+    console.error('Failed to load reports via Worker:', error);
+    browseMessage.textContent = 'Unable to load reports right now. Please try again in a moment.';
+    browseMessage.className = 'message error';
+    allReports = [];
+    updateReportCount(0);
+    renderReportRows([]);
+  }
+}
 
     function getTurnstileToken() {
       const tokenField = document.querySelector('[name="cf-turnstile-response"]');
