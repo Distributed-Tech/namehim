@@ -917,10 +917,16 @@
     const reportId = button.getAttribute('data-report-id');
     if (!reportId) return;
 
-    // Optional: get submitter_uuid to track who flagged (but not required)
+    let reason = prompt(
+      'Why are you reporting this entry? (Optional, max 250 characters)\n\nThis helps moderators understand the issue.',
+      ''
+    );
+    if (reason === null) return;
+    reason = reason.trim().slice(0, 250);
+    if (reason === '') reason = null;
+
     const submitterId = localStorage.getItem('submitter_id') || 'anonymous';
 
-    // Disable button briefly to prevent double-click spam
     const originalText = button.textContent;
     button.textContent = 'Submitting...';
     button.disabled = true;
@@ -930,18 +936,17 @@
         .from('report_flags')
         .insert({
           report_id: parseInt(reportId, 10),
-          created_at: new Date().toISOString()
-          // You can also add: flagged_by: submitterId
+          reason: reason,
+          flagged_by: submitterId
         });
 
       if (error) {
-        console.error('Flag insert error:', error);
+        console.error(error);
         alert('Could not flag entry. Please try again later.');
       } else {
-        alert('Entry #' + reportId + ' has been flagged for review. Thank you.');
+        alert('Entry #' + reportId + ' has been flagged for review.\nThank you for your report.');
       }
     } catch (err) {
-      console.error('Unexpected error:', err);
       alert('An error occurred. Please try again.');
     } finally {
       button.textContent = originalText;
