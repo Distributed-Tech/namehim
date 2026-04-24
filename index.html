@@ -221,6 +221,26 @@
     .message.error { color: var(--danger); }
     .message.success { color: var(--success); }
 
+    .pagination {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 0.9rem;
+    }
+
+    .pagination button {
+      min-width: 2.2rem;
+      padding: 0.45rem 0.65rem;
+    }
+
+    .pagination button.active {
+      background: var(--accent);
+      color: #0f172a;
+      border-color: #3b82f6;
+      font-weight: 700;
+    }
+
     .panel {
       background: var(--panel);
       border: 1px solid var(--border);
@@ -387,6 +407,7 @@
             <tbody id="reports-body"></tbody>
           </table>
         </div>
+        <div id="browse-pagination" class="pagination" aria-label="Report pagination"></div>
         <p id="browse-message" class="message"></p>
       </section>
 
@@ -684,6 +705,8 @@
     const countryField = document.getElementById('country');
     const stateFieldContainer = document.getElementById('state-field-container');
     const browseStateSelect = document.getElementById('browse-state-select');
+    const browsePagination = document.getElementById('browse-pagination');
+    const REPORTS_PER_PAGE = 100;
 
     const US_STATES = [
       'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware',
@@ -699,6 +722,8 @@
 
     let allReports = [];
     window.allReports = allReports;
+    let currentFilteredReports = [];
+    let currentPage = 1;
 
     // --- ADDED: submitter_uuid management (critical fix) ---
     function getOrCreateSubmitterId() {
@@ -761,9 +786,9 @@
   } else {
     // Fallback
     const filtered = allReports.filter(r => r.state === stateFullName);
-    renderReportRows(filtered);
+    renderPagedReports(filtered, 1);
     const browseMsg = document.getElementById('browse-message');
-    if (browseMsg) browseMsg.textContent = filtered.length ? `Showing ${filtered.length} of ${allReports.length} report(s).` : 'No reports found.';
+    if (browseMsg) browseMsg.textContent = filtered.length ? `Showing ${filtered.length} of ${allReports.length} report(s), ${REPORTS_PER_PAGE} per page.` : 'No reports found.';
   }
 }
     
@@ -912,13 +937,44 @@
 });
     }
 
+    function renderPagination(totalReports, page) {
+      browsePagination.innerHTML = '';
+      const totalPages = Math.ceil(totalReports / REPORTS_PER_PAGE);
+
+      if (totalPages <= 1) {
+        return;
+      }
+
+      const previousDisabled = page <= 1 ? ' disabled' : '';
+      const nextDisabled = page >= totalPages ? ' disabled' : '';
+      let paginationHTML = '<button type="button" data-page-nav="prev"' + previousDisabled + '>Previous</button>';
+
+      for (let pageNumber = 1; pageNumber <= totalPages; pageNumber += 1) {
+        const activeClass = pageNumber === page ? ' class="active"' : '';
+        paginationHTML += '<button type="button" data-page="' + pageNumber + '"' + activeClass + '>' + pageNumber + '</button>';
+      }
+
+      paginationHTML += '<button type="button" data-page-nav="next"' + nextDisabled + '>Next</button>';
+      browsePagination.innerHTML = paginationHTML;
+    }
+
+    function renderPagedReports(reports, page) {
+      currentFilteredReports = reports;
+      const totalPages = Math.max(1, Math.ceil(reports.length / REPORTS_PER_PAGE));
+      currentPage = Math.min(Math.max(page, 1), totalPages);
+      const start = (currentPage - 1) * REPORTS_PER_PAGE;
+      const end = start + REPORTS_PER_PAGE;
+      renderReportRows(reports.slice(start, end));
+      renderPagination(reports.length, currentPage);
+    }
+
     function applySearchFilter() {
       const query = (reportSearch.value || '').trim().toLowerCase();
 
       if (!query) {
-        renderReportRows(allReports);
+        renderPagedReports(allReports, 1);
         browseMessage.textContent = allReports.length
-          ? 'Loaded ' + allReports.length + ' report(s).'
+          ? 'Loaded ' + allReports.length + ' report(s). Showing up to ' + REPORTS_PER_PAGE + ' per page.'
           : 'No reports yet. Be the first to submit.';
         browseMessage.className = 'message';
         return;
@@ -931,9 +987,9 @@
         return blob.includes(query);
       });
 
-      renderReportRows(filtered);
+      renderPagedReports(filtered, 1);
       browseMessage.textContent = filtered.length
-        ? 'Showing ' + filtered.length + ' of ' + allReports.length + ' report(s).'
+        ? 'Showing ' + filtered.length + ' of ' + allReports.length + ' report(s), ' + REPORTS_PER_PAGE + ' per page.'
         : 'No matching reports found.';
       browseMessage.className = 'message';
     }
@@ -970,7 +1026,7 @@
     allReports = [];
     window.allReports = allReports;
     updateReportCount(0);
-    renderReportRows([]);
+    renderPagedReports([], 1);
   }
 }
 
@@ -1154,6 +1210,26 @@
           }
         });
       }
+      browsePagination.addEventListener('click', function onPaginationClick(event) {
+        const target = event.target.closest('button');
+        if (!target) {
+          return;
+        }
+
+        const pageValue = Number(target.getAttribute('data-page'));
+        const navDirection = target.getAttribute('data-page-nav');
+
+        if (Number.isInteger(pageValue) && pageValue > 0) {
+          renderPagedReports(currentFilteredReports, pageValue);
+          return;
+        }
+
+        if (navDirection === 'prev') {
+          renderPagedReports(currentFilteredReports, currentPage - 1);
+        } else if (navDirection === 'next') {
+          renderPagedReports(currentFilteredReports, currentPage + 1);
+        }
+      });
       reportForm.addEventListener('submit', handleSubmit);
     }
 
