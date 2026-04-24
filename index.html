@@ -385,6 +385,7 @@
     const SUPABASE_ANON_KEY = 'sb_publishable_G9Doh6gciyFVT1NDum55ZA_8ryL3fOw';
     const MAX_SUBMISSIONS_PER_HOUR = 3;
     const RATE_LIMIT_STORAGE_KEY = 'submission_timestamps';
+    const SUBMITTER_ID_KEY = 'submitter_id';
 
     const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
@@ -402,6 +403,16 @@
     const categoryContainer = document.getElementById('category-checkboxes');
 
     let allReports = [];
+
+    // --- ADDED: submitter_uuid management (critical fix) ---
+    function getOrCreateSubmitterId() {
+      let id = localStorage.getItem(SUBMITTER_ID_KEY);
+      if (!id) {
+        id = crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).substring(2) + Date.now().toString(36);
+        localStorage.setItem(SUBMITTER_ID_KEY, id);
+      }
+      return id;
+    }
 
     function escapeHTML(value) {
       return String(value || '').replace(/[&<>'"]/g, function replaceChar(char) {
@@ -591,6 +602,7 @@
 
     function resetTurnstileWidget() {
       if (window.turnstile && typeof window.turnstile.reset === 'function') {
+        // Find the first turnstile iframe and reset
         window.turnstile.reset();
       }
     }
@@ -623,7 +635,8 @@
         city: document.getElementById('city').value.trim(),
         state: document.getElementById('state').value.trim() || null,
         country: document.getElementById('country').value.trim(),
-        categories: getSelectedCategories()
+        categories: getSelectedCategories(),
+        submitter_uuid: getOrCreateSubmitterId()    // <-- CRITICAL FIX
       };
 
       if (!payload.name || !payload.city || !payload.country) {
@@ -685,6 +698,8 @@
     }
 
     function init() {
+      // Ensure a submitter_id exists right away (used for rate limits? no, but good practice)
+      getOrCreateSubmitterId();
       renderCategories();
       updateRateLimitUI();
       renderRoute();
