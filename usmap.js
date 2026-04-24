@@ -126,6 +126,25 @@ var simplemaps_usmap_mapinfo={map_name:'us',initial_view:{x:-20,y:-10,x2:980,y2:
     }
   }
 
+  function disableLabelPointerEvents() {
+    var map = window.simplemaps_usmap;
+    if (!map || !map.labels) {
+      return;
+    }
+
+    var labelId;
+    for (labelId in map.labels) {
+      if (
+        Object.prototype.hasOwnProperty.call(map.labels, labelId) &&
+        map.labels[labelId] &&
+        map.labels[labelId].node &&
+        map.labels[labelId].node.style
+      ) {
+        map.labels[labelId].node.style.pointerEvents = "none";
+      }
+    }
+  }
+
   function setStateFill(stateId, color) {
     var map = window.simplemaps_usmap;
     if (!map || !map.states || !map.states[stateId] || !map.states[stateId].attr) {
@@ -253,6 +272,7 @@ var simplemaps_usmap_mapinfo={map_name:'us',initial_view:{x:-20,y:-10,x2:980,y2:
     chainHook("complete", function () {
       disableStateUrls();
       ensureMapResponsive();
+      disableLabelPointerEvents();
     });
 
     chainHook("over_state", function (stateId) {
@@ -297,6 +317,7 @@ var simplemaps_usmap_mapinfo={map_name:'us',initial_view:{x:-20,y:-10,x2:980,y2:
 
     window.addEventListener("resize", ensureMapResponsive);
     ensureMapResponsive();
+    disableLabelPointerEvents();
     return true;
   }
 
