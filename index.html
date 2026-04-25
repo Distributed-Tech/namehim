@@ -1059,6 +1059,17 @@ function filterReportsByState(stateFullName) {
   if (searchInput) {
     searchInput.value = stateFullName;
   }
+
+  const selectedCountry = String((browseCountrySelect && browseCountrySelect.value) || '').trim();
+  if (selectedCountry && !isUnitedStatesCountryValue(selectedCountry)) {
+    setCountryDropdownValue('');
+    if (typeof window.clearSelectedWorldCountry === 'function') {
+      window.clearSelectedWorldCountry();
+    }
+  }
+
+  updateBrowseLocationFiltersUI();
+
   // Reuse your existing search filter
   if (typeof applySearchFilter === 'function') {
     applySearchFilter();
