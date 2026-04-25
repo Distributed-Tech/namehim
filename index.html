@@ -355,12 +355,8 @@
     }
 
     #world-map {
-  width: 100%;
-  height: 450px;
-  margin-bottom: 1rem;
-  background: #1f2937;
-  border-radius: 0.5rem;
-}
+      display: none;
+    }
 
     footer {
       border-top: 1px solid var(--border);
@@ -486,7 +482,7 @@
         <div class="map-toggle-wrap">
   <button id="toggle-world-map-btn" class="map-toggle-btn" type="button" aria-expanded="false" aria-controls="world-map">Show World Map</button>
 </div>
-<div id="world-map" style="display: none; width: 100%; height: 450px; margin-bottom: 1rem; background: #1f2937; border-radius: 0.5rem;"></div>
+<div id="world-map"></div>
         
         <div class="table-wrap">
           <table>
@@ -1486,6 +1482,10 @@
         return;
       }
 
+      if (isVisible && typeof setWorldMapVisibility === 'function') {
+        setWorldMapVisibility(false);
+      }
+
       mapContainer.style.display = isVisible ? 'block' : 'none';
       toggleMapBtn.textContent = isVisible ? 'Hide US Map' : 'Show US Map';
       toggleMapBtn.setAttribute('aria-expanded', String(isVisible));
@@ -1622,14 +1622,32 @@ const WORLD_MAP_VISIBILITY_KEY = 'namehim_world_map_visible';
 
 function setWorldMapVisibility(isVisible, persistPreference = true) {
   if (!worldMapContainer || !toggleWorldMapBtn) return;
+
+  if (isVisible && typeof setMapVisibility === 'function') {
+    setMapVisibility(false);
+  }
+
   worldMapContainer.style.display = isVisible ? 'block' : 'none';
   toggleWorldMapBtn.textContent = isVisible ? 'Hide World Map' : 'Show World Map';
   toggleWorldMapBtn.setAttribute('aria-expanded', String(isVisible));
   if (persistPreference) {
     localStorage.setItem(WORLD_MAP_VISIBILITY_KEY, isVisible ? '1' : '0');
   }
-  if (isVisible && window.simplemaps_worldmap && typeof window.simplemaps_worldmap.refresh === 'function') {
-    window.simplemaps_worldmap.refresh();
+  if (isVisible) {
+    window.requestAnimationFrame(function onWorldMapShow() {
+      if (
+        window.simplemaps_worldmap &&
+        typeof window.simplemaps_worldmap.refresh === 'function'
+      ) {
+        window.simplemaps_worldmap.refresh();
+      }
+      if (
+        window.simplemaps_worldmap &&
+        typeof window.simplemaps_worldmap.resize === 'function'
+      ) {
+        window.simplemaps_worldmap.resize();
+      }
+    });
   }
 }
 
