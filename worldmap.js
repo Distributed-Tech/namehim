@@ -18,6 +18,7 @@ var simplemaps_worldmap_mapinfo={  map_name: "world",  initial_view: {    x: 0, 
   var ACTIVE_COUNTRY_COLOR = "#7c3aed";
   var applied = false;
   var selectedCountryId = null;
+  var brandingObserver = null;
   var COUNTRY_COUNT_ALIASES = {
     "united states of america": "united states",
     usa: "united states",
@@ -52,15 +53,24 @@ var simplemaps_worldmap_mapinfo={  map_name: "world",  initial_view: {    x: 0, 
 
   function ensureMapLayout() {
     var container = getMapContainer();
+    var svg;
     if (!container) {
       return;
     }
 
     container.style.width = "100%";
     container.style.maxWidth = "100%";
-    container.style.minHeight = "420px";
+    container.style.minHeight = "0";
+    container.style.height = "auto";
     container.style.position = "relative";
     container.style.overflow = "hidden";
+
+    svg = container.querySelector("svg");
+    if (svg) {
+      svg.style.display = "block";
+      svg.style.maxWidth = "100%";
+      svg.style.height = "auto";
+    }
   }
 
   function getCountryName(countryId) {
@@ -264,12 +274,27 @@ var simplemaps_worldmap_mapinfo={  map_name: "world",  initial_view: {    x: 0, 
       return;
     }
 
-    links = container.querySelectorAll('a[href*="simplemaps.com"], a[title*="SimpleMaps"], a[title*="Simplemaps"]');
+    links = container.querySelectorAll('a[href*="simplemaps.com"], a[href*="openstreetmap.org"], a[title*="SimpleMaps"], a[title*="Simplemaps"], [id*="copyright"], [class*="copyright"]');
     for (i = 0; i < links.length; i += 1) {
       if (links[i] && links[i].parentNode) {
         links[i].parentNode.removeChild(links[i]);
       }
     }
+  }
+
+  function observeBrandingRemoval() {
+    var container = getMapContainer();
+
+    if (!container || brandingObserver) {
+      return;
+    }
+
+    brandingObserver = new MutationObserver(function () {
+      removeSimpleMapsBranding();
+      ensureMapLayout();
+    });
+
+    brandingObserver.observe(container, { childList: true, subtree: true });
   }
 
   function moveTooltip(event) {
@@ -457,6 +482,7 @@ var simplemaps_worldmap_mapinfo={  map_name: "world",  initial_view: {    x: 0, 
 
     ensureMapLayout();
     removeSimpleMapsBranding();
+    observeBrandingRemoval();
     return true;
   }
 
