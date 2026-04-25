@@ -16,9 +16,6 @@ var simplemaps_worldmap_mapinfo={  map_name: "world",  initial_view: {    x: 0, 
   var DEFAULT_COUNTRY_COLOR = "#2d3748";
   var HOVER_COUNTRY_COLOR = "#a855f7";
   var ACTIVE_COUNTRY_COLOR = "#7c3aed";
-  var DEFAULT_REGION_COLOR = "#2d3748";
-  var DEFAULT_REGION_OPACITY = 0.06;
-  var HOVER_REGION_OPACITY = 0.28;
   var applied = false;
   var selectedCountryId = null;
 
@@ -77,51 +74,6 @@ var simplemaps_worldmap_mapinfo={  map_name: "world",  initial_view: {    x: 0, 
 
     for (i = 0; i < reports.length; i += 1) {
       if (normalizeText(reports[i] && reports[i].country) === target) {
-        count += 1;
-      }
-    }
-
-    return count;
-  }
-
-  function getRegionName(regionId) {
-    var mapdata = window.simplemaps_worldmap_mapdata || {};
-    var regions = mapdata.regions || {};
-    return regions[regionId] && regions[regionId].name ? regions[regionId].name : regionId;
-  }
-
-  function getRegionCountryIds(regionId) {
-    var mapdata = window.simplemaps_worldmap_mapdata || {};
-    var regions = mapdata.regions || {};
-    if (!regions[regionId] || !Array.isArray(regions[regionId].states)) {
-      return [];
-    }
-    return regions[regionId].states.slice();
-  }
-
-  function getRegionReportCount(regionId) {
-    var reports = Array.isArray(window.allReports) ? window.allReports : [];
-    var countryIds = getRegionCountryIds(regionId);
-    var mapdata = window.simplemaps_worldmap_mapdata || {};
-    var stateSpecific = mapdata.state_specific || {};
-    var targetCountries = {};
-    var i;
-    var normalizedCountry;
-    var reportCountry;
-    var count = 0;
-
-    for (i = 0; i < countryIds.length; i += 1) {
-      normalizedCountry = normalizeText(
-        stateSpecific[countryIds[i]] && stateSpecific[countryIds[i]].name
-          ? stateSpecific[countryIds[i]].name
-          : countryIds[i]
-      );
-      targetCountries[normalizedCountry] = true;
-    }
-
-    for (i = 0; i < reports.length; i += 1) {
-      reportCountry = normalizeText(reports[i] && reports[i].country);
-      if (targetCountries[reportCountry]) {
         count += 1;
       }
     }
@@ -241,19 +193,6 @@ var simplemaps_worldmap_mapinfo={  map_name: "world",  initial_view: {    x: 0, 
     tooltip.style.display = "block";
   }
 
-  function showRegionTooltip(regionId) {
-    var tooltip = ensureTooltip();
-    var regionName = getRegionName(regionId);
-    var count = getRegionReportCount(regionId);
-    tooltip.innerHTML =
-      "<div>" +
-      escapeHtml(regionName) +
-      "</div><div>Reports: " +
-      count +
-      "</div><div>(Click to select individual countries)</div>";
-    tooltip.style.display = "block";
-  }
-
   function hideTooltip() {
     ensureTooltip().style.display = "none";
   }
@@ -262,34 +201,6 @@ var simplemaps_worldmap_mapinfo={  map_name: "world",  initial_view: {    x: 0, 
     var tooltip = ensureTooltip();
     tooltip.style.left = event.clientX + 14 + "px";
     tooltip.style.top = event.clientY + 16 + "px";
-  }
-
-  function setRegionStyle(regionId, isHovered) {
-    var map = window.simplemaps_worldmap;
-    var region = map && map.regions ? map.regions[regionId] : null;
-    if (!region || typeof region.attr !== "function") {
-      return;
-    }
-
-    region.attr({
-      fill: DEFAULT_REGION_COLOR,
-      "fill-opacity": isHovered ? HOVER_REGION_OPACITY : DEFAULT_REGION_OPACITY,
-      stroke: "none"
-    });
-  }
-
-  function initializeRegionStyles() {
-    var map = window.simplemaps_worldmap;
-    var regionId;
-    if (!map || !map.regions) {
-      return;
-    }
-
-    for (regionId in map.regions) {
-      if (Object.prototype.hasOwnProperty.call(map.regions, regionId)) {
-        setRegionStyle(regionId, false);
-      }
-    }
   }
 
   function chainHook(name, handler) {
@@ -395,7 +306,6 @@ var simplemaps_worldmap_mapinfo={  map_name: "world",  initial_view: {    x: 0, 
     chainHook("complete", function () {
       disableCountryUrls();
       ensureMapLayout();
-      initializeRegionStyles();
     });
 
     chainHook("over_state", function (countryId) {
@@ -410,16 +320,6 @@ var simplemaps_worldmap_mapinfo={  map_name: "world",  initial_view: {    x: 0, 
       } else {
         setCountryFill(countryId, DEFAULT_COUNTRY_COLOR);
       }
-      hideTooltip();
-    });
-
-    chainHook("over_region", function (regionId) {
-      setRegionStyle(regionId, true);
-      showRegionTooltip(regionId);
-    });
-
-    chainHook("out_region", function (regionId) {
-      setRegionStyle(regionId, false);
       hideTooltip();
     });
 
