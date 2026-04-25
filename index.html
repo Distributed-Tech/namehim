@@ -459,10 +459,15 @@
           <button id="back-to-all-reports" type="button">← Back to all reports</button>
         </div>
         <p class="table-guidance">
-          Select a state from the list or click show map to see results for specific locations. (More maps and options will be coming soon, including a world map).
-          <select id="browse-state-select" aria-label="Select a state to filter reports">
-            <option value="">Select a state</option>
+          Select a country or state from the list or click show map to see results for specific locations. (More maps and options will be coming soon, including a world map).
+          <select id="browse-country-select" aria-label="Select a country to filter reports">
+            <option value="">Select a country</option>
           </select>
+          <span id="browse-state-select-wrap">
+            <select id="browse-state-select" aria-label="Select a state to filter reports">
+              <option value="">Select a state</option>
+            </select>
+          </span>
           <span>(full list below).</span>
         </p>
         <div class="map-toggle-wrap">
@@ -782,6 +787,8 @@
     const reportCount = document.getElementById('report-count');
     const countryField = document.getElementById('country');
     const stateFieldContainer = document.getElementById('state-field-container');
+    const browseCountrySelect = document.getElementById('browse-country-select');
+    const browseStateSelectWrap = document.getElementById('browse-state-select-wrap');
     const browseStateSelect = document.getElementById('browse-state-select');
     const mapContainer = document.getElementById('map');
     const toggleMapBtn = document.getElementById('toggle-map-btn');
@@ -848,6 +855,44 @@
         .map((state) => '<option value="' + escapeHTML(state) + '">' + escapeHTML(state) + '</option>')
         .join('');
       browseStateSelect.innerHTML = '<option value="">Select a state</option>' + stateOptions;
+    }
+
+    function populateBrowseCountrySelect() {
+      if (!browseCountrySelect || !countryField) {
+        return;
+      }
+
+      const countryOptions = Array.from(countryField.options || [])
+        .map((option) => {
+          const value = String(option.value || '').trim();
+          const label = String(option.textContent || '').trim();
+          if (!value || !label) {
+            return '';
+          }
+          return '<option value="' + escapeHTML(value) + '">' + escapeHTML(label) + '</option>';
+        })
+        .filter(Boolean)
+        .join('');
+
+      browseCountrySelect.innerHTML = '<option value="">Select a country</option>' + countryOptions;
+    }
+
+    function updateBrowseLocationFiltersUI() {
+      if (!browseStateSelectWrap || !browseCountrySelect) {
+        return;
+      }
+
+      const selectedCountry = String(browseCountrySelect.value || '').trim().toLowerCase();
+      const shouldShowStateFilter = !selectedCountry || selectedCountry === 'united states of america';
+
+      browseStateSelectWrap.classList.toggle('hidden', !shouldShowStateFilter);
+
+      if (!shouldShowStateFilter && browseStateSelect) {
+        browseStateSelect.value = '';
+        if (typeof window.clearSelectedMapState === 'function') {
+          window.clearSelectedMapState();
+        }
+      }
     }
 
     function setStateDropdownValue(stateName) {
@@ -1196,22 +1241,31 @@
       }
 
       const query = (reportSearch.value || '').trim().toLowerCase();
-
-      if (!query) {
-        renderPagedReports(allReports, 1);
-        browseMessage.textContent = allReports.length
-          ? 'Loaded ' + allReports.length + ' report(s). Showing up to ' + REPORTS_PER_PAGE + ' per page.'
-          : 'No reports yet. Be the first to submit.';
-        browseMessage.className = 'message';
-        return;
-      }
+      const selectedCountry = String((browseCountrySelect && browseCountrySelect.value) || '').trim().toLowerCase();
+      const selectedState = String((browseStateSelect && browseStateSelect.value) || '').trim().toLowerCase();
 
       const filtered = allReports.filter((report) => {
         const blob = [report.name, report.city, report.state, report.country]
           .map((item) => String(item || '').toLowerCase())
           .join(' ');
-        return blob.includes(query);
+        const reportCountry = String(report.country || '').trim().toLowerCase();
+        const reportState = String(report.state || '').trim().toLowerCase();
+
+        const matchesQuery = !query || blob.includes(query);
+        const matchesCountry = !selectedCountry || reportCountry === selectedCountry;
+        const matchesState = !selectedState || reportState === selectedState;
+
+        return matchesQuery && matchesCountry && matchesState;
       });
+
+      if (!query && !selectedCountry && !selectedState) {
+        renderPagedReports(filtered, 1);
+        browseMessage.textContent = filtered.length
+          ? 'Loaded ' + allReports.length + ' report(s). Showing up to ' + REPORTS_PER_PAGE + ' per page.'
+          : 'No reports yet. Be the first to submit.';
+        browseMessage.className = 'message';
+        return;
+      }
 
       renderPagedReports(filtered, 1);
       browseMessage.textContent = filtered.length
@@ -1458,6 +1512,8 @@
       startRealtimeUpdates();
       renderStateField();
       populateBrowseStateSelect();
+      populateBrowseCountrySelect();
+      updateBrowseLocationFiltersUI();
       initMapToggle();
 
       window.addEventListener('hashchange', renderRoute);
@@ -1470,7 +1526,11 @@
       reportSearch.addEventListener('input', applySearchFilter);
       clearSearch.addEventListener('click', function clearSearchInput() {
         reportSearch.value = '';
+        if (browseCountrySelect) {
+          browseCountrySelect.value = '';
+        }
         setStateDropdownValue('');
+        updateBrowseLocationFiltersUI();
         if (typeof window.clearSelectedMapState === 'function') {
           window.clearSelectedMapState();
         }
@@ -1483,7 +1543,11 @@
       if (backToAllReportsBtn) {
         backToAllReportsBtn.addEventListener('click', function onBackToAllReportsClick() {
           reportSearch.value = '';
+          if (browseCountrySelect) {
+            browseCountrySelect.value = '';
+          }
           setStateDropdownValue('');
+          updateBrowseLocationFiltersUI();
           clearSingleReportHash();
           if (typeof window.clearSelectedMapState === 'function') {
             window.clearSelectedMapState();
@@ -1507,6 +1571,12 @@
           } else {
             filterReportsByState(selectedState);
           }
+        });
+      }
+      if (browseCountrySelect) {
+        browseCountrySelect.addEventListener('change', function onCountrySelectChange() {
+          updateBrowseLocationFiltersUI();
+          applySearchFilter();
         });
       }
       browsePagination.addEventListener('click', function onPaginationClick(event) {
