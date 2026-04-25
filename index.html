@@ -259,6 +259,13 @@
       gap: 0.45rem;
       flex-wrap: wrap;
     }
+
+    .report-timestamp {
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin-top: 0.3rem;
+      display: block;
+    }
     .toast {
       position: fixed;
       right: 1rem;
@@ -1340,6 +1347,28 @@ function addStoryTimestamp() {
       reportCount.textContent = total + ' reports and counting...';
     }
 
+    function formatTimestamp(timestamp) {
+      if (!timestamp) {
+        return '';
+      }
+
+      const date = new Date(timestamp);
+      if (Number.isNaN(date.getTime())) {
+        return '';
+      }
+
+      return date.toLocaleString('en-US', {
+        timeZone: 'America/Los_Angeles',
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true,
+        timeZoneName: 'short'
+      });
+    }
+
     function renderStateField() {
       const selectedCountry = (countryField.value || '').trim();
 
@@ -1374,29 +1403,34 @@ function addStoryTimestamp() {
       }
 
       reports.forEach((report) => {
-  const categories = Array.isArray(report.categories) ? report.categories : [];
-  const pillHTML = categories
-    .map((category) => {
-      const normalized = String(category || '').toLowerCase().trim();
-      const cssClass = getCategoryClass(normalized);
-      return '<span class="pill ' + cssClass + '">' + escapeHTML(toTitleCase(normalized)) + '</span>';
-    })
-    .join('');
+        const categories = Array.isArray(report.categories) ? report.categories : [];
+        const pillHTML = categories
+          .map((category) => {
+            const normalized = String(category || '').toLowerCase().trim();
+            const cssClass = getCategoryClass(normalized);
+            return '<span class="pill ' + cssClass + '">' + escapeHTML(toTitleCase(normalized)) + '</span>';
+          })
+          .join('');
 
-  const row = document.createElement('tr');
-  row.innerHTML = `
-    <td data-label="Name">${escapeHTML(report.name || '')}</td>
-    <td data-label="Location">${formatLocation(report.city, report.state, report.country)}</td>
-    <td data-label="Categories"><div class="pills">${pillHTML}</div></td>
-    <td data-label="Actions">
-      <div class="row-actions">
-        <button type="button" class="report-entry-btn" data-report-id="${escapeHTML(report.id || '')}">Report this entry</button>
-        <button type="button" class="report-share-btn" data-report-id="${escapeHTML(report.id || '')}">Share</button>
-      </div>
-    </td>
-  `;
-  reportsBody.appendChild(row);
-});
+        const formattedTimestamp = formatTimestamp(report.created_at);
+        const timestampHTML = formattedTimestamp
+          ? '<span class="report-timestamp">' + escapeHTML(formattedTimestamp) + '</span>'
+          : '';
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td data-label="Name">${escapeHTML(report.name || '')}${timestampHTML}</td>
+          <td data-label="Location">${formatLocation(report.city, report.state, report.country)}</td>
+          <td data-label="Categories"><div class="pills">${pillHTML}</div></td>
+          <td data-label="Actions">
+            <div class="row-actions">
+              <button type="button" class="report-entry-btn" data-report-id="${escapeHTML(report.id || '')}">Report this entry</button>
+              <button type="button" class="report-share-btn" data-report-id="${escapeHTML(report.id || '')}">Share</button>
+            </div>
+          </td>
+        `;
+        reportsBody.appendChild(row);
+      });
     }
 
     function renderPagination(totalReports, page) {
