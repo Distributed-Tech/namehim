@@ -577,12 +577,12 @@
         <form id="report-form" class="panel" novalidate>
           <div class="row">
             <label for="name">Name *</label>
-            <input id="name" type="text" required />
+            <input id="name" type="text" required inputmode="text" />
           </div>
 
           <div class="row">
             <label for="city">City *</label>
-            <input id="city" type="text" required />
+            <input id="city" type="text" required inputmode="text" />
           </div>
 
           <div class="row">
@@ -790,7 +790,7 @@
 
           <div id="state-field-container" class="row">
             <label for="state">State / Province (optional)</label>
-            <input id="state" type="text" placeholder="State / Province (optional)" />
+            <input id="state" type="text" placeholder="State / Province (optional)" inputmode="text" />
           </div>
 
           <fieldset>
@@ -1380,6 +1380,33 @@ function addStoryTimestamp() {
       });
     }
 
+    function hasNumber(value) {
+      return /\d/.test(String(value || ''));
+    }
+
+    function preventNumbersForField(fieldElement) {
+      if (!fieldElement || fieldElement.dataset.noDigitsBound === 'true') {
+        return;
+      }
+
+      fieldElement.dataset.noDigitsBound = 'true';
+      fieldElement.addEventListener('input', () => {
+        const cleanedValue = fieldElement.value.replace(/\d+/g, '');
+        if (cleanedValue !== fieldElement.value) {
+          fieldElement.value = cleanedValue;
+        }
+      });
+    }
+
+    function bindNoNumberFields() {
+      preventNumbersForField(document.getElementById('name'));
+      preventNumbersForField(document.getElementById('city'));
+      const stateField = document.getElementById('state');
+      if (stateField && stateField.tagName === 'INPUT') {
+        preventNumbersForField(stateField);
+      }
+    }
+
     function renderStateField() {
       const selectedCountry = (countryField.value || '').trim();
 
@@ -1394,13 +1421,16 @@ function addStoryTimestamp() {
             ${stateOptions}
           </select>
         `;
+        bindNoNumberFields();
         return;
       }
 
       stateFieldContainer.innerHTML = `
         <label for="state">State / Province (optional)</label>
-        <input type="text" id="state" placeholder="State / Province (optional)">
+        <input type="text" id="state" placeholder="State / Province (optional)" inputmode="text">
       `;
+
+      bindNoNumberFields();
     }
 
     function renderReportRows(reports) {
@@ -1692,6 +1722,12 @@ function addStoryTimestamp() {
         return;
       }
 
+      if (hasNumber(payload.name) || hasNumber(payload.city) || hasNumber(payload.state)) {
+        submitMessage.textContent = 'Numbers are not allowed in Name, City, or State / Province.';
+        submitMessage.className = 'message error';
+        return;
+      }
+
       if (!payload.categories.length) {
         submitMessage.textContent = 'Please select at least one category.';
         submitMessage.className = 'message error';
@@ -1858,6 +1894,7 @@ function addStoryTimestamp() {
       });
       countryField.addEventListener('change', renderStateField);
       reportSearch.addEventListener('input', applySearchFilter);
+      bindNoNumberFields();
       clearSearch.addEventListener('click', function clearSearchInput() {
         reportSearch.value = '';
         if (browseCountrySelect) {
