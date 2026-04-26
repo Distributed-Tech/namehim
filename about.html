@@ -291,6 +291,11 @@
   </footer>
 
   <script>
+    function formatReportTotal(total) {
+      const parsedTotal = Number(total) || 0;
+      return parsedTotal.toLocaleString('en-US');
+    }
+
     async function loadReportCount() {
       const reportCount = document.getElementById('report-count');
       if (!reportCount) {
@@ -310,7 +315,7 @@
           throw new Error('Worker did not return an array');
         }
 
-        reportCount.textContent = reports.length + ' reports and counting...';
+        reportCount.textContent = formatReportTotal(reports.length) + ' reports and counting...';
       } catch (error) {
         console.error('Failed to load report count:', error);
         reportCount.textContent = '0 reports and counting...';

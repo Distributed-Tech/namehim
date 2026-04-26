@@ -1346,8 +1346,13 @@ function addStoryTimestamp() {
       return parts.join(', ');
     }
 
+    function formatReportTotal(total) {
+      const parsedTotal = Number(total) || 0;
+      return parsedTotal.toLocaleString('en-US');
+    }
+
     function updateReportCount(total) {
-      reportCount.textContent = total + ' reports and counting...';
+      reportCount.textContent = formatReportTotal(total) + ' reports and counting...';
     }
 
     function formatTimestamp(timestamp) {
