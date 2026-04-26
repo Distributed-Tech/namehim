@@ -310,6 +310,32 @@
       return parsedTotal.toLocaleString('en-US');
     }
 
+    const loadingDots = ['.', '..', '...'];
+    let loadingDotIndex = 0;
+    let reportCountLoadingInterval = null;
+
+    function startReportCountLoadingAnimation(reportCount) {
+      if (!reportCount || reportCountLoadingInterval) {
+        return;
+      }
+
+      reportCount.textContent = 'Loading reports and counting' + loadingDots[loadingDotIndex];
+      reportCountLoadingInterval = setInterval(() => {
+        loadingDotIndex = (loadingDotIndex + 1) % loadingDots.length;
+        reportCount.textContent = 'Loading reports and counting' + loadingDots[loadingDotIndex];
+      }, 1000);
+    }
+
+    function stopReportCountLoadingAnimation() {
+      if (!reportCountLoadingInterval) {
+        return;
+      }
+
+      clearInterval(reportCountLoadingInterval);
+      reportCountLoadingInterval = null;
+      loadingDotIndex = 0;
+    }
+
     const SUPABASE_URL = 'https://cmmggaprguusffiphegy.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_G9Doh6gciyFVT1NDum55ZA_8ryL3fOw';
     const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -319,6 +345,7 @@
       if (!reportCount) {
         return;
       }
+      startReportCountLoadingAnimation(reportCount);
 
       const WORKER_URL = 'https://api.namehim.app/filtered-reports';
 
@@ -353,6 +380,8 @@
       } catch (error) {
         console.error('Failed to load report count:', error);
         reportCount.textContent = '0 reports and counting...';
+      } finally {
+        stopReportCountLoadingAnimation();
       }
     }
 

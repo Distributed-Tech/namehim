@@ -1361,6 +1361,32 @@ function addStoryTimestamp() {
       reportCount.textContent = formatReportTotal(total) + ' reports and counting...';
     }
 
+    const loadingDots = ['.', '..', '...'];
+    let loadingDotIndex = 0;
+    let reportCountLoadingInterval = null;
+
+    function startReportCountLoadingAnimation() {
+      if (!reportCount || reportCountLoadingInterval) {
+        return;
+      }
+
+      reportCount.textContent = 'Loading reports and counting' + loadingDots[loadingDotIndex];
+      reportCountLoadingInterval = setInterval(() => {
+        loadingDotIndex = (loadingDotIndex + 1) % loadingDots.length;
+        reportCount.textContent = 'Loading reports and counting' + loadingDots[loadingDotIndex];
+      }, 1000);
+    }
+
+    function stopReportCountLoadingAnimation() {
+      if (!reportCountLoadingInterval) {
+        return;
+      }
+
+      clearInterval(reportCountLoadingInterval);
+      reportCountLoadingInterval = null;
+      loadingDotIndex = 0;
+    }
+
     function formatTimestamp(timestamp) {
       if (!timestamp) {
         return '';
@@ -1641,6 +1667,7 @@ function addStoryTimestamp() {
     }
 
     async function loadReports() {
+  startReportCountLoadingAnimation();
   browseMessage.textContent = 'Loading reports...';
   browseMessage.className = 'message';
 
@@ -1678,6 +1705,7 @@ function addStoryTimestamp() {
     allReports = resolvedReports;
     window.allReports = allReports;
     hasLoadedReports = true;
+    stopReportCountLoadingAnimation();
     updateReportCount(allReports.length);
     updateBrowseViewFromRoute({ preserveBrowsePage: true });
     browseMessage.textContent = allReports.length
@@ -1691,6 +1719,7 @@ function addStoryTimestamp() {
     allReports = [];
     window.allReports = allReports;
     hasLoadedReports = true;
+    stopReportCountLoadingAnimation();
     updateReportCount(0);
     renderPagedReports([], 1);
   }
