@@ -816,8 +816,9 @@
       <section id="page-community" class="page">
   <h2>Community Voices</h2>
   <p>Share your story or just a few words anonymously, without names. This is a space for hope, encouragement, and survivor experiences. No names of abusers or yourself. Your post will be reviewed before appearing.</p>
+  <button id="show-story-form-btn" type="button" aria-expanded="false" aria-controls="story-form">Submit post</button>
   
-  <form id="story-form" class="panel" style="max-width: 720px;">
+  <form id="story-form" class="panel hidden" style="max-width: 720px;">
     <div class="row">
       <label for="story-title">Title (optional)</label>
       <input id="story-title" type="text" maxlength="100" placeholder="e.g., A message of hope" />
@@ -907,6 +908,7 @@
     const REPORTS_PER_PAGE = 100;
     const DEFAULT_PAGE_TITLE = document.title || 'NameHim';
     const storyForm = document.getElementById('story-form');
+    const showStoryFormBtn = document.getElementById('show-story-form-btn');
     const storyTitle = document.getElementById('story-title');
     const storyContent = document.getElementById('story-content');
     const storySubmitBtn = document.getElementById('submit-story-btn');
@@ -1651,6 +1653,15 @@ function addStoryTimestamp() {
         .map((input) => input.value);
     }
 
+    function openStoryForm() {
+      if (!storyForm || !showStoryFormBtn) {
+        return;
+      }
+      storyForm.classList.remove('hidden');
+      showStoryFormBtn.classList.add('hidden');
+      showStoryFormBtn.setAttribute('aria-expanded', 'true');
+    }
+
     async function submitStory(event) {
   event.preventDefault();
   storyMessage.textContent = '';
@@ -1990,6 +2001,9 @@ function addStoryTimestamp() {
       });
       reportForm.addEventListener('submit', handleSubmit);
       storyForm.addEventListener('submit', submitStory);
+      if (showStoryFormBtn) {
+        showStoryFormBtn.addEventListener('click', openStoryForm);
+      }
     }
 
    // --- World Map Toggle (similar to US Map) ---
