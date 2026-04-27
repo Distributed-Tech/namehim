@@ -1774,35 +1774,6 @@ function addStoryTimestamp() {
     }
 
 
-    async function fetchAllReportsFromSupabase(batchSize = 1000) {
-      const collected = [];
-      let from = 0;
-
-      while (true) {
-        const to = from + batchSize - 1;
-        const { data, error } = await supabaseClient
-          .from('reports')
-          .select('id,name,city,state,country,categories,created_at')
-          .order('created_at', { ascending: false })
-          .range(from, to);
-
-        if (error) {
-          throw error;
-        }
-
-        const rows = Array.isArray(data) ? data : [];
-        collected.push(...rows);
-
-        if (rows.length < batchSize) {
-          break;
-        }
-
-        from += batchSize;
-      }
-
-      return collected;
-    }
-
     function applySearchFilter(options = {}) {
       const preservePage = Boolean(options.preservePage);
       const reportId = getReportIdFromUrl();
@@ -1854,9 +1825,19 @@ function addStoryTimestamp() {
       browseMessage.textContent = 'Loading reports...';
       browseMessage.className = 'message';
       startReportCountLoadingAnimation();
+      const WORKER_URL = 'https://api.namehim.app/filtered-reports';
 
       try {
-        const reports = await fetchAllReportsFromSupabase();
+        const response = await fetch(WORKER_URL);
+        if (!response.ok) {
+          throw new Error(`Worker returned ${response.status}`);
+        }
+        const reports = await response.json();
+
+        if (!Array.isArray(reports)) {
+          throw new Error('Worker did not return an array');
+        }
+
         allReports = sanitizeFetchedReports(reports);
         window.allReports = allReports;
         hasLoadedReports = true;
@@ -1867,7 +1848,7 @@ function addStoryTimestamp() {
           : 'No reports yet. Be the first to submit.';
         browseMessage.className = 'message';
       } catch (error) {
-        console.error('Failed to load reports from Supabase:', error);
+        console.error('Failed to load reports via Worker:', error);
         browseMessage.textContent = 'Unable to load reports right now. Please try again in a moment.';
         browseMessage.className = 'message error';
         allReports = [];
