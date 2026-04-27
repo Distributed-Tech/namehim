@@ -1560,18 +1560,25 @@ function addStoryTimestamp() {
         : `${formattedTimestamp} PDT`;
     }
 
-    function hasNumber(value) {
-      return /\d/.test(String(value || ''));
+    function hasInvalidLettersOnlyChars(value) {
+      const normalized = sanitizeReportText(value, MAX_BROWSE_FIELD_LENGTH);
+      if (!normalized) {
+        return false;
+      }
+      return !/^[\p{L}\s]+$/u.test(normalized);
     }
 
-    function preventNumbersForField(fieldElement) {
-      if (!fieldElement || fieldElement.dataset.noDigitsBound === 'true') {
+    function preventInvalidCharsForField(fieldElement) {
+      if (!fieldElement || fieldElement.dataset.lettersOnlyBound === 'true') {
         return;
       }
 
-      fieldElement.dataset.noDigitsBound = 'true';
+      fieldElement.dataset.lettersOnlyBound = 'true';
       fieldElement.addEventListener('input', () => {
-        const cleanedValue = fieldElement.value.replace(/\d+/g, '');
+        const cleanedValue = fieldElement.value
+          .replace(/[^\p{L}\s]+/gu, '')
+          .replace(/\s+/g, ' ')
+          .trimStart();
         if (cleanedValue !== fieldElement.value) {
           fieldElement.value = cleanedValue;
         }
@@ -1593,11 +1600,11 @@ function addStoryTimestamp() {
     }
 
     function bindNoNumberFields() {
-      preventNumbersForField(document.getElementById('name'));
-      preventNumbersForField(document.getElementById('city'));
+      preventInvalidCharsForField(document.getElementById('name'));
+      preventInvalidCharsForField(document.getElementById('city'));
       const stateField = document.getElementById('state');
       if (stateField && stateField.tagName === 'INPUT') {
-        preventNumbersForField(stateField);
+        preventInvalidCharsForField(stateField);
       }
     }
 
@@ -2051,13 +2058,19 @@ function addStoryTimestamp() {
       };
 
       if (!payload.name || !payload.city || !payload.country) {
-        submitMessage.textContent = 'Please fill in Name, City, and Country.';
+        submitMessage.textContent = '* Please fill out the Name and Location fields to submit an entry.';
         submitMessage.className = 'message error';
         return;
       }
 
-      if (hasNumber(payload.name) || hasNumber(payload.city) || hasNumber(payload.state)) {
-        submitMessage.textContent = 'Numbers are not allowed in Name, City, or State / Province.';
+      const stateInputField = document.getElementById('state');
+      const shouldValidateStateInput = stateInputField && stateInputField.tagName === 'INPUT';
+      if (
+        hasInvalidLettersOnlyChars(payload.name) ||
+        hasInvalidLettersOnlyChars(payload.city) ||
+        (shouldValidateStateInput && hasInvalidLettersOnlyChars(payload.state))
+      ) {
+        submitMessage.textContent = '* Name and Location can only contain letters.';
         submitMessage.className = 'message error';
         return;
       }
