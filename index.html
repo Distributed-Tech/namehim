@@ -2381,9 +2381,6 @@ function addStoryTimestamp() {
           }
           updateBrowseLocationFiltersUI();
           applySearchFilter();
-          if (typeof window.refreshWorldMapReportData === 'function') {
-            window.refreshWorldMapReportData();
-          }
         });
       }
       window.filterReportsByStateFromMap = function filterReportsByStateFromMap(stateFullName) {
