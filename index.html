@@ -965,6 +965,7 @@
     ];
 
     window.US_STATES = US_STATES;
+    const ALLOWED_COUNTRY_BY_NORMALIZED = new Map();
 
     let allReports = [];
     window.allReports = allReports;
@@ -1081,15 +1082,20 @@
         return [];
       }
 
-      return rows.map((report) => ({
-        id: Number(report && report.id) || 0,
-        name: sanitizeLettersOnlyText(report && report.name, MAX_BROWSE_FIELD_LENGTH),
-        city: sanitizeLettersOnlyText(report && report.city, MAX_BROWSE_FIELD_LENGTH),
-        state: sanitizeLettersOnlyText(report && report.state, MAX_BROWSE_FIELD_LENGTH),
-        country: sanitizeLettersOnlyText(report && report.country, MAX_COUNTRY_LENGTH),
-        categories: sanitizeCategoryList(report && report.categories),
-        created_at: sanitizeReportText(report && report.created_at, 64),
-      }));
+      return rows.map((report) => {
+        const rawCountry = sanitizeReportText(report && report.country, MAX_COUNTRY_LENGTH);
+        const canonicalCountry = getCanonicalAllowedCountry(rawCountry);
+
+        return {
+          id: Number(report && report.id) || 0,
+          name: sanitizeLettersOnlyText(report && report.name, MAX_BROWSE_FIELD_LENGTH),
+          city: sanitizeLettersOnlyText(report && report.city, MAX_BROWSE_FIELD_LENGTH),
+          state: sanitizeLettersOnlyText(report && report.state, MAX_BROWSE_FIELD_LENGTH),
+          country: canonicalCountry,
+          categories: sanitizeCategoryList(report && report.categories),
+          created_at: sanitizeReportText(report && report.created_at, 64),
+        };
+      });
     }
 
     function toTitleCase(value) {
@@ -1128,6 +1134,29 @@
       return normalizeCountryForFiltering(value) === 'united states';
     }
 
+    function rebuildAllowedCountries() {
+      ALLOWED_COUNTRY_BY_NORMALIZED.clear();
+      Array.from((countryField && countryField.options) || []).forEach((option) => {
+        const optionValue = String((option && option.value) || '').trim();
+        if (!optionValue) {
+          return;
+        }
+        const normalized = normalizeCountryForFiltering(optionValue);
+        if (!normalized) {
+          return;
+        }
+        ALLOWED_COUNTRY_BY_NORMALIZED.set(normalized, optionValue);
+      });
+    }
+
+    function getCanonicalAllowedCountry(value) {
+      const normalized = normalizeCountryForFiltering(value);
+      if (!normalized) {
+        return '';
+      }
+      return ALLOWED_COUNTRY_BY_NORMALIZED.get(normalized) || '';
+    }
+
 
     function populateBrowseStateSelect() {
       if (!browseStateSelect) {
@@ -1164,12 +1193,6 @@
       Array.from(countryField.options || []).forEach((option) => {
         addCountryOption(option.value || option.textContent);
       });
-
-      if (Array.isArray(allReports)) {
-        allReports.forEach((report) => {
-          addCountryOption(report && report.country);
-        });
-      }
 
       const sortedCountries = Array.from(uniqueByNormalized.values()).sort((a, b) =>
         a.localeCompare(b, undefined, { sensitivity: 'base' })
@@ -1230,7 +1253,7 @@
         return normalizeCountryForFiltering(option.value) === incomingNormalized;
       });
 
-      browseCountrySelect.value = matchingOption ? matchingOption.value : incomingValue;
+      browseCountrySelect.value = matchingOption ? matchingOption.value : '';
     }
 
     window.setCountryDropdownValue = setCountryDropdownValue;
@@ -2106,11 +2129,20 @@ function addStoryTimestamp() {
         return;
       }
 
+      const rawName = sanitizeReportText(document.getElementById('name').value, MAX_BROWSE_FIELD_LENGTH);
+      const rawCity = sanitizeReportText(document.getElementById('city').value, MAX_BROWSE_FIELD_LENGTH);
+      const rawState = sanitizeReportText(document.getElementById('state').value, MAX_BROWSE_FIELD_LENGTH);
+      const rawCountry = sanitizeReportText(document.getElementById('country').value, MAX_COUNTRY_LENGTH);
+      const cleanedName = sanitizeLettersOnlyText(rawName, MAX_BROWSE_FIELD_LENGTH);
+      const cleanedCity = sanitizeLettersOnlyText(rawCity, MAX_BROWSE_FIELD_LENGTH);
+      const cleanedState = sanitizeLettersOnlyText(rawState, MAX_BROWSE_FIELD_LENGTH);
+      const cleanedCountry = getCanonicalAllowedCountry(rawCountry);
+
       const payload = {
-        name: sanitizeReportText(document.getElementById('name').value, MAX_BROWSE_FIELD_LENGTH),
-        city: sanitizeReportText(document.getElementById('city').value, MAX_BROWSE_FIELD_LENGTH),
-        state: sanitizeReportText(document.getElementById('state').value, MAX_BROWSE_FIELD_LENGTH) || null,
-        country: sanitizeReportText(document.getElementById('country').value, MAX_COUNTRY_LENGTH),
+        name: cleanedName,
+        city: cleanedCity,
+        state: cleanedState || null,
+        country: cleanedCountry,
         categories: getSelectedCategories(),
         submitter_uuid: getOrCreateSubmitterId()    // <-- CRITICAL FIX
       };
@@ -2124,11 +2156,17 @@ function addStoryTimestamp() {
       const stateInputField = document.getElementById('state');
       const shouldValidateStateInput = stateInputField && stateInputField.tagName === 'INPUT';
       if (
-        hasInvalidLettersOnlyChars(payload.name) ||
-        hasInvalidLettersOnlyChars(payload.city) ||
-        (shouldValidateStateInput && hasInvalidLettersOnlyChars(payload.state))
+        cleanedName !== rawName ||
+        cleanedCity !== rawCity ||
+        (shouldValidateStateInput && cleanedState !== rawState)
       ) {
         submitMessage.textContent = '* Name and Location can only contain English letters (A-Z).';
+        submitMessage.className = 'message error';
+        return;
+      }
+
+      if (!cleanedCountry) {
+        submitMessage.textContent = '* Please select a valid country from the list.';
         submitMessage.className = 'message error';
         return;
       }
@@ -2295,6 +2333,7 @@ function addStoryTimestamp() {
     function init() {
       // Ensure a submitter_id exists right away (used for rate limits? no, but good practice)
       getOrCreateSubmitterId();
+      rebuildAllowedCountries();
       renderCategories();
       updateRateLimitUI();
       renderRoute();
