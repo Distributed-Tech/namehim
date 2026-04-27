@@ -807,6 +807,7 @@
           <fieldset>
             <legend>Categories *</legend>
             <div class="checkboxes" id="category-checkboxes"></div>
+            <p id="category-limit-warning" class="message error hidden">You can select up to 8 categories.</p>
           </fieldset>
 
           <div class="row">
@@ -922,6 +923,7 @@
     const MAP_VISIBILITY_STORAGE_KEY = 'namehim_us_map_visible';
     const browsePagination = document.getElementById('browse-pagination');
     const REPORTS_PER_PAGE = 100;
+    const MAX_SELECTED_CATEGORIES = 8;
     const DEFAULT_PAGE_TITLE = document.title || 'NameHim';
     const storyForm = document.getElementById('story-form');
     const showStoryFormBtn = document.getElementById('show-story-form-btn');
@@ -929,6 +931,7 @@
     const storyContent = document.getElementById('story-content');
     const storySubmitBtn = document.getElementById('submit-story-btn');
     const storyMessage = document.getElementById('story-message');
+    const categoryLimitWarning = document.getElementById('category-limit-warning');
     const storyTurnstileWarning = document.getElementById('story-turnstile-warning');
     const storyRateWarning = document.getElementById('story-rate-warning');
     const storiesContainer = document.getElementById('stories-container');
@@ -1874,6 +1877,25 @@ function addStoryTimestamp() {
         .map((input) => input.value);
     }
 
+    function enforceCategorySelectionLimit(changedInput) {
+      const selectedCount = getSelectedCategories().length;
+      if (selectedCount > MAX_SELECTED_CATEGORIES && changedInput) {
+        changedInput.checked = false;
+      }
+
+      const hasReachedLimit = getSelectedCategories().length >= MAX_SELECTED_CATEGORIES;
+      const categoryInputs = document.querySelectorAll('input[name="categories"]');
+      categoryInputs.forEach((input) => {
+        if (!input.checked) {
+          input.disabled = hasReachedLimit;
+        }
+      });
+
+      if (categoryLimitWarning) {
+        categoryLimitWarning.classList.toggle('hidden', !hasReachedLimit);
+      }
+    }
+
     function openStoryForm() {
       if (!storyForm || !showStoryFormBtn) {
         return;
@@ -1982,6 +2004,11 @@ function addStoryTimestamp() {
         submitMessage.className = 'message error';
         return;
       }
+      if (payload.categories.length > MAX_SELECTED_CATEGORIES) {
+        submitMessage.textContent = 'You can select up to 8 categories.';
+        submitMessage.className = 'message error';
+        return;
+      }
 
       submitBtn.disabled = true;
 
@@ -2002,6 +2029,7 @@ function addStoryTimestamp() {
       addSubmissionTimestamp();
       updateRateLimitUI();
       reportForm.reset();
+      enforceCategorySelectionLimit();
       renderStateField();
       populateBrowseStateSelect();
       resetTurnstileWidget();
@@ -2233,6 +2261,12 @@ function addStoryTimestamp() {
         }
       });
       reportForm.addEventListener('submit', handleSubmit);
+      categoryContainer.addEventListener('change', function onCategoryChange(event) {
+        if (event.target && event.target.name === 'categories') {
+          enforceCategorySelectionLimit(event.target);
+        }
+      });
+      enforceCategorySelectionLimit();
       storyForm.addEventListener('submit', submitStory);
       if (showStoryFormBtn) {
         showStoryFormBtn.addEventListener('click', openStoryForm);
