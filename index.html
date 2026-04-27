@@ -537,7 +537,7 @@
         <h2>Browse Reports</h2>
         <p>See someone you recognize? Trust your instincts. Do your own research. And if you have information to share, use the Submit tab.</p>
         <div class="controls">
-          <input id="report-search" class="search-input" type="text" placeholder="Search by name, city, state, or country..." />
+          <input id="report-search" class="search-input" type="text" maxlength="20" placeholder="Search by name, city, state, or country..." />
           <button id="clear-search" type="button">Clear</button>
         </div>
         <div id="single-report-controls" class="single-report-controls hidden">
@@ -588,12 +588,12 @@
         <form id="report-form" class="panel" novalidate>
           <div class="row">
             <label for="name">Name *</label>
-            <input id="name" type="text" required inputmode="text" />
+            <input id="name" type="text" maxlength="20" required inputmode="text" />
           </div>
 
           <div class="row">
             <label for="city">City *</label>
-            <input id="city" type="text" required inputmode="text" />
+            <input id="city" type="text" maxlength="20" required inputmode="text" />
           </div>
 
           <div class="row">
@@ -801,7 +801,7 @@
 
           <div id="state-field-container" class="row">
             <label for="state">State / Province (optional)</label>
-            <input id="state" type="text" placeholder="State / Province (optional)" inputmode="text" />
+            <input id="state" type="text" maxlength="20" placeholder="State / Province (optional)" inputmode="text" />
           </div>
 
           <fieldset>
@@ -832,11 +832,11 @@
   <form id="story-form" class="panel hidden" style="max-width: 720px;">
     <div class="row">
       <label for="story-title">Title (optional)</label>
-      <input id="story-title" type="text" maxlength="100" placeholder="e.g., A message of hope" />
+      <input id="story-title" type="text" maxlength="1000" placeholder="e.g., A message of hope" />
     </div>
     <div class="row">
       <label for="story-content">Your story *</label>
-      <textarea id="story-content" rows="6" maxlength="2000" required placeholder="Share your experience (no names, no identifying details)..."></textarea>
+      <textarea id="story-content" rows="6" maxlength="1000" required placeholder="Share your experience (no names, no identifying details)..."></textarea>
     </div>
     <div class="row">
       <div class="cf-turnstile" data-sitekey="0x4AAAAAADCC51BDmfY6JgSc" data-theme="dark"></div>
@@ -889,6 +889,8 @@
 
     const SUPABASE_URL = 'https://cmmggaprguusffiphegy.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_G9Doh6gciyFVT1NDum55ZA_8ryL3fOw';
+    const MAX_BROWSE_FIELD_LENGTH = 20;
+    const MAX_COMMUNITY_POST_LENGTH = 1000;
     const MAX_SUBMISSIONS_PER_HOUR = 3;
     const RATE_LIMIT_STORAGE_KEY = 'submission_timestamps';
     const SUBMITTER_ID_KEY = 'submitter_id';
@@ -1487,6 +1489,20 @@ function addStoryTimestamp() {
       });
     }
 
+    function limitFieldLength(fieldElement, maxLength) {
+      if (!fieldElement || !maxLength || fieldElement.dataset.maxLengthBound === 'true') {
+        return;
+      }
+
+      fieldElement.dataset.maxLengthBound = 'true';
+      fieldElement.maxLength = maxLength;
+      fieldElement.addEventListener('input', () => {
+        if (fieldElement.value.length > maxLength) {
+          fieldElement.value = fieldElement.value.slice(0, maxLength);
+        }
+      });
+    }
+
     function bindNoNumberFields() {
       preventNumbersForField(document.getElementById('name'));
       preventNumbersForField(document.getElementById('city'));
@@ -1494,6 +1510,15 @@ function addStoryTimestamp() {
       if (stateField && stateField.tagName === 'INPUT') {
         preventNumbersForField(stateField);
       }
+    }
+
+    function bindFieldLengthLimits() {
+      limitFieldLength(reportSearch, MAX_BROWSE_FIELD_LENGTH);
+      limitFieldLength(document.getElementById('name'), MAX_BROWSE_FIELD_LENGTH);
+      limitFieldLength(document.getElementById('city'), MAX_BROWSE_FIELD_LENGTH);
+      limitFieldLength(document.getElementById('state'), MAX_BROWSE_FIELD_LENGTH);
+      limitFieldLength(storyTitle, MAX_COMMUNITY_POST_LENGTH);
+      limitFieldLength(storyContent, MAX_COMMUNITY_POST_LENGTH);
     }
 
     function renderStateField() {
@@ -1511,15 +1536,17 @@ function addStoryTimestamp() {
           </select>
         `;
         bindNoNumberFields();
+        bindFieldLengthLimits();
         return;
       }
 
       stateFieldContainer.innerHTML = `
         <label for="state">State / Province (optional)</label>
-        <input type="text" id="state" placeholder="State / Province (optional)" inputmode="text">
+        <input type="text" id="state" maxlength="20" placeholder="State / Province (optional)" inputmode="text">
       `;
 
       bindNoNumberFields();
+      bindFieldLengthLimits();
     }
 
     function renderReportRows(reports) {
@@ -1872,8 +1899,14 @@ function addStoryTimestamp() {
     return;
   }
 
-  const title = storyTitle.value.trim() || null;
+  const titleValue = storyTitle.value.trim();
   const content = storyContent.value.trim();
+  const title = titleValue ? titleValue.slice(0, MAX_COMMUNITY_POST_LENGTH) : null;
+  if (content.length > MAX_COMMUNITY_POST_LENGTH) {
+    storyMessage.textContent = `Your story must be ${MAX_COMMUNITY_POST_LENGTH} characters or fewer.`;
+    storyMessage.className = 'message error';
+    return;
+  }
   if (!content) {
     storyMessage.textContent = 'Please write your story.';
     storyMessage.className = 'message error';
@@ -1924,9 +1957,9 @@ function addStoryTimestamp() {
       }
 
       const payload = {
-        name: document.getElementById('name').value.trim(),
-        city: document.getElementById('city').value.trim(),
-        state: document.getElementById('state').value.trim() || null,
+        name: document.getElementById('name').value.trim().slice(0, MAX_BROWSE_FIELD_LENGTH),
+        city: document.getElementById('city').value.trim().slice(0, MAX_BROWSE_FIELD_LENGTH),
+        state: document.getElementById('state').value.trim().slice(0, MAX_BROWSE_FIELD_LENGTH) || null,
         country: document.getElementById('country').value.trim(),
         categories: getSelectedCategories(),
         submitter_uuid: getOrCreateSubmitterId()    // <-- CRITICAL FIX
@@ -2109,6 +2142,7 @@ function addStoryTimestamp() {
       countryField.addEventListener('change', renderStateField);
       reportSearch.addEventListener('input', applySearchFilter);
       bindNoNumberFields();
+      bindFieldLengthLimits();
       clearSearch.addEventListener('click', function clearSearchInput() {
         reportSearch.value = '';
         if (browseCountrySelect) {
