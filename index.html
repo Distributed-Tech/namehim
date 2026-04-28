@@ -2,19 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <script>(function(){var t=localStorage.getItem('sv_theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);})()</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NameHim | Community Safety Awareness Reports</title>
-  <meta name="description" content="NameHim is a community-driven awareness platform for browsing and submitting safety concern reports with clear disclaimers, transparency, and survivor-centered context." />
+  <title>SafeVoice | Community Safety Awareness</title>
+  <meta name="description" content="SafeVoice is an inclusive community safety platform for browsing and sharing concern reports — transparent, survivor-centered, and welcoming to all." />
   <meta name="robots" content="index, follow, max-image-preview:large" />
-  <meta name="theme-color" content="#0b1220" />
+  <meta name="theme-color" content="#0d9488" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="NameHim | Community Safety Awareness Reports" />
-  <meta property="og:description" content="Browse and submit community safety concern reports in a transparent, disclaimer-first awareness platform." />
-  <meta property="og:site_name" content="NameHim" />
+  <meta property="og:title" content="SafeVoice | Community Safety Awareness" />
+  <meta property="og:description" content="Browse and submit community safety concern reports on SafeVoice — open, anonymous, and survivor-centered." />
+  <meta property="og:site_name" content="SafeVoice" />
   <meta property="og:image" content="favicon.svg" />
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="NameHim | Community Safety Awareness Reports" />
-  <meta name="twitter:description" content="Browse and submit community safety concern reports on NameHim." />
+  <meta name="twitter:title" content="SafeVoice | Community Safety Awareness" />
+  <meta name="twitter:description" content="Browse and submit community safety concern reports on SafeVoice." />
   <meta name="twitter:image" content="favicon.svg" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="shortcut icon" href="favicon.svg" />
@@ -22,8 +23,8 @@
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "name": "NameHim",
-      "description": "A community-driven safety awareness platform for browsing and submitting concern reports.",
+      "name": "SafeVoice",
+      "description": "An inclusive community safety awareness platform for browsing and submitting concern reports.",
       "inLanguage": "en"
     }
   </script>
@@ -267,8 +268,21 @@
     }
     .row-actions {
       display: flex;
-      gap: 0.45rem;
-      flex-wrap: wrap;
+      gap: 0.35rem;
+      flex-wrap: nowrap;
+      align-items: center;
+    }
+
+    .row-actions button {
+      white-space: nowrap;
+      font-size: 0.8rem;
+      padding: 0.45rem 0.65rem;
+    }
+
+    table th:last-child,
+    table td:last-child {
+      width: 1%;
+      white-space: nowrap;
     }
 
     .report-timestamp {
@@ -373,52 +387,64 @@
 
     .warning { color: #f59e0b; font-size: 0.85rem; margin-top: 0.5rem; }
     .hidden { display: none !important; }
-    .map-toggle-wrap {
-      margin-bottom: 0.65rem;
-    }
-
-    .map-toggle-row {
+    .filter-bar-maps {
       display: flex;
-      gap: 0.5rem;
       align-items: center;
-      margin-bottom: 0.65rem;
-    }
-
-    .map-toggle-row .map-toggle-wrap {
-      margin-bottom: 0;
-      flex: 1;
+      gap: 0.5rem;
     }
 
     .map-toggle-btn {
-      min-width: 0;
-      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      white-space: nowrap;
     }
 
-    #map {
-      display: none;
-    }
-
-    #world-map {
-      display: none;
-      width: 100%;
-      max-width: 100%;
-      min-height: 0;
-      position: relative;
-      overflow: hidden;
+    #leaflet-map-container {
       margin-bottom: 1rem;
-      border: 1px solid var(--border);
+    }
+
+    #leaflet-map {
+      height: 420px;
       border-radius: 0.7rem;
+      border: 1px solid var(--border);
+      overflow: hidden;
       background: #0f172a;
     }
 
-    #world-map a[href*="simplemaps.com"],
-    #world-map a[href*="openstreetmap.org"],
-    #world-map [class*="copyright"],
-    #world-map [id*="copyright"] {
-      display: none !important;
-      visibility: hidden !important;
-      opacity: 0 !important;
-      pointer-events: none !important;
+    #sv-map-status {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 0.35rem;
+      padding: 0 0.25rem;
+    }
+
+    .sv-map-ctrl {
+      display: flex;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 0.45rem;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.45);
+    }
+
+    .sv-mc-btn {
+      border: none;
+      background: transparent;
+      color: #94a3b8;
+      padding: 0.35rem 0.8rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 0;
+      letter-spacing: 0.01em;
+    }
+
+    .sv-mc-btn:hover { background: #334155; color: #e2e8f0; }
+
+    .sv-mc-btn.sv-mc-active {
+      background: var(--accent);
+      color: #0f172a;
     }
 
     footer {
@@ -517,75 +543,162 @@
   font-size: 0.8rem;
   color: var(--muted);
 }
+
+    .datasource-row {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      margin-bottom: 0.65rem;
+      flex-wrap: wrap;
+    }
+
+    .ds-btn {
+      border: 1px solid var(--border);
+      background: var(--panel-2);
+      color: var(--text);
+      border-radius: 0.5rem;
+      padding: 0.45rem 0.75rem;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .ds-btn.ds-active {
+      background: var(--accent);
+      color: #0f172a;
+      border-color: #3b82f6;
+    }
+
+    .ds-status {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-left: auto;
+      white-space: nowrap;
+    }
+
+    .ds-badge {
+      display: inline-block;
+      font-size: 0.68rem;
+      line-height: 1;
+      border-radius: 999px;
+      padding: 0.2rem 0.45rem;
+      font-weight: 700;
+      vertical-align: middle;
+      margin-left: 0.3rem;
+    }
+
+    .ds-badge-ext  { background: #0ea5e9; color: #082f49; }
+    .ds-badge-local { background: #22c55e; color: #052e16; }
     
   </style>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="i18n.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
   <div class="disclaimer">
-    DISCLAIMER: All user-submitted statements on this site are unverified and generated by third-party users, not by the operator of this site. We do not endorse, confirm, or investigate the truth of any user submission. This information is presented for informational purposes only and is not a substitute for professional legal advice or law enforcement investigation.
+    <span data-i18n="disclaimer.main">All reports are user-submitted and unverified. Not a substitute for law enforcement. This information is for community awareness only.</span>
+    <button class="info-btn" onclick="openModal('modal-disclaimer')" aria-label="Learn more about this disclaimer" type="button">i</button>
   </div>
 
   <header>
     <div class="container header-inner">
-      <div class="site-title-wrap">
-        <h1><a class="site-title-link" href="index.html#/browse">NameHim</a></h1>
-        <p id="report-count" class="report-count">Loading reports and counting...</p>
+      <div class="site-logo">
+        <div class="site-title-wrap">
+          <h1><a class="site-title-link" href="#/browse"><span class="site-name-gradient">SafeVoice</span></a></h1>
+          <p id="report-count" class="report-count" data-i18n="loading.reports">Loading reports…</p>
+        </div>
       </div>
-      <p class="header-status">The site suffered a very intelligent malicious attack, but after many hours of problem solving and updating the site and the database, it has been fixed and should stop this from happening in the future. In this process, there may have been an accidental deletion of some entries, so if you submitted your entry around the time the site had between 18,000 and 21,000 reports, please check if your submission is still there. If it is not, feel free to submit again.</p>
-      <nav>
-        <a href="#/browse" class="nav-link" data-route="#/browse">Browse</a>
-        <a href="#/submit" class="nav-link" data-route="#/submit">Submit</a>
-        <a href="#/community" class="nav-link" data-route="#/community">Community</a>
-        <a href="about.html" class="nav-link">About</a>
-      </nav>
+      <div class="header-right">
+        <nav>
+          <a href="#/browse" class="nav-link" data-route="#/browse" data-i18n="nav.browse">Browse</a>
+          <a href="#/submit" class="nav-link" data-route="#/submit" data-i18n="nav.submit">Submit</a>
+          <a href="#/community" class="nav-link" data-route="#/community" data-i18n="nav.community">Community</a>
+          <a href="resources.html" class="nav-link" data-i18n="nav.resources">Resources</a>
+          <a href="about.html" class="nav-link" data-i18n="nav.about">About</a>
+        </nav>
+        <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light mode" title="Toggle light/dark mode"></button>
+        <button class="lang-toggle" id="lang-toggle" onclick="svToggleLanguage()" aria-label="Cambiar a Español" lang="es">ES</button>
+        <button id="community-exit-btn" class="community-exit-btn" type="button"
+          title="Quick exit: leaves this page immediately"
+          data-i18n-title="community.exit.title"
+          onclick="window.location.href='https://weather.com'"
+          aria-label="Exit quickly">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          <span data-i18n="community.exit.btn">Exit quickly</span>
+        </button>
+      </div>
     </div>
   </header>
 
   <main>
     <div class="container">
       <section id="page-browse" class="page" aria-live="polite">
-        <h2>Browse Reports</h2>
-        <p>See someone you recognize? Trust your instincts. Do your own research. And if you have information to share, use the Submit tab.</p>
-        <div class="controls">
-          <input id="report-search" class="search-input" type="text" maxlength="20" placeholder="Search by name, city, state, or country..." />
-          <button id="clear-search" type="button">Clear</button>
+        <!-- Story of the day widget -->
+        <div id="sotd-widget" class="sotd-widget hidden">
+          <div class="sotd-label" data-i18n="community.sotd.label">Community Voice</div>
+          <blockquote id="sotd-content" class="sotd-content"></blockquote>
+          <a href="#/community" class="sotd-cta" data-i18n="community.sotd.cta">Read more voices →</a>
+        </div>
+
+        <div class="browse-hero">
+          <div class="browse-hero-text">
+            <h2><span data-i18n="index.browse.title">Browse Reports</span> <button class="info-btn" onclick="openModal('modal-browse')" aria-label="How to use browse" type="button">i</button></h2>
+            <p data-i18n="browse.desc">Search community-submitted safety reports by name or location. See someone you recognize? Trust your instincts — do your own research, and share what you know using the Submit tab.</p>
+          </div>
+        </div>
+
+        <div class="filter-bar">
+          <div class="datasource-row">
+            <span class="filter-bar-label" data-i18n="browse.source.label">Source</span>
+            <button id="ds-btn-external" class="ds-btn" type="button" aria-pressed="false">
+              NameHim.app<span class="ds-badge ds-badge-ext">external</span>
+            </button>
+            <button id="ds-btn-local" class="ds-btn" type="button" aria-pressed="false">
+              <span data-i18n="browse.our-reports">Our Reports</span><span class="ds-badge ds-badge-local">local</span>
+            </button>
+            <button id="ds-refresh-btn" class="ds-btn" type="button" title="Refresh current data source" aria-label="Refresh data">↻</button>
+            <span id="ds-status" class="ds-status"></span>
+          </div>
+          <div class="filter-bar-row">
+            <span class="filter-bar-label" data-i18n="browse.search.label">Search</span>
+            <input id="report-search" class="search-input" type="text" maxlength="20" placeholder="Name, city, state, or country…" />
+            <button id="clear-search" type="button" data-i18n="browse.clear">Clear</button>
+          </div>
+          <div class="filter-bar-row">
+            <span class="filter-bar-label" data-i18n="browse.filter.label">Filter</span>
+            <select id="browse-country-select" aria-label="Select a country to filter reports">
+              <option value="" data-i18n="browse.all-countries">All countries</option>
+            </select>
+            <span id="browse-state-select-wrap">
+              <select id="browse-state-select" aria-label="Select a state to filter reports">
+                <option value="" data-i18n="browse.all-states">All states</option>
+              </select>
+            </span>
+          </div>
+          <div class="filter-bar-maps">
+            <button id="toggle-map-btn" class="map-toggle-btn" type="button" aria-expanded="false" aria-controls="leaflet-map-container">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+              <span class="sv-map-label" data-i18n="browse.map">Map View</span>
+            </button>
+          </div>
         </div>
         <div id="single-report-controls" class="single-report-controls hidden">
-          <button id="back-to-all-reports" type="button">← Back to all reports</button>
+          <button id="back-to-all-reports" type="button" data-i18n="browse.back">← Back to all reports</button>
         </div>
-        <p class="table-guidance">
-          Select a country or state from the list or click show map to see results for specific locations.
-          <select id="browse-country-select" aria-label="Select a country to filter reports">
-            <option value="">Select a country</option>
-          </select>
-          <span id="browse-state-select-wrap">
-            <select id="browse-state-select" aria-label="Select a state to filter reports">
-              <option value="">Select a state</option>
-            </select>
-          </span>
-          <span>(full list below).</span>
-        </p>
-        <div class="map-toggle-row">
-          <div class="map-toggle-wrap">
-            <button id="toggle-map-btn" class="map-toggle-btn" type="button" aria-expanded="false" aria-controls="map">Show US Map</button>
-          </div>
-          <div class="map-toggle-wrap">
-            <button id="toggle-world-map-btn" class="map-toggle-btn" type="button" aria-expanded="false" aria-controls="world-map">Show World Map</button>
-          </div>
+        <div id="leaflet-map-container" class="hidden">
+          <div id="leaflet-map"></div>
+          <div id="sv-map-status"></div>
         </div>
-        <div id="map"></div>
-        <div id="world-map"></div>
-        
         <div class="table-wrap">
           <table>
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Location (City, State/Province, Country)</th>
-                <th>Categories</th>
-                <th>Actions</th>
+                <th data-i18n="browse.th.name">Name</th>
+                <th data-i18n="browse.th.location">Location (City, State/Province, Country)</th>
+                <th data-i18n="browse.th.categories">Categories</th>
+                <th data-i18n="browse.th.actions">Actions</th>
               </tr>
             </thead>
             <tbody id="reports-body"></tbody>
@@ -596,22 +709,35 @@
       </section>
 
       <section id="page-submit" class="page">
-        <h2>Submit a Report</h2>
-        <form id="report-form" class="panel" novalidate>
+        <div class="submit-hero">
+          <h2><span data-i18n="index.submit.title">Submit a Report</span> <button class="info-btn" onclick="openModal('modal-submit')" aria-label="About submitting a report" type="button">i</button></h2>
+          <p data-i18n="submit.desc">Share a safety concern with the community. All reports are public and permanent. Please submit only honest, good-faith reports.</p>
+          <p style="margin-top:0.6rem;font-size:0.875rem;">
+            <a href="report-flow.html" style="display:inline-flex;align-items:center;gap:0.35rem;color:var(--violet);font-weight:600;text-decoration:none;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <span data-i18n="submit.guided">Try the guided report flow</span>
+            </a>
+            <span style="color:var(--muted);font-size:0.8rem;" data-i18n="submit.guided.note"> &mdash; step-by-step, easier for first-time submissions</span>
+          </p>
+        </div>
+        <form id="report-form" class="form-panel" novalidate>
+
+          <div class="form-section-label" data-i18n="submit.section.person">About the person</div>
+
           <div class="row">
-            <label for="name">Name *</label>
-            <input id="name" type="text" maxlength="20" required inputmode="text" />
+            <label for="name" data-i18n="submit.name.label">Full Name *</label>
+            <input id="name" type="text" maxlength="20" required inputmode="text" placeholder="First and last name" data-i18n-placeholder="submit.name.placeholder" />
           </div>
 
           <div class="row">
-            <label for="city">City *</label>
-            <input id="city" type="text" maxlength="20" required inputmode="text" />
+            <label for="city" data-i18n="submit.city.label">City *</label>
+            <input id="city" type="text" maxlength="20" required inputmode="text" placeholder="City where they reside or incident occurred" data-i18n-placeholder="submit.city.placeholder" />
           </div>
 
           <div class="row">
-            <label for="country">Country *</label>
+            <label for="country" data-i18n="submit.country.label">Country *</label>
             <select id="country" required>
-              <option value="">Select a country</option>
+              <option value="" data-i18n="submit.country.default">Select a country</option>
               <option value="Afghanistan">Afghanistan</option>
               <option value="Albania">Albania</option>
               <option value="Algeria">Algeria</option>
@@ -812,74 +938,579 @@
           </div>
 
           <div id="state-field-container" class="row">
-            <label for="state">State / Province (optional)</label>
-            <input id="state" type="text" maxlength="20" placeholder="State / Province (optional)" inputmode="text" />
+            <label for="state" data-i18n="submit.state.label">State / Province (optional)</label>
+            <input id="state" type="text" maxlength="20" placeholder="State / Province (optional)" data-i18n-placeholder="submit.state.placeholder" inputmode="text" />
+          </div>
+
+          <div class="form-section-label">
+            <span data-i18n="submit.section.type">Type of concern</span>
+            <button class="info-btn" onclick="openModal('modal-categories')" aria-label="About report categories" type="button">i</button>
           </div>
 
           <fieldset>
-            <legend>Categories *</legend>
+            <legend class="hidden">Categories</legend>
             <div class="checkboxes" id="category-checkboxes"></div>
           </fieldset>
+
+          <div class="form-section-label" data-i18n="submit.section.verify">Verification</div>
 
           <div class="row">
             <div
               class="cf-turnstile"
               data-sitekey="0x4AAAAAADCC51BDmfY6JgSc"
-              data-theme="dark"
+              data-theme="auto"
             ></div>
-            <p id="turnstile-warning" class="warning hidden">Please complete the CAPTCHA verification.</p>
+            <p id="turnstile-warning" class="warning hidden" data-i18n="submit.captcha.warning">Please complete the CAPTCHA verification.</p>
           </div>
 
-          <p id="rate-warning" class="message error hidden">You have reached the limit of 3 submissions in the last hour. Please try again later.</p>
-          <button id="submit-btn" class="primary" type="submit">Submit</button>
+          <p id="rate-warning" class="message error hidden" data-i18n="submit.rate-limit">You have reached the limit of 3 submissions in the last hour. Please try again later.</p>
+          <button id="submit-btn" class="primary" type="submit" data-i18n="index.submit.btn">Submit Report</button>
         </form>
         <p id="submit-message" class="message"></p>
       </section>
 
       <section id="page-community" class="page">
-  <h2>Community Voices</h2>
-  <p>Share your story or just a few words anonymously, without names. This is a space for hope, encouragement, and survivor experiences. No names of abusers or yourself. Your post will be reviewed before appearing.</p>
-  <button id="show-story-form-btn" type="button" aria-expanded="false" aria-controls="story-form">Submit post</button>
-  
-  <form id="story-form" class="panel hidden" style="max-width: 720px;">
-    <div class="row">
-      <label for="story-title">Title (optional)</label>
-      <input id="story-title" type="text" maxlength="1000" placeholder="e.g., A message of hope" />
-    </div>
-    <div class="row">
-      <label for="story-content">Your story *</label>
-      <textarea id="story-content" rows="6" maxlength="1000" required placeholder="Share your experience (no names, no identifying details)..."></textarea>
-    </div>
-    <div class="row">
-      <div class="cf-turnstile" data-sitekey="0x4AAAAAADCC51BDmfY6JgSc" data-theme="dark"></div>
-      <p id="story-turnstile-warning" class="warning hidden">Please complete the CAPTCHA.</p>
-    </div>
-    <p id="story-rate-warning" class="message error hidden">You've reached the limit. Please wait before submitting another story.</p>
-    <button id="submit-story-btn" class="primary" type="submit">Submit story</button>
-  </form>
-  <p id="story-message" class="message"></p>
 
-  <div id="single-story-controls" class="single-report-controls hidden" style="margin-top: 2rem;">
-    <button id="back-to-all-stories" type="button">← Back to all approved posts</button>
-  </div>
-  <h3 id="approved-stories-heading" style="margin-top: 2rem;">Approved stories</h3>
-  <div id="stories-container" class="stories-grid">
-    <p>Loading stories...</p>
-  </div>
-</section>
+        <!-- Hero -->
+        <div class="community-hero">
+          <h2 data-i18n="community.hero.title">Community Voices
+            <button class="info-btn" onclick="openModal('modal-community')" aria-label="About Community Voices" type="button">i</button>
+          </h2>
+          <p data-i18n="community.hero.desc">A moderated space for survivors, allies, and supporters — anonymous, intersectional, and built on solidarity.</p>
+          <p class="community-mod-note">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <span data-i18n="community.moderation.note">Posts are reviewed before appearing — usually within 24–48 hours.</span>
+            <button class="link-btn" onclick="openModal('modal-moderation')" type="button" data-i18n="community.mod.info.title">How moderation works</button>
+          </p>
+        </div>
+
+        <!-- Rooms navigation -->
+        <nav class="community-rooms-nav" aria-label="Community rooms" id="community-rooms-nav">
+          <button class="room-tab active" data-room="stories" type="button">
+            <span class="room-emoji" aria-hidden="true">💜</span>
+            <span data-i18n="community.room.stories">Survivor Stories</span>
+          </button>
+          <button class="room-tab" data-room="hope" type="button">
+            <span class="room-emoji" aria-hidden="true">🌱</span>
+            <span data-i18n="community.room.hope">Messages of Hope</span>
+          </button>
+          <button class="room-tab" data-room="ask" type="button">
+            <span class="room-emoji" aria-hidden="true">❓</span>
+            <span data-i18n="community.room.ask">Ask the Community</span>
+          </button>
+          <button class="room-tab" data-room="lgbtq" type="button">
+            <span class="room-emoji" aria-hidden="true">🏳️‍🌈</span>
+            <span data-i18n="community.room.lgbtq">LGBTQ+ Voices</span>
+          </button>
+          <button class="room-tab" data-room="trans" type="button">
+            <span class="room-emoji" aria-hidden="true">⚧</span>
+            <span data-i18n="community.room.trans">Trans &amp; Non-Binary</span>
+          </button>
+          <button class="room-tab" data-room="allies" type="button">
+            <span class="room-emoji" aria-hidden="true">🤝</span>
+            <span data-i18n="community.room.allies">For Allies</span>
+          </button>
+          <button class="room-tab" data-room="legal" type="button">
+            <span class="room-emoji" aria-hidden="true">⚖️</span>
+            <span data-i18n="community.room.legal">Court &amp; Legal</span>
+          </button>
+          <button class="room-tab" data-room="resources" type="button">
+            <span class="room-emoji" aria-hidden="true">📚</span>
+            <span data-i18n="community.room.resources">Resource Recs</span>
+          </button>
+          <button class="room-tab" data-room="men" type="button">
+            <span class="room-emoji" aria-hidden="true">💙</span>
+            <span data-i18n="community.room.men">Men Who've Experienced Abuse</span>
+          </button>
+          <button class="room-tab room-tab-saved" data-room="saved" type="button">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span data-i18n="community.saved.tab">Saved</span>
+          </button>
+        </nav>
+
+        <!-- Room description bar -->
+        <div id="community-room-desc" class="community-room-desc" aria-live="polite"></div>
+
+        <!-- Filter & sort toolbar -->
+        <div class="community-toolbar" id="community-toolbar">
+          <div class="community-toolbar-left">
+            <input type="text" id="community-search" class="community-search-input"
+              maxlength="100" placeholder="Search posts…"
+              data-i18n-placeholder="community.search.placeholder"
+              aria-label="Search community posts" />
+            <div class="community-tag-filter" id="community-tag-filter" aria-label="Filter by tag"></div>
+          </div>
+          <div class="community-toolbar-right">
+            <label for="community-sort" class="sr-only" data-i18n="community.sort.label">Sort</label>
+            <select id="community-sort" class="community-sort-select" aria-label="Sort posts">
+              <option value="newest" data-i18n="community.sort.newest">Newest</option>
+              <option value="supported" data-i18n="community.sort.supported">Most supported</option>
+              <option value="random" data-i18n="community.sort.random">Random</option>
+              <option value="unanswered" data-i18n="community.sort.unanswered">Unanswered</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Compose button / multi-step composer -->
+        <div id="community-compose-wrap">
+          <button id="community-compose-btn" class="community-compose-open-btn" type="button" aria-expanded="false" aria-controls="community-composer">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            <span data-i18n="community.compose.btn">Share your voice</span>
+          </button>
+          <div id="community-draft-restore" class="community-draft-restore hidden">
+            <span data-i18n="community.compose.draft.restore">You have a saved draft. Restore it?</span>
+            <button id="community-draft-restore-yes" type="button" data-i18n="community.draft.yes">Restore</button>
+            <button id="community-draft-restore-no" type="button" data-i18n="community.draft.no">Discard</button>
+          </div>
+        </div>
+
+        <!-- Multi-step composer -->
+        <div id="community-composer" class="community-composer hidden" role="dialog" aria-modal="false" aria-label="Compose a community post">
+
+          <!-- Step progress -->
+          <div class="composer-progress" aria-label="Step progress">
+            <div class="composer-step-indicator active" data-step="1">1</div>
+            <div class="composer-step-line"></div>
+            <div class="composer-step-indicator" data-step="2">2</div>
+            <div class="composer-step-line"></div>
+            <div class="composer-step-indicator" data-step="3">3</div>
+            <div class="composer-step-line"></div>
+            <div class="composer-step-indicator" data-step="4">4</div>
+            <div class="composer-step-line"></div>
+            <div class="composer-step-indicator" data-step="5">5</div>
+          </div>
+
+          <!-- Step 1: Choose room -->
+          <div class="composer-step active" data-step="1">
+            <h3 data-i18n="community.compose.step1.title">Choose a room</h3>
+            <p class="composer-step-desc" data-i18n="community.compose.step1.desc">Where does your post belong? Pick the space that fits best.</p>
+            <div class="composer-room-grid" id="composer-room-grid">
+              <label class="composer-room-option" data-room="stories">
+                <input type="radio" name="compose-room" value="stories" />
+                <span class="room-emoji" aria-hidden="true">💜</span>
+                <span data-i18n="community.room.stories">Survivor Stories</span>
+              </label>
+              <label class="composer-room-option" data-room="hope">
+                <input type="radio" name="compose-room" value="hope" />
+                <span class="room-emoji" aria-hidden="true">🌱</span>
+                <span data-i18n="community.room.hope">Messages of Hope</span>
+              </label>
+              <label class="composer-room-option" data-room="ask">
+                <input type="radio" name="compose-room" value="ask" />
+                <span class="room-emoji" aria-hidden="true">❓</span>
+                <span data-i18n="community.room.ask">Ask the Community</span>
+              </label>
+              <label class="composer-room-option" data-room="lgbtq">
+                <input type="radio" name="compose-room" value="lgbtq" />
+                <span class="room-emoji" aria-hidden="true">🏳️‍🌈</span>
+                <span data-i18n="community.room.lgbtq">LGBTQ+ Voices</span>
+              </label>
+              <label class="composer-room-option" data-room="trans">
+                <input type="radio" name="compose-room" value="trans" />
+                <span class="room-emoji" aria-hidden="true">⚧</span>
+                <span data-i18n="community.room.trans">Trans &amp; Non-Binary</span>
+              </label>
+              <label class="composer-room-option" data-room="allies">
+                <input type="radio" name="compose-room" value="allies" />
+                <span class="room-emoji" aria-hidden="true">🤝</span>
+                <span data-i18n="community.room.allies">For Allies</span>
+              </label>
+              <label class="composer-room-option" data-room="legal">
+                <input type="radio" name="compose-room" value="legal" />
+                <span class="room-emoji" aria-hidden="true">⚖️</span>
+                <span data-i18n="community.room.legal">Court &amp; Legal</span>
+              </label>
+              <label class="composer-room-option" data-room="resources">
+                <input type="radio" name="compose-room" value="resources" />
+                <span class="room-emoji" aria-hidden="true">📚</span>
+                <span data-i18n="community.room.resources">Resource Recs</span>
+              </label>
+              <label class="composer-room-option" data-room="men">
+                <input type="radio" name="compose-room" value="men" />
+                <span class="room-emoji" aria-hidden="true">💙</span>
+                <span data-i18n="community.room.men">Men Who've Experienced Abuse</span>
+              </label>
+            </div>
+            <div class="composer-nav">
+              <button type="button" class="composer-cancel-btn" onclick="closeCommunityComposer()" data-i18n="community.compose.cancel">Cancel</button>
+              <button type="button" class="primary" data-goto-step="2" data-i18n="community.compose.next">Continue →</button>
+            </div>
+          </div>
+
+          <!-- Step 2: Content warning -->
+          <div class="composer-step" data-step="2">
+            <h3 data-i18n="community.compose.step2.title">Content note</h3>
+            <p class="composer-step-desc" data-i18n="community.compose.step2.desc">Does your post describe violence, sexual assault, or coercive control?</p>
+            <div class="composer-cw-grid" id="composer-cw-grid">
+              <label class="composer-cw-option">
+                <input type="radio" name="compose-cw" value="none" checked />
+                <span data-i18n="community.cw.none">No content note needed</span>
+              </label>
+              <label class="composer-cw-option">
+                <input type="radio" name="compose-cw" value="physical" />
+                <span data-i18n="community.cw.physical">Physical violence</span>
+              </label>
+              <label class="composer-cw-option">
+                <input type="radio" name="compose-cw" value="sexual" />
+                <span data-i18n="community.cw.sexual">Sexual violence or assault</span>
+              </label>
+              <label class="composer-cw-option">
+                <input type="radio" name="compose-cw" value="coercive-control" />
+                <span data-i18n="community.cw.coercive-control">Coercive control or emotional abuse</span>
+              </label>
+              <label class="composer-cw-option">
+                <input type="radio" name="compose-cw" value="general" />
+                <span data-i18n="community.cw.general">General — I'll describe in my post</span>
+              </label>
+            </div>
+            <div class="composer-nav">
+              <button type="button" class="composer-back-btn" data-goto-step="1" data-i18n="community.compose.back">← Back</button>
+              <button type="button" class="primary" data-goto-step="3" data-i18n="community.compose.next">Continue →</button>
+            </div>
+          </div>
+
+          <!-- Step 3: Write -->
+          <div class="composer-step" data-step="3">
+            <h3 data-i18n="community.compose.step3.title">Write your post</h3>
+            <p class="composer-step-desc" data-i18n="community.compose.step3.desc">Share in your own words. No names, no identifying details.</p>
+            <div class="row">
+              <label for="compose-title" data-i18n="community.compose.title.label">Title (optional)</label>
+              <input id="compose-title" type="text" maxlength="200" placeholder="e.g., A message of hope…" />
+            </div>
+            <div class="row">
+              <label for="compose-content" data-i18n="community.compose.content.label">Your post *</label>
+              <textarea id="compose-content" rows="7" maxlength="2000" required
+                placeholder="Share your experience, question, or message… (no names or identifying details)"
+                data-i18n-placeholder="community.compose.content.placeholder"></textarea>
+              <div class="compose-char-count"><span id="compose-char-num">0</span> / 2000</div>
+            </div>
+            <div class="row">
+              <label data-i18n="community.compose.tags.label">Add tags (optional)</label>
+              <div class="composer-tag-picker" id="composer-tag-picker">
+                <button class="composer-tag-choice" data-tag="healing" type="button">healing</button>
+                <button class="composer-tag-choice" data-tag="leaving" type="button">leaving</button>
+                <button class="composer-tag-choice" data-tag="court" type="button">court</button>
+                <button class="composer-tag-choice" data-tag="family" type="button">family</button>
+                <button class="composer-tag-choice" data-tag="lgbtq" type="button">LGBTQ+</button>
+                <button class="composer-tag-choice" data-tag="recovery" type="button">recovery</button>
+                <button class="composer-tag-choice" data-tag="first-week" type="button">first week</button>
+                <button class="composer-tag-choice" data-tag="years-later" type="button">years later</button>
+                <button class="composer-tag-choice" data-tag="housing" type="button">housing</button>
+                <button class="composer-tag-choice" data-tag="children" type="button">children</button>
+                <button class="composer-tag-choice" data-tag="financial" type="button">financial abuse</button>
+                <button class="composer-tag-choice" data-tag="digital" type="button">digital safety</button>
+                <button class="composer-tag-choice" data-tag="hope" type="button">hope</button>
+                <button class="composer-tag-choice" data-tag="letter" type="button">letter to myself</button>
+              </div>
+            </div>
+            <div id="compose-pii-warning" class="compose-pii-warning hidden" role="alert">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <span data-i18n="community.compose.pii.warning">Your post may contain personal information. Please review before submitting — for your own protection.</span>
+            </div>
+            <p id="compose-draft-status" class="compose-draft-status" aria-live="polite"></p>
+            <div class="composer-nav">
+              <button type="button" class="composer-back-btn" data-goto-step="2" data-i18n="community.compose.back">← Back</button>
+              <button type="button" class="primary" data-goto-step="4" data-i18n="community.compose.next">Continue →</button>
+            </div>
+          </div>
+
+          <!-- Step 4: Preview -->
+          <div class="composer-step" data-step="4">
+            <h3 data-i18n="community.compose.step4.title">Preview</h3>
+            <p class="composer-step-desc" data-i18n="community.compose.step4.desc">This is how your post will appear. Ready to submit?</p>
+            <div id="compose-preview" class="community-composer-preview"></div>
+            <div class="composer-nav">
+              <button type="button" class="composer-back-btn" data-goto-step="3" data-i18n="community.compose.back">← Back</button>
+              <button type="button" class="primary" data-goto-step="5" data-i18n="community.compose.next">Continue →</button>
+            </div>
+          </div>
+
+          <!-- Step 5: CAPTCHA + submit -->
+          <div class="composer-step" data-step="5">
+            <h3 data-i18n="community.compose.step5.title">Verification</h3>
+            <div class="row">
+              <div class="cf-turnstile" data-sitekey="0x4AAAAAADCC51BDmfY6JgSc" data-theme="auto"></div>
+              <p id="compose-turnstile-warning" class="warning hidden" data-i18n="community.captcha.warning">Please complete the CAPTCHA.</p>
+            </div>
+            <p id="compose-rate-warning" class="message error hidden" data-i18n="community.rate-limit">You've reached the limit. Please wait before submitting another post.</p>
+            <!-- Crisis overlay (shown if crisis keywords detected) -->
+            <div id="compose-crisis-overlay" class="compose-crisis-overlay hidden" role="alert">
+              <div class="crisis-overlay-inner">
+                <h4 data-i18n="community.compose.crisis.overlay.title">We see you. You're not alone.</h4>
+                <p data-i18n="community.compose.crisis.overlay.desc">Your words suggest you may be going through something very hard right now. Before you post, please know that real, confidential support is available right now.</p>
+                <div class="crisis-overlay-links">
+                  <a href="resources.html#hotlines" class="crisis-resource-link">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.5 19.79 19.79 0 0 1 1.59 4.9C1.58 3.9 2.26 3.04 3.26 3h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.91a16 16 0 0 0 6.1 6.1l1.27-.62a2 2 0 0 1 2.11.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 19.92z"/></svg>
+                    <span data-i18n="community.compose.crisis.hotline">National Crisis Line</span>
+                  </a>
+                  <span class="crisis-resource-divider">·</span>
+                  <span class="crisis-text-line" data-i18n="community.compose.crisis.chat">Crisis Text Line — text HOME to 741741</span>
+                </div>
+                <button type="button" id="compose-crisis-continue" class="composer-cancel-btn" data-i18n="community.compose.crisis.continue">Continue writing anyway</button>
+              </div>
+            </div>
+            <div class="composer-nav">
+              <button type="button" class="composer-back-btn" data-goto-step="4" data-i18n="community.compose.back">← Back</button>
+              <button type="button" id="compose-submit-btn" class="primary" data-i18n="community.compose.submit">Submit</button>
+            </div>
+            <p id="compose-message" class="message" aria-live="polite"></p>
+          </div>
+
+          <!-- Step 6: Success -->
+          <div class="composer-step" data-step="6">
+            <div class="composer-success">
+              <div class="composer-success-icon" aria-hidden="true">💜</div>
+              <h3 data-i18n="community.compose.success.title">Thank you for sharing your voice.</h3>
+              <p data-i18n="community.compose.success.desc">Your post has been submitted for review. It usually takes 24–48 hours to appear.</p>
+              <div class="composer-success-actions">
+                <button type="button" onclick="closeCommunityComposer()" class="primary" data-i18n="community.compose.success.read">Read other stories</button>
+                <a href="resources.html" class="button" data-i18n="community.compose.success.resources">Find support resources</a>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /community-composer -->
+
+        <!-- Single post back button (shown when deep-linking to one post) -->
+        <div id="single-story-controls" class="single-report-controls hidden" style="margin-top: 1rem;">
+          <button id="back-to-all-stories" type="button" data-i18n="community.story.back">← Back to all posts</button>
+        </div>
+
+        <!-- Saved posts panel (shown when saved room tab is active) -->
+        <div id="community-saved-panel" class="hidden">
+          <p class="community-saved-note" data-i18n="community.saved.note">Saved posts are stored only in your browser. They disappear if you clear your browser data.</p>
+          <div id="community-saved-container" class="stories-grid"></div>
+        </div>
+
+        <!-- Stories feed -->
+        <div id="stories-container" class="stories-grid" aria-live="polite" aria-label="Community posts">
+          <p data-i18n="community.loading">Loading…</p>
+        </div>
+
+        <!-- Load more -->
+        <div id="community-load-more-wrap" class="community-load-more-wrap hidden">
+          <button id="community-load-more-btn" type="button" data-i18n="community.load.more">Load more</button>
+        </div>
+
+        <!-- Story flag modal -->
+        <div class="modal-overlay" id="modal-story-flag" role="dialog" aria-modal="true" aria-labelledby="modal-story-flag-title">
+          <div class="modal-box">
+            <button class="modal-close" onclick="closeModal('modal-story-flag')" aria-label="Close">×</button>
+            <h3 id="modal-story-flag-title" data-i18n="community.flag.title">Report this post</h3>
+            <p data-i18n="community.flag.desc">All flags are reviewed by a moderator. Thank you for helping keep this space safe.</p>
+            <input type="hidden" id="flag-target-story-id" value="" />
+            <div class="flag-reason-grid">
+              <label class="flag-reason-option">
+                <input type="radio" name="flag-reason" value="names-a-person" />
+                <span data-i18n="community.flag.names-a-person">Names or identifies a specific person</span>
+              </label>
+              <label class="flag-reason-option">
+                <input type="radio" name="flag-reason" value="unsafe-content" />
+                <span data-i18n="community.flag.unsafe-content">Unsafe or harmful content</span>
+              </label>
+              <label class="flag-reason-option">
+                <input type="radio" name="flag-reason" value="spam" />
+                <span data-i18n="community.flag.spam">Spam or off-topic</span>
+              </label>
+              <label class="flag-reason-option">
+                <input type="radio" name="flag-reason" value="crisis-needs-help" />
+                <span data-i18n="community.flag.crisis-needs-help">This person may need crisis support</span>
+              </label>
+              <label class="flag-reason-option">
+                <input type="radio" name="flag-reason" value="other" checked />
+                <span data-i18n="community.flag.other">Other</span>
+              </label>
+            </div>
+            <button id="submit-story-flag-btn" type="button" class="primary" data-i18n="community.flag.submit">Submit flag</button>
+            <p id="story-flag-message" class="message" aria-live="polite"></p>
+          </div>
+        </div>
+
+      </section>
       
     </div>
   </main>
 
   <footer>
+    <div class="footer-rainbow-bar"></div>
     <div class="container footer-inner">
-      <div>
-        <a href="about.html">About</a> ·
-        <a href="https://github.com/namehim/namehim">GitHub</a>
+      <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;">
+        <a href="resources.html" data-i18n="footer.resources">Resources</a> ·
+        <a href="about.html" data-i18n="footer.about">About</a> ·
+        <a href="https://github.com/namehim/namehim" rel="noopener noreferrer">GitHub</a>
+        <button class="info-btn" onclick="openModal('modal-privacy')" aria-label="Privacy information" type="button">i</button>
       </div>
-      <span>Open source</span>
+      <span data-i18n="footer.tagline">SafeVoice — Open source community safety</span>
     </div>
   </footer>
+
+  <!-- ═══ INFO MODALS ════════════════════════════════════════════ -->
+
+  <!-- Disclaimer modal -->
+  <div class="modal-overlay" id="modal-disclaimer" role="dialog" aria-modal="true" aria-labelledby="modal-disclaimer-title">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('modal-disclaimer')" aria-label="Close">×</button>
+      <h3 id="modal-disclaimer-title" data-i18n="modal.disclaimer.title">About These Reports</h3>
+      <div data-i18n-html="modal.disclaimer.body"><p>All reports on SafeVoice are submitted anonymously by community members and are completely unverified. We publish them because we believe people have the right to share their experiences and warn others — but we cannot confirm, investigate, or endorse any claim. Treat each report as a starting point for your own awareness, not as verified fact.</p></div>
+      <ul>
+        <li>Reports are user-generated and not investigated by platform administrators.</li>
+        <li>Information should serve as one data point among many — always do your own research.</li>
+        <li>If you believe someone is in immediate danger, contact law enforcement, not just this site.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Browse modal -->
+  <div class="modal-overlay" id="modal-browse" role="dialog" aria-modal="true" aria-labelledby="modal-browse-title">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('modal-browse')" aria-label="Close">×</button>
+      <h3 id="modal-browse-title">How to Use Browse</h3>
+      <p>The browse directory contains community-submitted safety awareness reports. You can search by name or location, filter by country or US state, and explore an interactive map. Every report is user-submitted and unverified — use this as a starting point for awareness, never as a definitive verdict on anyone.</p>
+      <ul>
+        <li>Search by name, city, state, or country using the search bar above.</li>
+        <li>Use the country/state dropdowns or the interactive maps to explore by location.</li>
+        <li>Click "Share" on any report to copy a direct link you can send to someone.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Submit modal -->
+  <div class="modal-overlay" id="modal-submit" role="dialog" aria-modal="true" aria-labelledby="modal-submit-title">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('modal-submit')" aria-label="Close">×</button>
+      <h3 id="modal-submit-title" data-i18n="modal.submit.title">Before You Submit</h3>
+      <div data-i18n-html="modal.submit.body"><p>Submitting a report adds a person's name, location, and the nature of your concern to a public directory. Please ensure your report is honest and submitted in good faith. You are responsible for what you submit. Reports are permanent but can be appealed by the subject via the platform's review process.</p></div>
+      <ul>
+        <li>Submissions should reflect genuine safety concerns, not personal grievances.</li>
+        <li>Only letters (A–Z) are accepted for name and location to protect privacy.</li>
+        <li>You can submit up to 3 reports per hour from the same browser — no account needed.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Categories modal -->
+  <div class="modal-overlay" id="modal-categories" role="dialog" aria-modal="true" aria-labelledby="modal-categories-title">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('modal-categories')" aria-label="Close">×</button>
+      <h3 id="modal-categories-title" data-i18n="modal.categories.title">Report Categories</h3>
+      <div data-i18n-html="modal.categories.body"><p>Categories help others quickly understand the nature of the safety concern being reported. You may select multiple categories that apply to your experience. These are broad community classifications used for awareness — they are not legal definitions, and selecting them does not constitute a formal accusation.</p></div>
+      <ul>
+        <li>Choose all categories that accurately reflect your experience — you can select more than one.</li>
+        <li>Categories appear as color-coded tags in the browse listing to help others filter by type.</li>
+        <li>If you're unsure which category fits, choose the closest one — accuracy helps the community.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Community modal -->
+  <div class="modal-overlay" id="modal-community" role="dialog" aria-modal="true" aria-labelledby="modal-community-title">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('modal-community')" aria-label="Close">×</button>
+      <h3 id="modal-community-title" data-i18n="modal.community.title">Community Voices</h3>
+      <div data-i18n-html="modal.community.body"><p>Community Voices is a moderated, anonymous space for survivors, allies, and supporters. It is organized into rooms — each with its own purpose and norms — so you can find the conversation that fits where you are right now.</p></div>
+      <ul>
+        <li>No names of specific people are permitted in any post or reply.</li>
+        <li>Posts and replies are reviewed before appearing — this usually takes 24–48 hours.</li>
+        <li>Your submission is completely anonymous — no personal data is collected or stored.</li>
+        <li>You can react to posts, save them to your device, and post replies — all without an account.</li>
+        <li>If you ever need to leave quickly, use the "Exit quickly" button at the top of this section.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Moderation info modal -->
+  <div class="modal-overlay" id="modal-moderation" role="dialog" aria-modal="true" aria-labelledby="modal-moderation-title">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('modal-moderation')" aria-label="Close">×</button>
+      <h3 id="modal-moderation-title" data-i18n="community.mod.info.title">How moderation works</h3>
+      <p data-i18n="community.mod.info.desc">All Community posts are reviewed by a volunteer moderator before appearing publicly. We remove posts that name specific individuals, contain unsafe content, or violate our community guidelines. Moderation is about safety, not censorship.</p>
+      <ul>
+        <li>Posts are reviewed in order. Average wait time: 24–48 hours.</li>
+        <li>We remove: posts naming specific people, spam, and content that could put someone at risk.</li>
+        <li>We do not remove posts just because the topic is difficult or painful.</li>
+        <li>If your post is not approved, it is because it may have contained identifying information — you're welcome to revise and resubmit.</li>
+        <li>Community guidelines are publicly available in the <a href="https://github.com/namehim/namehim" rel="noopener noreferrer">open-source repository</a>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Privacy modal -->
+  <div class="modal-overlay" id="modal-privacy" role="dialog" aria-modal="true" aria-labelledby="modal-privacy-title">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('modal-privacy')" aria-label="Close">×</button>
+      <h3 id="modal-privacy-title" data-i18n="modal.privacy.title">Your Privacy</h3>
+      <div data-i18n-html="modal.privacy.body"><p>SafeVoice is built from the ground up to protect your privacy. You never need to create an account, provide an email, or log in to use any feature. We have deliberately designed the system to minimize what we know about you — because your safety and anonymity are the entire point.</p></div>
+      <ul>
+        <li>No accounts, no emails, no passwords — ever. Completely anonymous use.</li>
+        <li>We never store your IP address. A temporary check is used only for rate limiting and expires in 60 seconds.</li>
+        <li>The only browser data stored is a random anonymous ID in localStorage to enforce the 3-per-hour rate limit. You can clear it anytime by clearing your browser storage.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═══ THEME TOGGLE + MODAL JS ════════════════════════════════ -->
+  <script>
+    // ── Theme toggle ──────────────────────────────────────────────
+    var SVG_MOON = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>';
+    var SVG_SUN  = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>';
+
+    function toggleTheme() {
+      var html = document.documentElement;
+      var current = html.getAttribute('data-theme');
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var isDark = current === 'dark' || (!current && prefersDark);
+      var next = isDark ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('sv_theme', next);
+      var btn = document.getElementById('theme-toggle');
+      if (btn) btn.innerHTML = next === 'dark' ? SVG_SUN : SVG_MOON;
+    }
+
+    // Init theme button label on load
+    (function initThemeBtn() {
+      var t = document.documentElement.getAttribute('data-theme');
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var isDark = t === 'dark' || (!t && prefersDark);
+      var btn = document.getElementById('theme-toggle');
+      if (btn) btn.innerHTML = isDark ? SVG_SUN : SVG_MOON;
+    })();
+
+    // ── Modal system ─────────────────────────────────────────────
+    function openModal(id) {
+      var overlay = document.getElementById(id);
+      if (!overlay) return;
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      // Focus close button for accessibility
+      var closeBtn = overlay.querySelector('.modal-close');
+      if (closeBtn) closeBtn.focus();
+    }
+
+    function closeModal(id) {
+      var overlay = document.getElementById(id);
+      if (!overlay) return;
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // Close modal on overlay click
+    document.addEventListener('click', function(e) {
+      if (e.target && e.target.classList.contains('modal-overlay')) {
+        e.target.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.modal-overlay.open').forEach(function(el) {
+          el.classList.remove('open');
+          document.body.style.overflow = '';
+        });
+      }
+    });
+  </script>
 
   <script>
     const routes = {
@@ -899,11 +1530,10 @@
       'pedo'
     ];
 
-    const SUPABASE_URL = 'https://cmmggaprguusffiphegy.supabase.co';
-    const SUPABASE_ANON_KEY = 'sb_publishable_G9Doh6gciyFVT1NDum55ZA_8ryL3fOw';
+    const SUPABASE_URL = 'https://rdxsvvoyqzvymcjqyjvx.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_QppckTiCmGyI4Z-_dAqE2A_PT2HN6dq';
     const MAX_BROWSE_FIELD_LENGTH = 30;
     const MAX_COUNTRY_LENGTH = 64;
-    const MAX_COMMUNITY_POST_LENGTH = 1000;
     const MAX_SUBMISSIONS_PER_HOUR = 3;
     const RATE_LIMIT_STORAGE_KEY = 'submission_timestamps';
     const SUBMITTER_ID_KEY = 'submitter_id';
@@ -930,29 +1560,31 @@
     const browseCountrySelect = document.getElementById('browse-country-select');
     const browseStateSelectWrap = document.getElementById('browse-state-select-wrap');
     const browseStateSelect = document.getElementById('browse-state-select');
-    const mapContainer = document.getElementById('map');
-    const toggleMapBtn = document.getElementById('toggle-map-btn');
-    const MAP_VISIBILITY_STORAGE_KEY = 'namehim_us_map_visible';
     const browsePagination = document.getElementById('browse-pagination');
     const REPORTS_PER_PAGE = 100;
     const MAX_CATEGORY_LENGTH = 40;
     const MAX_CATEGORY_COUNT = 8;
     const MAX_CATEGORY_TOTAL_CHARS = 240;
     const DEFAULT_PAGE_TITLE = document.title || 'NameHim';
-    const storyForm = document.getElementById('story-form');
-    const showStoryFormBtn = document.getElementById('show-story-form-btn');
-    const storyTitle = document.getElementById('story-title');
-    const storyContent = document.getElementById('story-content');
-    const storySubmitBtn = document.getElementById('submit-story-btn');
-    const storyMessage = document.getElementById('story-message');
-    const storyTurnstileWarning = document.getElementById('story-turnstile-warning');
-    const storyRateWarning = document.getElementById('story-rate-warning');
+    const STORY_RATE_LIMIT_KEY = 'story_submission_timestamps';
+    const COMMUNITY_DRAFT_KEY  = 'sv_community_draft';
+    const COMMUNITY_REACTIONS_KEY = 'sv_community_reactions';
+    const COMMUNITY_SAVED_KEY  = 'sv_community_saved';
+    const COMMUNITY_REPLY_TOKEN_KEY = 'sv_community_reply_token';
+    const MAX_COMMUNITY_POST_LENGTH = 2000;
+
     const storiesContainer = document.getElementById('stories-container');
     const singleStoryControls = document.getElementById('single-story-controls');
     const backToAllStoriesBtn = document.getElementById('back-to-all-stories');
-    const approvedStoriesHeading = document.getElementById('approved-stories-heading');
 
-    const STORY_RATE_LIMIT_KEY = 'story_submission_timestamps';
+    /* ── Community state ───────────────────────────────────────── */
+    let communityCurrentRoom = 'stories';
+    let communityCurrentSort = 'newest';
+    let communityActiveTag   = null;
+    let communitySearchQuery = '';
+    let communityOffset      = 0;
+    const COMMUNITY_PAGE_SIZE = 20;
+    let communityHasMore = false;
 
     const US_STATES = [
       'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware',
@@ -963,17 +1595,24 @@
       'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
       'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
     ];
-
     window.US_STATES = US_STATES;
+
     const ALLOWED_COUNTRY_BY_NORMALIZED = new Map();
 
     let allReports = [];
-    window.allReports = allReports;
     let currentFilteredReports = [];
     let currentPage = 1;
     let activeSingleReportId = null;
     let activeSingleStoryId = null;
     let hasLoadedReports = false;
+
+    // ── Data-source state ──────────────────────────────────────────────────
+    let externalReports = [];        // fetched from api.namehim.app
+    let localReports    = [];        // fetched from this fork's Supabase
+    let externalLastFetched = null;  // Date when external was last fetched
+    let localLastFetched    = null;  // Date when local was last fetched
+    let activeDataSource = localStorage.getItem('sv_datasource') || 'external';
+    let externalRefreshTimer = null; // setInterval handle for auto-refresh
 
     // --- ADDED: submitter_uuid management (critical fix) ---
     function getOrCreateSubmitterId() {
@@ -1383,10 +2022,10 @@ function filterReportsByState(stateFullName) {
       const shareUrl = getShareUrl(reportId);
       try {
         await navigator.clipboard.writeText(shareUrl);
-        showToast('Link copied to clipboard');
+        showToast(svT('browse.copied'));
       } catch (error) {
         console.error('Clipboard write failed:', error);
-        showToast('Could not copy link');
+        showToast(svT('browse.copy-failed'));
       }
     }
 
@@ -1399,10 +2038,10 @@ function filterReportsByState(stateFullName) {
       const shareUrl = getStoryShareUrl(storyId);
       try {
         await navigator.clipboard.writeText(shareUrl);
-        showToast('Link copied to clipboard');
+        showToast(svT('browse.copied'));
       } catch (error) {
         console.error('Clipboard write failed:', error);
-        showToast('Could not copy link');
+        showToast(svT('browse.copy-failed'));
       }
     }
 
@@ -1421,7 +2060,7 @@ function filterReportsByState(stateFullName) {
 
     function setBrowseTitleForSingleReport(report) {
       if (report && report.name) {
-        document.title = 'NameHim – Report for ' + report.name;
+        document.title = 'SafeVoice – Report for ' + report.name;
       } else {
         document.title = DEFAULT_PAGE_TITLE;
       }
@@ -1434,7 +2073,7 @@ function filterReportsByState(stateFullName) {
       setStateDropdownValue('');
       renderReportRows([report]);
       renderPagination(0, 1);
-      browseMessage.textContent = 'Showing shared report #' + activeSingleReportId + '.';
+      browseMessage.textContent = svT('browse.shared-single').replace('{id}', activeSingleReportId);
       browseMessage.className = 'message';
       setBrowseTitleForSingleReport(report);
     }
@@ -1444,8 +2083,8 @@ function filterReportsByState(stateFullName) {
       setSingleReportControlsVisible(true);
       renderReportRows([]);
       renderPagination(0, 1);
-      reportsBody.innerHTML = '<tr><td colspan="4">Report not found. <a href="#/browse">Back to all reports</a>.</td></tr>';
-      browseMessage.textContent = 'Report not found.';
+      reportsBody.innerHTML = '<tr><td colspan="4">' + svT('browse.not-found-link') + '</td></tr>';
+      browseMessage.textContent = svT('browse.not-found');
       browseMessage.className = 'message error';
       setBrowseTitleForSingleReport(null);
     }
@@ -1489,6 +2128,13 @@ function filterReportsByState(stateFullName) {
     return;
   }
 
+  // Scroll to top whenever the route changes so the new page
+  // content is visible regardless of prior scroll position.
+  if (renderRoute._lastRoute !== route) {
+    window.scrollTo(0, 0);
+    renderRoute._lastRoute = route;
+  }
+
   pageBrowse.classList.toggle('active', route === '#/browse');
   pageSubmit.classList.toggle('active', route === '#/submit');
   const communityPage = document.getElementById('page-community');
@@ -1500,9 +2146,8 @@ function filterReportsByState(stateFullName) {
 
   updateBrowseViewFromRoute();
 
-  if (route === '#/community') {
-    updateCommunityViewFromRoute();
-  }
+  // Always call — the function handles both entering and leaving community
+  updateCommunityViewFromRoute();
 }
 
     function normalizeTimestamps(values) {
@@ -1581,7 +2226,7 @@ function addStoryTimestamp() {
     }
 
     function updateReportCount(total) {
-      reportCount.textContent = formatReportTotal(total) + ' reports and counting...';
+      reportCount.textContent = formatReportTotal(total) + ' ' + svT('browse.count');
     }
 
     const loadingDots = ['.', '..', '...'];
@@ -1593,10 +2238,10 @@ function addStoryTimestamp() {
         return;
       }
 
-      reportCount.textContent = 'Loading reports and counting' + loadingDots[loadingDotIndex];
+      reportCount.textContent = svT('browse.counting');
       reportCountLoadingInterval = setInterval(() => {
         loadingDotIndex = (loadingDotIndex + 1) % loadingDots.length;
-        reportCount.textContent = 'Loading reports and counting' + loadingDots[loadingDotIndex];
+        reportCount.textContent = svT('browse.counting');
       }, 1000);
     }
 
@@ -1718,9 +2363,9 @@ function addStoryTimestamp() {
           .map((state) => '<option value="' + escapeHTML(state) + '">' + escapeHTML(state) + '</option>')
           .join('');
         stateFieldContainer.innerHTML = `
-          <label for="state">State / Province (optional)</label>
+          <label for="state">${svT('browse.state-label')}</label>
           <select id="state">
-            <option value="">Select a state (optional)</option>
+            <option value="">${svT('browse.state-select')}</option>
             ${stateOptions}
           </select>
         `;
@@ -1730,8 +2375,8 @@ function addStoryTimestamp() {
       }
 
       stateFieldContainer.innerHTML = `
-        <label for="state">State / Province (optional)</label>
-        <input type="text" id="state" maxlength="20" placeholder="State / Province (optional)" inputmode="text">
+        <label for="state">${svT('browse.state-label')}</label>
+        <input type="text" id="state" maxlength="20" placeholder="${svT('browse.state-placeholder')}" inputmode="text">
       `;
 
       bindNoNumberFields();
@@ -1743,7 +2388,7 @@ function addStoryTimestamp() {
 
       if (!reports.length) {
         const emptyRow = document.createElement('tr');
-        emptyRow.innerHTML = '<td colspan="4">No reports yet. Be the first to submit.</td>';
+        emptyRow.innerHTML = '<td colspan="4">' + svT('browse.none-yet') + '</td>';
         reportsBody.appendChild(emptyRow);
         return;
       }
@@ -1765,13 +2410,13 @@ function addStoryTimestamp() {
 
         const row = document.createElement('tr');
         row.innerHTML = `
-          <td data-label="Name">${escapeHTML(report.name || '')}${timestampHTML}</td>
-          <td data-label="Location">${formatLocation(report.city, report.state, report.country)}</td>
-          <td data-label="Categories"><div class="pills">${pillHTML}</div></td>
-          <td data-label="Actions">
+          <td data-label="${svT('browse.th.name')}">${escapeHTML(report.name || '')}${timestampHTML}</td>
+          <td data-label="${svT('browse.th.location')}">${formatLocation(report.city, report.state, report.country)}</td>
+          <td data-label="${svT('browse.th.categories')}"><div class="pills">${pillHTML}</div></td>
+          <td data-label="${svT('browse.th.actions')}">
             <div class="row-actions">
-              <button type="button" class="report-entry-btn" data-report-id="${escapeHTML(report.id || '')}">Report this entry</button>
-              <button type="button" class="report-share-btn" data-report-id="${escapeHTML(report.id || '')}">Share</button>
+              <button type="button" class="report-entry-btn" data-report-id="${escapeHTML(report.id || '')}">${svT('browse.report-entry')}</button>
+              <button type="button" class="report-share-btn" data-report-id="${escapeHTML(report.id || '')}">${svT('browse.share')}</button>
             </div>
           </td>
         `;
@@ -1792,8 +2437,8 @@ function addStoryTimestamp() {
       const isAtLastPage = page >= totalPages;
       let paginationHTML = '';
 
-      paginationHTML += '<button type="button" data-page-nav="first"' + (isAtFirstPage ? ' disabled' : '') + '>First</button>';
-      paginationHTML += '<button type="button" data-page-nav="prev"' + (isAtFirstPage ? ' disabled' : '') + '>Previous</button>';
+      paginationHTML += '<button type="button" data-page-nav="first"' + (isAtFirstPage ? ' disabled' : '') + '>' + svT('browse.page.first') + '</button>';
+      paginationHTML += '<button type="button" data-page-nav="prev"' + (isAtFirstPage ? ' disabled' : '') + '>' + svT('browse.page.prev') + '</button>';
 
       let startPage = 1;
       let endPage = totalPages;
@@ -1829,8 +2474,8 @@ function addStoryTimestamp() {
         paginationHTML += '<button type="button" data-page="' + totalPages + '">' + totalPages + '</button>';
       }
 
-      paginationHTML += '<button type="button" data-page-nav="next"' + (isAtLastPage ? ' disabled' : '') + '>Next</button>';
-      paginationHTML += '<button type="button" data-page-nav="last"' + (isAtLastPage ? ' disabled' : '') + '>Last</button>';
+      paginationHTML += '<button type="button" data-page-nav="next"' + (isAtLastPage ? ' disabled' : '') + '>' + svT('browse.page.next') + '</button>';
+      paginationHTML += '<button type="button" data-page-nav="last"' + (isAtLastPage ? ' disabled' : '') + '>' + svT('browse.page.last') + '</button>';
       browsePagination.innerHTML = paginationHTML;
     }
 
@@ -1879,51 +2524,96 @@ function addStoryTimestamp() {
       if (!query && !selectedCountry && !selectedState) {
         renderPagedReports(filtered, preservePage ? currentPage : 1);
         browseMessage.textContent = filtered.length
-          ? 'Loaded ' + allReports.length + ' report(s). Showing up to ' + REPORTS_PER_PAGE + ' per page.'
-          : 'No reports yet. Be the first to submit.';
+          ? svT('browse.loaded').replace('{total}', allReports.length).replace('{per}', REPORTS_PER_PAGE)
+          : svT('browse.none-yet');
         browseMessage.className = 'message';
         return;
       }
 
       renderPagedReports(filtered, preservePage ? currentPage : 1);
       browseMessage.textContent = filtered.length
-        ? 'Showing ' + filtered.length + ' of ' + allReports.length + ' report(s), ' + REPORTS_PER_PAGE + ' per page.'
-        : 'No matching reports found.';
+        ? svT('browse.showing').replace('{n}', filtered.length).replace('{total}', allReports.length).replace('{per}', REPORTS_PER_PAGE)
+        : svT('browse.no-match');
       browseMessage.className = 'message';
     }
 
+    // Fetches from api.namehim.app, stores in externalReports, and if the
+    // active source is 'external' also updates allReports + re-renders.
+    async function loadExternalReports() {
+      const WORKER_URL = 'https://api.namehim.app/filtered-reports';
+      try {
+        const response = await fetch(WORKER_URL);
+        if (!response.ok) throw new Error(`Worker returned ${response.status}`);
+        const reports = await response.json();
+        if (!Array.isArray(reports)) throw new Error('Worker did not return an array');
+        externalReports = sanitizeFetchedReports(reports);
+        externalLastFetched = new Date();
+        return true;
+      } catch (err) {
+        console.error('Failed to load external reports:', err);
+        return false;
+      }
+    }
+
+    // Fetches from this fork's Supabase, stores in localReports, and if the
+    // active source is 'local' also updates allReports + re-renders.
+    async function loadLocalReports() {
+      try {
+        const { data, error } = await supabaseClient
+          .from('reports')
+          .select('id, name, city, state, country, categories, created_at')
+          .order('created_at', { ascending: false });
+        if (error) throw error;
+        localReports = sanitizeFetchedReports(data || []);
+        localLastFetched = new Date();
+        return true;
+      } catch (err) {
+        console.error('Failed to load local reports:', err);
+        return false;
+      }
+    }
+
+    // Main entry-point: load both sources (or just active one) and render.
     async function loadReports() {
       browseMessage.textContent = 'Loading reports...';
       browseMessage.className = 'message';
       startReportCountLoadingAnimation();
-      const WORKER_URL = 'https://api.namehim.app/filtered-reports';
 
       try {
-        const response = await fetch(WORKER_URL);
-        if (!response.ok) {
-          throw new Error(`Worker returned ${response.status}`);
-        }
-        const reports = await response.json();
+        const ok = activeDataSource === 'local'
+          ? await loadLocalReports()
+          : await loadExternalReports();
 
-        if (!Array.isArray(reports)) {
-          throw new Error('Worker did not return an array');
+        const source = activeDataSource === 'local' ? localReports : externalReports;
+
+        if (!ok) {
+          browseMessage.textContent = 'Unable to load reports right now. Please try again in a moment.';
+          browseMessage.className = 'message error';
+          allReports = [];
+          window.allReports = allReports;
+          hasLoadedReports = true;
+          updateReportCount(0);
+          populateBrowseCountrySelect();
+          renderPagedReports([], 1);
+          refreshLeafletMap();
+          updateDsStatus();
+          return;
         }
 
-        allReports = sanitizeFetchedReports(reports);
+        allReports = source;
         window.allReports = allReports;
         hasLoadedReports = true;
         updateReportCount(allReports.length);
         populateBrowseCountrySelect();
-        if (typeof window.refreshWorldMapReportData === 'function') {
-          window.refreshWorldMapReportData();
-        }
+        refreshLeafletMap();
         updateBrowseViewFromRoute({ preserveBrowsePage: true });
         browseMessage.textContent = allReports.length
           ? `Loaded ${allReports.length} report(s).`
           : 'No reports yet. Be the first to submit.';
         browseMessage.className = 'message';
+        updateDsStatus();
       } catch (error) {
-        console.error('Failed to load reports via Worker:', error);
+        console.error('Failed to load reports:', error);
         browseMessage.textContent = 'Unable to load reports right now. Please try again in a moment.';
         browseMessage.className = 'message error';
         allReports = [];
@@ -1932,101 +2622,841 @@ function addStoryTimestamp() {
         updateReportCount(0);
         populateBrowseCountrySelect();
         renderPagedReports([], 1);
-        if (typeof window.refreshWorldMapReportData === 'function') {
-          window.refreshWorldMapReportData();
-        }
+        refreshLeafletMap();
+        updateDsStatus();
       } finally {
         stopReportCountLoadingAnimation();
       }
     }
 
-    function setSingleStoryControlsVisible(visible) {
-      if (!singleStoryControls) {
-        return;
+    // ── Data-source toggle helpers ─────────────────────────────────────────
+
+    function updateDsButtons() {
+      const extBtn   = document.getElementById('ds-btn-external');
+      const localBtn = document.getElementById('ds-btn-local');
+      if (!extBtn || !localBtn) return;
+      const isExt = activeDataSource === 'external';
+      extBtn.classList.toggle('ds-active', isExt);
+      extBtn.setAttribute('aria-pressed', String(isExt));
+      localBtn.classList.toggle('ds-active', !isExt);
+      localBtn.setAttribute('aria-pressed', String(!isExt));
+    }
+
+    function updateDsStatus() {
+      const el = document.getElementById('ds-status');
+      if (!el) return;
+      const ts = activeDataSource === 'external' ? externalLastFetched : localLastFetched;
+      if (!ts) { el.textContent = ''; return; }
+      const secs = Math.round((Date.now() - ts.getTime()) / 1000);
+      let label;
+      if (secs < 60)        label = 'just now';
+      else if (secs < 3600) label = `${Math.floor(secs / 60)}m ago`;
+      else                  label = `${Math.floor(secs / 3600)}h ago`;
+      const src = activeDataSource === 'external' ? 'NameHim.app' : 'Our Reports';
+      el.textContent = `${src} · updated ${label}`;
+    }
+
+    async function switchDataSource(src) {
+      if (src === activeDataSource) return;
+      activeDataSource = src;
+      localStorage.setItem('sv_datasource', src);
+      updateDsButtons();
+      // Use cached data if we have it; otherwise fetch fresh
+      const cached = src === 'external' ? externalReports : localReports;
+      if (cached.length > 0) {
+        allReports = cached;
+        window.allReports = allReports;
+        hasLoadedReports = true;
+        updateReportCount(allReports.length);
+        populateBrowseCountrySelect();
+        refreshLeafletMap();
+        updateBrowseViewFromRoute({ preserveBrowsePage: false });
+        browseMessage.textContent = `Loaded ${allReports.length} report(s).`;
+        browseMessage.className = 'message';
+        updateDsStatus();
+      } else {
+        await loadReports();
       }
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       COMMUNITY SECTION — Full expanded system
+       ══════════════════════════════════════════════════════════════ */
+
+    const ROOM_META = {
+      stories:   { emoji: '💜', descKey: 'community.room.stories.desc' },
+      hope:      { emoji: '🌱', descKey: 'community.room.hope.desc' },
+      ask:       { emoji: '❓', descKey: 'community.room.ask.desc' },
+      lgbtq:     { emoji: '🏳️‍🌈', descKey: 'community.room.lgbtq.desc' },
+      trans:     { emoji: '⚧',  descKey: 'community.room.trans.desc' },
+      allies:    { emoji: '🤝', descKey: 'community.room.allies.desc' },
+      legal:     { emoji: '⚖️', descKey: 'community.room.legal.desc' },
+      resources: { emoji: '📚', descKey: 'community.room.resources.desc' },
+      men:       { emoji: '💙', descKey: 'community.room.men.desc' },
+    };
+
+    const CW_LABELS = {
+      none:             '',
+      physical:         'CW: Physical violence',
+      sexual:           'CW: Sexual violence',
+      'coercive-control': 'CW: Coercive control',
+      general:          'CW: Content note',
+    };
+
+    const CRISIS_PATTERNS = [
+      /\bsuicid/i, /\bkill myself\b/i, /\bend my life\b/i, /\bdon't want to (be here|live)\b/i,
+      /\bno reason to live\b/i, /\bhopeless\b/i, /\bgive up on life\b/i,
+      /\bwant to die\b/i, /\bcan't go on\b/i, /\bthinking about (hurting|harming)\b/i,
+    ];
+
+    const PII_PATTERNS = [
+      /\b[A-Z][a-z]+\s+[A-Z][a-z]+\b/, // possible full name
+      /\b\d{3}[-.\s]\d{3}[-.\s]\d{4}\b/, // phone number
+      /\b[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}\b/i, // email
+      /\b\d{5}(-\d{4})?\b/, // zip code
+      /@\w+/, // social handle
+    ];
+
+    function isCrisisContent(text) {
+      return CRISIS_PATTERNS.some(p => p.test(text));
+    }
+
+    function hasPII(text) {
+      return PII_PATTERNS.some(p => p.test(text));
+    }
+
+    /* ── localStorage helpers ────────────────────────────────── */
+
+    function getSavedReactions() {
+      try { return JSON.parse(localStorage.getItem(COMMUNITY_REACTIONS_KEY) || '{}'); }
+      catch { return {}; }
+    }
+
+    function saveReactions(obj) {
+      try { localStorage.setItem(COMMUNITY_REACTIONS_KEY, JSON.stringify(obj)); }
+      catch {}
+    }
+
+    function hasReacted(storyId, type) {
+      const r = getSavedReactions();
+      return !!(r[storyId] && r[storyId][type]);
+    }
+
+    function toggleReactionLocal(storyId, type) {
+      const r = getSavedReactions();
+      if (!r[storyId]) r[storyId] = {};
+      r[storyId][type] = !r[storyId][type];
+      saveReactions(r);
+      return r[storyId][type];
+    }
+
+    function getSavedPostIds() {
+      try { return JSON.parse(localStorage.getItem(COMMUNITY_SAVED_KEY) || '[]'); }
+      catch { return []; }
+    }
+
+    function isPostSaved(storyId) {
+      return getSavedPostIds().includes(String(storyId));
+    }
+
+    function toggleSavedPost(storyId) {
+      let ids = getSavedPostIds();
+      const id = String(storyId);
+      if (ids.includes(id)) {
+        ids = ids.filter(x => x !== id);
+      } else {
+        ids.unshift(id);
+        if (ids.length > 100) ids = ids.slice(0, 100);
+      }
+      try { localStorage.setItem(COMMUNITY_SAVED_KEY, JSON.stringify(ids)); }
+      catch {}
+      return isPostSaved(id);
+    }
+
+    function getOrCreateReplyToken() {
+      let token = localStorage.getItem(COMMUNITY_REPLY_TOKEN_KEY);
+      if (!token) {
+        token = crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2) + Date.now().toString(36);
+        localStorage.setItem(COMMUNITY_REPLY_TOKEN_KEY, token);
+      }
+      return token;
+    }
+
+    /* ── Community Draft autosave ─────────────────────────────── */
+
+    function saveDraft() {
+      const room = document.querySelector('input[name="compose-room"]:checked');
+      const cw   = document.querySelector('input[name="compose-cw"]:checked');
+      const tags = Array.from(document.querySelectorAll('.composer-tag-choice.selected')).map(b => b.dataset.tag);
+      const draft = {
+        room:    room ? room.value : '',
+        cw:      cw ? cw.value : 'none',
+        tags,
+        title:   (document.getElementById('compose-title') || {}).value || '',
+        content: (document.getElementById('compose-content') || {}).value || '',
+        ts:      Date.now(),
+      };
+      if (draft.content.trim() || draft.title.trim()) {
+        try { localStorage.setItem(COMMUNITY_DRAFT_KEY, JSON.stringify(draft)); }
+        catch {}
+        const status = document.getElementById('compose-draft-status');
+        if (status) status.textContent = 'Draft saved';
+      }
+    }
+
+    function loadDraft() {
+      try { return JSON.parse(localStorage.getItem(COMMUNITY_DRAFT_KEY) || 'null'); }
+      catch { return null; }
+    }
+
+    function clearDraft() {
+      try { localStorage.removeItem(COMMUNITY_DRAFT_KEY); }
+      catch {}
+    }
+
+    function restoreDraft(draft) {
+      if (!draft) return;
+      if (draft.room) {
+        const radio = document.querySelector(`input[name="compose-room"][value="${draft.room}"]`);
+        if (radio) {
+          radio.checked = true;
+          const label = radio.closest('.composer-room-option');
+          if (label) {
+            document.querySelectorAll('.composer-room-option').forEach(l => l.classList.remove('selected'));
+            label.classList.add('selected');
+          }
+        }
+      }
+      if (draft.cw) {
+        const cw = document.querySelector(`input[name="compose-cw"][value="${draft.cw}"]`);
+        if (cw) {
+          cw.checked = true;
+          const label = cw.closest('.composer-cw-option');
+          if (label) {
+            document.querySelectorAll('.composer-cw-option').forEach(l => l.classList.remove('selected'));
+            label.classList.add('selected');
+          }
+        }
+      }
+      (draft.tags || []).forEach(tag => {
+        const btn = document.querySelector(`.composer-tag-choice[data-tag="${tag}"]`);
+        if (btn) btn.classList.add('selected');
+      });
+      const titleEl = document.getElementById('compose-title');
+      const contentEl = document.getElementById('compose-content');
+      if (titleEl) titleEl.value = draft.title || '';
+      if (contentEl) {
+        contentEl.value = draft.content || '';
+        updateCharCount();
+      }
+    }
+
+    /* ── Composer multi-step ─────────────────────────────────── */
+
+    let composerCurrentStep = 1;
+
+    function openCommunityComposer() {
+      const composer = document.getElementById('community-composer');
+      const btn = document.getElementById('community-compose-btn');
+      if (!composer) return;
+      composer.classList.remove('hidden');
+      if (btn) { btn.setAttribute('aria-expanded', 'true'); btn.classList.add('hidden'); }
+      composerGoToStep(1);
+      // Check for draft
+      const draft = loadDraft();
+      if (draft && (draft.content || draft.title)) {
+        const restoreBar = document.getElementById('community-draft-restore');
+        if (restoreBar) restoreBar.classList.remove('hidden');
+      }
+    }
+
+    function closeCommunityComposer() {
+      const composer = document.getElementById('community-composer');
+      const btn = document.getElementById('community-compose-btn');
+      const restoreBar = document.getElementById('community-draft-restore');
+      if (composer) composer.classList.add('hidden');
+      if (btn) { btn.setAttribute('aria-expanded', 'false'); btn.classList.remove('hidden'); }
+      if (restoreBar) restoreBar.classList.add('hidden');
+    }
+
+    window.closeCommunityComposer = closeCommunityComposer;
+
+    function composerGoToStep(step) {
+      composerCurrentStep = step;
+      document.querySelectorAll('.composer-step').forEach(el => {
+        el.classList.toggle('active', Number(el.dataset.step) === step);
+      });
+      document.querySelectorAll('.composer-step-indicator').forEach(el => {
+        const n = Number(el.dataset.step);
+        el.classList.toggle('active', n === step);
+        el.classList.toggle('done', n < step);
+      });
+      document.querySelectorAll('.composer-step-line').forEach((el, i) => {
+        el.classList.toggle('done', i + 1 < step);
+      });
+    }
+
+    function buildPreview() {
+      const room = document.querySelector('input[name="compose-room"]:checked');
+      const cw   = document.querySelector('input[name="compose-cw"]:checked');
+      const tags = Array.from(document.querySelectorAll('.composer-tag-choice.selected')).map(b => b.dataset.tag);
+      const title   = (document.getElementById('compose-title') || {}).value || '';
+      const content = (document.getElementById('compose-content') || {}).value || '';
+      const roomVal = room ? room.value : 'stories';
+      const cwVal   = cw ? cw.value : 'none';
+      const meta = ROOM_META[roomVal] || ROOM_META.stories;
+      const cwLabel = cwVal !== 'none' ? CW_LABELS[cwVal] || '' : '';
+
+      let html = `<div class="story-card-header">`;
+      html += `<span class="story-room-badge">${escapeHTML(meta.emoji)} ${escapeHTML(roomVal)}</span>`;
+      if (cwLabel) html += `<span class="story-cw-badge">${escapeHTML(cwLabel)}</span>`;
+      html += `</div>`;
+      if (title) html += `<h4>${escapeHTML(title)}</h4>`;
+      html += `<p class="story-body">${escapeHTML(content)}</p>`;
+      if (tags.length) {
+        html += `<div class="story-tags">${tags.map(t => `<span class="story-tag">${escapeHTML(t)}</span>`).join('')}</div>`;
+      }
+      html += `<div class="story-meta">— Anonymous, just now</div>`;
+      const preview = document.getElementById('compose-preview');
+      if (preview) preview.innerHTML = html;
+    }
+
+    function updateCharCount() {
+      const content = document.getElementById('compose-content');
+      const numEl   = document.getElementById('compose-char-num');
+      if (content && numEl) numEl.textContent = content.value.length;
+    }
+
+    /* ── Story feed ──────────────────────────────────────────── */
+
+    function setSingleStoryControlsVisible(visible) {
+      if (!singleStoryControls) return;
       singleStoryControls.classList.toggle('hidden', !visible);
     }
 
-    function setCommunityHeadingForSingleStory(story) {
-      if (!approvedStoriesHeading) {
+    function getStoryCardMarkup(story) {
+      const room  = story.room || 'stories';
+      const cw    = story.content_warning || 'none';
+      const tags  = Array.isArray(story.tags) ? story.tags : [];
+      const isSaved = isPostSaved(story.id);
+      const meta  = ROOM_META[room] || ROOM_META.stories;
+      const cwLabel = cw !== 'none' ? CW_LABELS[cw] || '' : '';
+      const submittedAt = formatCommunityPostTimestamp(story.created_at);
+
+      const hearYou   = story.react_hear_you || 0;
+      const gaveHope  = story.react_gave_hope || 0;
+      const solidarity = story.react_solidarity || 0;
+      const meToo     = story.react_me_too || 0;
+      const replyCount = story.reply_count || 0;
+
+      const myHearYou    = hasReacted(story.id, 'hear_you');
+      const myGaveHope   = hasReacted(story.id, 'gave_hope');
+      const mySolidarity = hasReacted(story.id, 'solidarity');
+      const myMeToo      = hasReacted(story.id, 'me_too');
+
+      const titleHtml = story.title ? `<h4>${escapeHTML(story.title)}</h4>` : '';
+      const tagsHtml  = tags.length
+        ? `<div class="story-tags">${tags.map(t => `<button class="story-tag" type="button" data-filter-tag="${escapeHTML(t)}">${escapeHTML(t)}</button>`).join('')}</div>`
+        : '';
+
+      const bodyHtml = `<p class="story-body">${escapeHTML(story.content || '')}</p>`;
+      const cwCollapsed = cw !== 'none';
+      const cwRevealBtn = cwCollapsed
+        ? `<button class="story-cw-reveal-btn" type="button" data-story-id="${escapeHTML(String(story.id))}" data-action="reveal-cw">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            Show post
+          </button>`
+        : '';
+
+      const replyCountLabel = replyCount === 1 ? '1 reply' : `${replyCount} replies`;
+
+      return `
+      <div class="story-card${cwCollapsed ? ' story-cw-collapsed' : ''}" data-story-id="${escapeHTML(String(story.id))}" data-room="${escapeHTML(room)}">
+        <div class="story-card-header">
+          <span class="story-room-badge">${escapeHTML(meta.emoji)} ${escapeHTML(room)}</span>
+          ${cwLabel ? `<span class="story-cw-badge">${escapeHTML(cwLabel)}</span>` : ''}
+        </div>
+        ${titleHtml}
+        ${cwRevealBtn}
+        <div class="story-body-wrap">
+          ${bodyHtml}
+        </div>
+        ${tagsHtml}
+        <div class="story-meta">— Anonymous · ${escapeHTML(submittedAt)}</div>
+        <div class="story-reactions">
+          <button class="reaction-btn${myHearYou ? ' reacted' : ''}" type="button" data-story-id="${escapeHTML(String(story.id))}" data-reaction="hear_you">
+            <span class="reaction-emoji">🤝</span> I hear you <span class="reaction-count">${hearYou > 0 ? hearYou : ''}</span>
+          </button>
+          <button class="reaction-btn${myGaveHope ? ' reacted' : ''}" type="button" data-story-id="${escapeHTML(String(story.id))}" data-reaction="gave_hope">
+            <span class="reaction-emoji">🌱</span> Gave me hope <span class="reaction-count">${gaveHope > 0 ? gaveHope : ''}</span>
+          </button>
+          <button class="reaction-btn${mySolidarity ? ' reacted' : ''}" type="button" data-story-id="${escapeHTML(String(story.id))}" data-reaction="solidarity">
+            <span class="reaction-emoji">🫶</span> Solidarity <span class="reaction-count">${solidarity > 0 ? solidarity : ''}</span>
+          </button>
+          <button class="reaction-btn${myMeToo ? ' reacted' : ''}" type="button" data-story-id="${escapeHTML(String(story.id))}" data-reaction="me_too">
+            Me too <span class="reaction-count">${meToo > 0 ? meToo : ''}</span>
+          </button>
+        </div>
+        <div class="story-actions">
+          <button class="story-action-btn story-share-btn" type="button" data-story-id="${escapeHTML(String(story.id))}">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            Share
+          </button>
+          <button class="story-action-btn story-save-btn${isSaved ? ' saved' : ''}" type="button" data-story-id="${escapeHTML(String(story.id))}" aria-pressed="${isSaved}">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            ${isSaved ? 'Saved' : 'Save'}
+          </button>
+          <button class="story-action-btn story-listen-btn" type="button" data-story-id="${escapeHTML(String(story.id))}" data-story-content="${escapeHTML(story.content || '')}">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+            Listen
+          </button>
+          <button class="story-action-btn story-flag-btn" type="button" data-story-id="${escapeHTML(String(story.id))}">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+            Report
+          </button>
+        </div>
+        <div class="story-replies-section" id="replies-section-${escapeHTML(String(story.id))}">
+          <button class="story-replies-toggle" type="button" data-story-id="${escapeHTML(String(story.id))}" data-action="toggle-replies">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            ${replyCount > 0 ? replyCountLabel : 'Reply'}
+          </button>
+          <div class="story-replies-body hidden" id="replies-body-${escapeHTML(String(story.id))}">
+            <div id="replies-list-${escapeHTML(String(story.id))}"><p class="story-replies-loading">Loading replies…</p></div>
+            <div class="story-reply-form">
+              <textarea class="reply-textarea" placeholder="Write a reply… (no names)" maxlength="1000" rows="2"></textarea>
+              <button type="button" class="primary reply-submit-btn" data-story-id="${escapeHTML(String(story.id))}">Post reply</button>
+            </div>
+            <p class="story-replies-moderation-note">Replies are reviewed before appearing.</p>
+          </div>
+        </div>
+      </div>`;
+    }
+
+    async function loadCommunityStories(options = {}) {
+      const append = options.append || false;
+      if (!storiesContainer) return;
+
+      if (!append) {
+        communityOffset = 0;
+        storiesContainer.innerHTML = '<p>Loading…</p>';
+      }
+
+      const room = communityCurrentRoom;
+      const sort = communityCurrentSort;
+      const tag  = communityActiveTag;
+      const search = communitySearchQuery.trim().toLowerCase();
+
+      let query = supabaseClient
+        .from('stories')
+        .select('id, title, content, created_at, room, tags, content_warning, react_hear_you, react_gave_hope, react_solidarity, react_me_too, reply_count')
+        .eq('is_approved', true);
+
+      if (room !== 'saved') {
+        query = query.eq('room', room);
+      }
+
+      if (options.storyId) {
+        query = query.eq('id', options.storyId).limit(1);
+      } else {
+        if (sort === 'newest') {
+          query = query.order('created_at', { ascending: false });
+        } else if (sort === 'supported') {
+          query = query.order('react_hear_you', { ascending: false });
+        } else if (sort === 'unanswered') {
+          query = query.order('reply_count', { ascending: true }).order('created_at', { ascending: false });
+        } else {
+          // random — fetch a page and shuffle client-side
+          query = query.order('created_at', { ascending: false });
+        }
+        query = query.range(communityOffset, communityOffset + COMMUNITY_PAGE_SIZE);
+      }
+
+      const { data, error } = await query;
+
+      if (error) {
+        if (!append) storiesContainer.innerHTML = '<p class="message error">Error loading posts. Please try refreshing.</p>';
         return;
       }
-      if (story) {
-        approvedStoriesHeading.textContent = 'Shared post';
+
+      let posts = data || [];
+
+      // Client-side filters
+      if (tag) {
+        posts = posts.filter(s => Array.isArray(s.tags) && s.tags.includes(tag));
+      }
+      if (search) {
+        posts = posts.filter(s =>
+          (s.content || '').toLowerCase().includes(search) ||
+          (s.title || '').toLowerCase().includes(search) ||
+          (Array.isArray(s.tags) ? s.tags.join(' ') : '').toLowerCase().includes(search)
+        );
+      }
+      if (sort === 'random') {
+        posts = posts.sort(() => Math.random() - 0.5);
+      }
+
+      communityHasMore = posts.length >= COMMUNITY_PAGE_SIZE;
+      communityOffset += posts.length;
+
+      const loadMoreWrap = document.getElementById('community-load-more-wrap');
+      if (loadMoreWrap) loadMoreWrap.classList.toggle('hidden', !communityHasMore);
+
+      if (!posts.length && !append) {
+        storiesContainer.innerHTML = '<p>No posts here yet. Be the first to share.</p>';
+        return;
+      }
+
+      const html = posts.map(getStoryCardMarkup).join('');
+      if (append) {
+        storiesContainer.insertAdjacentHTML('beforeend', html);
       } else {
-        approvedStoriesHeading.textContent = 'Approved stories';
+        storiesContainer.innerHTML = html;
+      }
+
+      // Load story-of-the-day on browse page
+      if (room === 'hope' && posts.length && !append) {
+        loadStoryOfTheDay(posts);
       }
     }
 
-    function getStoryCardMarkup(story) {
-      const submittedAt = formatCommunityPostTimestamp(story.created_at);
-      const titleHtml = story.title ? `<h4>${escapeHTML(story.title)}</h4>` : '';
-      return `
-      <div class="story-card">
-        ${titleHtml}
-        <p>${escapeHTML(story.content)}</p>
-        <div class="story-meta">— Anonymous, ${submittedAt}</div>
-        <div class="story-actions">
-          <button type="button" class="story-share-btn" data-story-id="${escapeHTML(story.id || '')}">Share</button>
-        </div>
-      </div>
-    `;
+    async function loadStoryOfTheDay(stories) {
+      const widget = document.getElementById('sotd-widget');
+      const content = document.getElementById('sotd-content');
+      if (!widget || !content) return;
+      const pick = stories[Math.floor(Math.random() * Math.min(stories.length, 5))];
+      if (!pick) return;
+      const text = (pick.content || '').slice(0, 180) + (pick.content && pick.content.length > 180 ? '…' : '');
+      content.textContent = '\u201C' + text + '\u201D';
+      widget.classList.remove('hidden');
     }
 
-    async function loadApprovedStories(options = {}) {
-  const storyId = options.storyId || null;
-  storiesContainer.innerHTML = '<p>Loading stories...</p>';
-  let query = supabaseClient
-    .from('stories')
-    .select('id, title, content, created_at')
-    .eq('is_approved', true);
-  if (storyId) {
-    query = query.eq('id', storyId).limit(1);
-  } else {
-    query = query.order('created_at', { ascending: false });
-  }
-  const { data, error } = await query;
+    async function fetchAndShowSotd() {
+      const widget = document.getElementById('sotd-widget');
+      if (!widget) return;
+      const { data } = await supabaseClient
+        .from('stories')
+        .select('id, content')
+        .eq('is_approved', true)
+        .eq('room', 'hope')
+        .order('react_gave_hope', { ascending: false })
+        .limit(10);
+      if (data && data.length) {
+        loadStoryOfTheDay(data);
+      }
+    }
 
-  if (error) {
-    storiesContainer.innerHTML = '<p>Error loading stories.</p>';
-    return;
-  }
+    function loadSavedPostsFeed() {
+      const ids = getSavedPostIds();
+      const savedPanel = document.getElementById('community-saved-panel');
+      const savedContainer = document.getElementById('community-saved-container');
+      if (!savedPanel || !savedContainer) return;
 
-  if (!data.length) {
-    storiesContainer.innerHTML = storyId
-      ? '<p>Post not found. <a href="#/community">Back to all approved posts</a>.</p>'
-      : '<p>No approved stories yet. Check back soon.</p>';
-    return;
-  }
+      if (!ids.length) {
+        savedContainer.innerHTML = '<p>No saved posts yet. Tap the bookmark icon on any post to save it here — just for you, never shared.</p>';
+        return;
+      }
 
-  let html = '';
-  for (const story of data) {
-    html += getStoryCardMarkup(story);
-  }
-  storiesContainer.innerHTML = html;
-}
+      savedContainer.innerHTML = '<p>Loading…</p>';
+      supabaseClient
+        .from('stories')
+        .select('id, title, content, created_at, room, tags, content_warning, react_hear_you, react_gave_hope, react_solidarity, react_me_too, reply_count')
+        .eq('is_approved', true)
+        .in('id', ids.slice(0, 50))
+        .then(({ data }) => {
+          if (!data || !data.length) {
+            savedContainer.innerHTML = '<p>Your saved posts are no longer available (they may have been removed).</p>';
+            return;
+          }
+          savedContainer.innerHTML = data.map(getStoryCardMarkup).join('');
+        });
+    }
+
+    /* ── Community room nav ─────────────────────────────────── */
+
+    function switchCommunityRoom(room) {
+      communityCurrentRoom = room;
+      communityOffset = 0;
+      communityActiveTag = null;
+
+      // Update tabs
+      document.querySelectorAll('.room-tab').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.room === room);
+      });
+
+      // Room description
+      const descEl = document.getElementById('community-room-desc');
+      if (descEl && ROOM_META[room]) {
+        const lang = window._svLang || 'en';
+        const key = ROOM_META[room].descKey;
+        const dict = (window.TRANSLATIONS && window.TRANSLATIONS[lang]) || (window.TRANSLATIONS && window.TRANSLATIONS.en) || {};
+        descEl.textContent = dict[key] || '';
+      }
+
+      // Toolbar: show sort, handle "unanswered" for ask room
+      const sortSelect = document.getElementById('community-sort');
+      if (sortSelect) {
+        const unansweredOption = sortSelect.querySelector('option[value="unanswered"]');
+        if (unansweredOption) unansweredOption.hidden = room !== 'ask';
+        if (communityCurrentSort === 'unanswered' && room !== 'ask') {
+          communityCurrentSort = 'newest';
+          sortSelect.value = 'newest';
+        }
+      }
+
+      // Show/hide panels
+      const storiesFeed = document.getElementById('stories-container');
+      const savedPanel  = document.getElementById('community-saved-panel');
+      const toolbar     = document.getElementById('community-toolbar');
+      const loadMoreWrap = document.getElementById('community-load-more-wrap');
+      const composeWrap = document.getElementById('community-compose-wrap');
+
+      if (room === 'saved') {
+        if (storiesFeed) storiesFeed.classList.add('hidden');
+        if (savedPanel) savedPanel.classList.remove('hidden');
+        if (toolbar) toolbar.classList.add('hidden');
+        if (loadMoreWrap) loadMoreWrap.classList.add('hidden');
+        if (composeWrap) composeWrap.classList.add('hidden');
+        loadSavedPostsFeed();
+        return;
+      }
+
+      if (storiesFeed) storiesFeed.classList.remove('hidden');
+      if (savedPanel) savedPanel.classList.add('hidden');
+      if (toolbar) toolbar.classList.remove('hidden');
+      if (composeWrap) composeWrap.classList.remove('hidden');
+
+      // Tag filter for room
+      renderTagFilter(room);
+      loadCommunityStories();
+    }
+
+    function renderTagFilter(room) {
+      const container = document.getElementById('community-tag-filter');
+      if (!container) return;
+      // All tags are available in all rooms for now
+      const ALL_TAGS = ['healing','leaving','court','family','lgbtq','recovery','first-week','years-later','housing','children','financial','digital','hope','letter'];
+      container.innerHTML = ALL_TAGS.map(tag =>
+        `<button class="community-tag-chip${communityActiveTag === tag ? ' active' : ''}" type="button" data-tag="${escapeHTML(tag)}">${escapeHTML(tag)}</button>`
+      ).join('');
+    }
+
+    /* ── Reaction handling ──────────────────────────────────── */
+
+    async function handleReaction(storyId, reactionType) {
+      const nowActive = toggleReactionLocal(storyId, reactionType);
+      // Update the button in the DOM
+      const btn = document.querySelector(`.reaction-btn[data-story-id="${storyId}"][data-reaction="${reactionType}"]`);
+      if (btn) btn.classList.toggle('reacted', nowActive);
+
+      // Persist increment/decrement to Supabase (best-effort, fire-and-forget)
+      const colMap = { hear_you: 'react_hear_you', gave_hope: 'react_gave_hope', solidarity: 'react_solidarity', me_too: 'react_me_too' };
+      const col = colMap[reactionType];
+      if (!col) return;
+
+      try {
+        // Fetch current value and increment/decrement
+        const { data } = await supabaseClient.from('stories').select('id, ' + col).eq('id', storyId).single();
+        if (data) {
+          const current = data[col] || 0;
+          const next = Math.max(0, current + (nowActive ? 1 : -1));
+          await supabaseClient.from('stories').update({ [col]: next }).eq('id', storyId);
+          // Update displayed count
+          if (btn) {
+            const countEl = btn.querySelector('.reaction-count');
+            if (countEl) countEl.textContent = next > 0 ? next : '';
+          }
+        }
+      } catch {}
+    }
+
+    /* ── Reply handling ─────────────────────────────────────── */
+
+    async function loadReplies(storyId) {
+      const listEl = document.getElementById(`replies-list-${storyId}`);
+      if (!listEl) return;
+
+      const { data, error } = await supabaseClient
+        .from('story_replies')
+        .select('id, content, created_at, reply_author_token')
+        .eq('story_id', storyId)
+        .eq('is_approved', true)
+        .order('created_at', { ascending: true });
+
+      if (error || !data || !data.length) {
+        listEl.innerHTML = '<p class="story-replies-moderation-note">No replies yet. Be the first to respond.</p>';
+        return;
+      }
+
+      const myToken = getOrCreateReplyToken();
+      listEl.innerHTML = data.map((reply, i) => {
+        const isOp = false; // OP token is not stored, only reply token
+        const authorLabel = reply.reply_author_token === myToken ? 'You' : `Reply ${i + 1}`;
+        return `<div class="story-reply">
+          <div class="story-reply-author">${escapeHTML(authorLabel)}</div>
+          ${escapeHTML(reply.content)}
+        </div>`;
+      }).join('');
+    }
+
+    async function submitReply(storyId, content) {
+      if (!content.trim()) return;
+      const token = getTurnstileToken();
+      // No CAPTCHA required for replies (rate-limited by token + server)
+      const payload = {
+        story_id: Number(storyId),
+        content: content.trim().slice(0, 1000),
+        reply_author_token: getOrCreateReplyToken(),
+      };
+      const { error } = await supabaseClient.from('story_replies').insert(payload);
+      return !error;
+    }
+
+    /* ── Story flagging ─────────────────────────────────────── */
+
+    function openStoryFlagModal(storyId) {
+      const input = document.getElementById('flag-target-story-id');
+      const msg   = document.getElementById('story-flag-message');
+      if (input) input.value = storyId;
+      if (msg) { msg.textContent = ''; msg.className = 'message'; }
+      openModal('modal-story-flag');
+    }
+
+    async function submitStoryFlag() {
+      const storyId = (document.getElementById('flag-target-story-id') || {}).value;
+      const reason  = (document.querySelector('input[name="flag-reason"]:checked') || {}).value || 'other';
+      const msg     = document.getElementById('story-flag-message');
+      if (!storyId) return;
+
+      const payload = {
+        story_id: Number(storyId),
+        reason,
+        flagged_by: getOrCreateSubmitterId(),
+      };
+
+      const { error } = await supabaseClient.from('story_flags').insert(payload);
+      if (msg) {
+        msg.textContent = error ? 'Could not submit flag. Please try again.' : 'Thank you. A moderator will review this post.';
+        msg.className = error ? 'message error' : 'message success';
+      }
+      if (!error) setTimeout(() => closeModal('modal-story-flag'), 1800);
+    }
+
+    /* ── Community composer submit ──────────────────────────── */
+
+    function canSubmitStory() {
+      const key = STORY_RATE_LIMIT_KEY;
+      const now = Date.now();
+      try {
+        const timestamps = JSON.parse(localStorage.getItem(key) || '[]');
+        const recent = timestamps.filter(t => now - t < 60 * 60 * 1000);
+        if (recent.length >= 3) return false;
+      } catch {}
+      return true;
+    }
+
+    function addStoryTimestamp() {
+      const key = STORY_RATE_LIMIT_KEY;
+      try {
+        const timestamps = JSON.parse(localStorage.getItem(key) || '[]');
+        timestamps.push(Date.now());
+        localStorage.setItem(key, JSON.stringify(timestamps));
+      } catch {}
+    }
+
+    async function handleComposerSubmit() {
+      const rateWarning  = document.getElementById('compose-rate-warning');
+      const turnstileWarn = document.getElementById('compose-turnstile-warning');
+      const submitBtn    = document.getElementById('compose-submit-btn');
+      const msgEl        = document.getElementById('compose-message');
+
+      if (!canSubmitStory()) {
+        if (rateWarning) rateWarning.classList.remove('hidden');
+        return;
+      }
+
+      const token = getTurnstileToken();
+      if (!token) {
+        if (turnstileWarn) turnstileWarn.classList.remove('hidden');
+        return;
+      }
+
+      const room = (document.querySelector('input[name="compose-room"]:checked') || {}).value || 'stories';
+      const cw   = (document.querySelector('input[name="compose-cw"]:checked') || {}).value || 'none';
+      const tags = Array.from(document.querySelectorAll('.composer-tag-choice.selected')).map(b => b.dataset.tag);
+      const title   = ((document.getElementById('compose-title') || {}).value || '').trim();
+      const content = ((document.getElementById('compose-content') || {}).value || '').trim();
+
+      if (!content) {
+        if (msgEl) { msgEl.textContent = 'Please write your post.'; msgEl.className = 'message error'; }
+        return;
+      }
+      if (content.length > MAX_COMMUNITY_POST_LENGTH) {
+        if (msgEl) { msgEl.textContent = `Post must be ${MAX_COMMUNITY_POST_LENGTH} characters or fewer.`; msgEl.className = 'message error'; }
+        return;
+      }
+
+      if (submitBtn) submitBtn.disabled = true;
+
+      const payload = {
+        title: title || null,
+        content,
+        room,
+        tags,
+        content_warning: cw,
+        lang: (window._svLang || 'en'),
+        submitter_uuid: getOrCreateSubmitterId(),
+      };
+
+      const { error } = await supabaseClient.from('stories').insert(payload);
+
+      if (error) {
+        if (msgEl) { msgEl.textContent = 'Submission failed: ' + error.message; msgEl.className = 'message error'; }
+        if (submitBtn) submitBtn.disabled = false;
+        return;
+      }
+
+      addStoryTimestamp();
+      clearDraft();
+      if (window.turnstile) window.turnstile.reset();
+      composerGoToStep(6);
+      if (submitBtn) submitBtn.disabled = false;
+    }
 
     function updateCommunityViewFromRoute() {
       if (getCurrentRoute() !== '#/community') {
         activeSingleStoryId = null;
         setSingleStoryControlsVisible(false);
-        setCommunityHeadingForSingleStory(null);
+        document.body.classList.remove('community-active');
         return;
       }
+
+      document.body.classList.add('community-active');
 
       const storyId = getStoryIdFromUrl();
       if (!storyId) {
         activeSingleStoryId = null;
         setSingleStoryControlsVisible(false);
-        setCommunityHeadingForSingleStory(null);
-        loadApprovedStories();
+        // Initial room description
+        const descEl = document.getElementById('community-room-desc');
+        if (descEl && ROOM_META[communityCurrentRoom]) {
+          const lang = window._svLang || 'en';
+          const key = ROOM_META[communityCurrentRoom].descKey;
+          const dict = (window.TRANSLATIONS && window.TRANSLATIONS[lang]) || (window.TRANSLATIONS && window.TRANSLATIONS.en) || {};
+          descEl.textContent = dict[key] || '';
+        }
+        renderTagFilter(communityCurrentRoom);
+        loadCommunityStories();
         return;
       }
 
       activeSingleStoryId = storyId;
       setSingleStoryControlsVisible(true);
-      setCommunityHeadingForSingleStory({ id: storyId });
-      loadApprovedStories({ storyId });
+      loadCommunityStories({ storyId });
+    }
+
+    /* ── Story of the day setup (called on browse page init) ── */
+    function initSotd() {
+      fetchAndShowSotd();
     }
 
     function getTurnstileToken() {
@@ -2221,6 +3651,12 @@ function addStoryTimestamp() {
       submitMessage.className = 'message success';
       submitBtn.disabled = false;
 
+      // After submitting, switch to Our Reports so the user can see their entry
+      if (activeDataSource !== 'local') {
+        activeDataSource = 'local';
+        localStorage.setItem('sv_datasource', 'local');
+        updateDsButtons();
+      }
       await loadReports();
       window.location.hash = '#/browse';
     }
@@ -2280,53 +3716,48 @@ function addStoryTimestamp() {
 }
 
     function startRealtimeUpdates() {
-  // Auto‑refresh removed to save Worker requests.
-  // The page will update when the user refreshes or submits a new report.
-}
+      // Auto-refresh external data every 5 minutes when the tab is visible.
+      const EXTERNAL_REFRESH_MS = 5 * 60 * 1000;
+      externalRefreshTimer = setInterval(async function onExternalRefreshTick() {
+        if (activeDataSource === 'external') {
+          const ok = await loadExternalReports();
+          if (ok) {
+            allReports = externalReports;
+            window.allReports = allReports;
+            updateReportCount(allReports.length);
+            populateBrowseCountrySelect();
+            refreshLeafletMap();
+            updateBrowseViewFromRoute({ preserveBrowsePage: true });
+            updateDsStatus();
+          }
+        }
+      }, EXTERNAL_REFRESH_MS);
 
-    function refreshSimpleMap() {
-      if (!window.simplemaps_usmap || typeof window.simplemaps_usmap.refresh !== 'function') {
-        return;
-      }
-      window.requestAnimationFrame(function () {
-        window.simplemaps_usmap.refresh();
+      // Refresh when the tab regains focus after being hidden
+      document.addEventListener('visibilitychange', async function onVisibilityChange() {
+        if (document.visibilityState !== 'visible') return;
+        const ts = activeDataSource === 'external' ? externalLastFetched : localLastFetched;
+        if (!ts || (Date.now() - ts.getTime()) > EXTERNAL_REFRESH_MS) {
+          await loadReports();
+        } else {
+          updateDsStatus();
+        }
       });
     }
 
-    function setMapVisibility(isVisible, persistPreference = true) {
-      if (!mapContainer || !toggleMapBtn) {
-        return;
-      }
+    function initDataSourceToggle() {
+      updateDsButtons();
 
-      if (isVisible && typeof setWorldMapVisibility === 'function') {
-        setWorldMapVisibility(false);
-      }
+      const extBtn     = document.getElementById('ds-btn-external');
+      const localBtn   = document.getElementById('ds-btn-local');
+      const refreshBtn = document.getElementById('ds-refresh-btn');
 
-      mapContainer.style.display = isVisible ? 'block' : 'none';
-      toggleMapBtn.textContent = isVisible ? 'Hide US Map' : 'Show US Map';
-      toggleMapBtn.setAttribute('aria-expanded', String(isVisible));
-
-      if (persistPreference) {
-        localStorage.setItem(MAP_VISIBILITY_STORAGE_KEY, isVisible ? '1' : '0');
-      }
-
-      if (isVisible) {
-        refreshSimpleMap();
-      }
-    }
-
-    function initMapToggle() {
-      if (!mapContainer || !toggleMapBtn) {
-        return;
-      }
-
-      const savedVisibility = localStorage.getItem(MAP_VISIBILITY_STORAGE_KEY);
-      const shouldShowMap = savedVisibility === '1';
-      setMapVisibility(shouldShowMap, false);
-
-      toggleMapBtn.addEventListener('click', function onMapToggleClick() {
-        const isVisible = mapContainer.style.display !== 'none';
-        setMapVisibility(!isVisible);
+      if (extBtn)     extBtn.addEventListener('click',     () => switchDataSource('external'));
+      if (localBtn)   localBtn.addEventListener('click',   () => switchDataSource('local'));
+      if (refreshBtn) refreshBtn.addEventListener('click', async () => {
+        refreshBtn.disabled = true;
+        await loadReports();
+        refreshBtn.disabled = false;
       });
     }
 
@@ -2337,6 +3768,7 @@ function addStoryTimestamp() {
       renderCategories();
       updateRateLimitUI();
       renderRoute();
+      initDataSourceToggle();
       loadReports();
       setupReportActionHandler();
       startRealtimeUpdates();
@@ -2344,14 +3776,9 @@ function addStoryTimestamp() {
       populateBrowseStateSelect();
       populateBrowseCountrySelect();
       updateBrowseLocationFiltersUI();
-      initMapToggle();
+      initLeafletMapToggle();
 
       window.addEventListener('hashchange', renderRoute);
-      window.addEventListener('load', function onWindowLoad() {
-        if (mapContainer && mapContainer.style.display !== 'none') {
-          refreshSimpleMap();
-        }
-      });
       countryField.addEventListener('change', renderStateField);
       reportSearch.addEventListener('input', applySearchFilter);
       bindNoNumberFields();
@@ -2464,258 +3891,655 @@ function addStoryTimestamp() {
         }
       });
       reportForm.addEventListener('submit', handleSubmit);
-      storyForm.addEventListener('submit', submitStory);
-      if (showStoryFormBtn) {
-        showStoryFormBtn.addEventListener('click', openStoryForm);
-      }
-      if (storiesContainer) {
-        storiesContainer.addEventListener('click', async function onStoryShareClick(event) {
-          const shareButton = event.target.closest('.story-share-btn');
-          if (!shareButton) {
-            return;
-          }
-          const storyId = shareButton.getAttribute('data-story-id');
-          if (storyId) {
-            await copyStoryShareLink(storyId);
-          }
-        });
-      }
+
+      /* ── Community: back to all stories ─────────────────────── */
       if (backToAllStoriesBtn) {
         backToAllStoriesBtn.addEventListener('click', function onBackToAllStoriesClick() {
           window.location.hash = '#/community';
         });
       }
+
+      /* ── Community: rooms nav ───────────────────────────────── */
+      const roomsNav = document.getElementById('community-rooms-nav');
+      if (roomsNav) {
+        roomsNav.addEventListener('click', function onRoomTabClick(e) {
+          const tab = e.target.closest('.room-tab');
+          if (!tab) return;
+          const room = tab.dataset.room;
+          if (room) switchCommunityRoom(room);
+        });
+      }
+
+      /* ── Community: sort select ─────────────────────────────── */
+      const sortSelect = document.getElementById('community-sort');
+      if (sortSelect) {
+        sortSelect.addEventListener('change', function() {
+          communityCurrentSort = sortSelect.value;
+          loadCommunityStories();
+        });
+      }
+
+      /* ── Community: tag filter chips ─────────────────────────── */
+      const tagFilterEl = document.getElementById('community-tag-filter');
+      if (tagFilterEl) {
+        tagFilterEl.addEventListener('click', function(e) {
+          const chip = e.target.closest('.community-tag-chip');
+          if (!chip) return;
+          const tag = chip.dataset.tag;
+          communityActiveTag = communityActiveTag === tag ? null : tag;
+          document.querySelectorAll('.community-tag-chip').forEach(c => {
+            c.classList.toggle('active', c.dataset.tag === communityActiveTag);
+          });
+          loadCommunityStories();
+        });
+      }
+
+      /* ── Community: search ───────────────────────────────────── */
+      const searchInput = document.getElementById('community-search');
+      if (searchInput) {
+        let searchDebounce = null;
+        searchInput.addEventListener('input', function() {
+          communitySearchQuery = searchInput.value;
+          clearTimeout(searchDebounce);
+          searchDebounce = setTimeout(() => loadCommunityStories(), 320);
+        });
+      }
+
+      /* ── Community: compose button ───────────────────────────── */
+      const composeBtn = document.getElementById('community-compose-btn');
+      if (composeBtn) {
+        composeBtn.addEventListener('click', openCommunityComposer);
+      }
+
+      /* ── Community: draft restore bar ────────────────────────── */
+      const draftYes = document.getElementById('community-draft-restore-yes');
+      const draftNo  = document.getElementById('community-draft-restore-no');
+      const restoreBar = document.getElementById('community-draft-restore');
+      if (draftYes) {
+        draftYes.addEventListener('click', function() {
+          const draft = loadDraft();
+          if (draft) restoreDraft(draft);
+          if (restoreBar) restoreBar.classList.add('hidden');
+        });
+      }
+      if (draftNo) {
+        draftNo.addEventListener('click', function() {
+          clearDraft();
+          if (restoreBar) restoreBar.classList.add('hidden');
+        });
+      }
+
+      /* ── Community: composer multi-step ─────────────────────── */
+      const composerEl = document.getElementById('community-composer');
+      if (composerEl) {
+        // Next/back step buttons via data-goto attribute
+        composerEl.addEventListener('click', function onComposerClick(e) {
+          const nextBtn = e.target.closest('[data-goto-step]');
+          if (nextBtn) {
+            const step = Number(nextBtn.dataset.gotoStep);
+            if (nextBtn.classList.contains('composer-cancel-btn')) {
+              closeCommunityComposer();
+              return;
+            }
+            // Pre-step-4 PII check
+            if (step === 4) {
+              const contentEl = document.getElementById('compose-content');
+              const piiWarn = document.getElementById('compose-pii-warning');
+              if (contentEl && hasPII(contentEl.value) && piiWarn) {
+                piiWarn.classList.remove('hidden');
+                // Still allow proceed after showing warning
+              }
+              buildPreview();
+            }
+            // Pre-step-5 crisis check
+            if (step === 5) {
+              const contentEl = document.getElementById('compose-content');
+              const crisisOverlay = document.getElementById('compose-crisis-overlay');
+              if (contentEl && isCrisisContent(contentEl.value) && crisisOverlay) {
+                crisisOverlay.classList.remove('hidden');
+              }
+            }
+            composerGoToStep(step);
+          }
+
+          // Room radio selection → add .selected fallback
+          const roomOption = e.target.closest('.composer-room-option');
+          if (roomOption) {
+            document.querySelectorAll('.composer-room-option').forEach(o => o.classList.remove('selected'));
+            roomOption.classList.add('selected');
+          }
+
+          // CW option selection → add .selected fallback
+          const cwOption = e.target.closest('.composer-cw-option');
+          if (cwOption) {
+            document.querySelectorAll('.composer-cw-option').forEach(o => o.classList.remove('selected'));
+            cwOption.classList.add('selected');
+          }
+
+          // Tag choice toggle
+          const tagBtn = e.target.closest('.composer-tag-choice');
+          if (tagBtn) {
+            tagBtn.classList.toggle('selected');
+          }
+
+          // Submit button
+          if (e.target.closest('#compose-submit-btn')) {
+            handleComposerSubmit();
+          }
+
+          // Success "start another" button
+          if (e.target.closest('#compose-start-another-btn')) {
+            composerGoToStep(1);
+            // Reset form
+            const titleEl = document.getElementById('compose-title');
+            const contentEl = document.getElementById('compose-content');
+            const piiWarn = document.getElementById('compose-pii-warning');
+            const crisis = document.getElementById('compose-crisis-overlay');
+            if (titleEl) titleEl.value = '';
+            if (contentEl) { contentEl.value = ''; updateCharCount(); }
+            if (piiWarn) piiWarn.classList.add('hidden');
+            if (crisis) crisis.classList.add('hidden');
+            document.querySelectorAll('.composer-tag-choice').forEach(b => b.classList.remove('selected'));
+            document.querySelectorAll('.composer-room-option').forEach(b => b.classList.remove('selected'));
+            document.querySelectorAll('.composer-cw-option').forEach(b => b.classList.remove('selected'));
+            if (window.turnstile) window.turnstile.reset();
+          }
+
+          // Success "go to feed" button
+          if (e.target.closest('#compose-to-feed-btn')) {
+            closeCommunityComposer();
+            loadCommunityStories();
+          }
+        });
+
+        // Char count
+        const contentEl = document.getElementById('compose-content');
+        if (contentEl) {
+          let draftDebounce = null;
+          contentEl.addEventListener('input', function() {
+            updateCharCount();
+            clearTimeout(draftDebounce);
+            draftDebounce = setTimeout(saveDraft, 1800);
+          });
+        }
+      }
+
+      /* ── Community: story feed delegated events ──────────────── */
+      const storiesFeed = document.getElementById('stories-container');
+      if (storiesFeed) {
+        storiesFeed.addEventListener('click', async function onFeedClick(e) {
+          // Share button
+          const shareBtn = e.target.closest('.story-share-btn');
+          if (shareBtn) {
+            const id = shareBtn.dataset.storyId;
+            if (id) await copyStoryShareLink(id);
+            return;
+          }
+
+          // Save button
+          const saveBtn = e.target.closest('.story-save-btn');
+          if (saveBtn) {
+            const id = saveBtn.dataset.storyId;
+            if (id) {
+              const nowSaved = toggleSavedPost(id);
+              saveBtn.classList.toggle('saved', nowSaved);
+              saveBtn.textContent = nowSaved ? 'Saved' : 'Save';
+              saveBtn.setAttribute('aria-pressed', String(nowSaved));
+            }
+            return;
+          }
+
+          // Listen button (TTS)
+          const listenBtn = e.target.closest('.story-listen-btn');
+          if (listenBtn) {
+            if (window.speechSynthesis) {
+              window.speechSynthesis.cancel();
+              const content = listenBtn.dataset.storyContent || '';
+              if (content) {
+                const utterance = new SpeechSynthesisUtterance(content);
+                utterance.rate = 0.95;
+                window.speechSynthesis.speak(utterance);
+              }
+            }
+            return;
+          }
+
+          // Flag button
+          const flagBtn = e.target.closest('.story-flag-btn');
+          if (flagBtn) {
+            const id = flagBtn.dataset.storyId;
+            if (id) openStoryFlagModal(id);
+            return;
+          }
+
+          // Reaction buttons
+          const reactionBtn = e.target.closest('.reaction-btn');
+          if (reactionBtn) {
+            const id   = reactionBtn.dataset.storyId;
+            const type = reactionBtn.dataset.reaction;
+            if (id && type) handleReaction(id, type);
+            return;
+          }
+
+          // Reveal CW button
+          const revealBtn = e.target.closest('.story-cw-reveal-btn');
+          if (revealBtn) {
+            const card = revealBtn.closest('.story-card');
+            if (card) {
+              card.classList.remove('story-cw-collapsed');
+              revealBtn.remove();
+            }
+            return;
+          }
+
+          // Replies toggle
+          const repliesToggle = e.target.closest('.story-replies-toggle');
+          if (repliesToggle) {
+            const id = repliesToggle.dataset.storyId;
+            const body = document.getElementById(`replies-body-${id}`);
+            if (body) {
+              const wasHidden = body.classList.contains('hidden');
+              body.classList.toggle('hidden', !wasHidden);
+              if (wasHidden) loadReplies(id);
+            }
+            return;
+          }
+
+          // Reply submit
+          const replySubmitBtn = e.target.closest('.reply-submit-btn');
+          if (replySubmitBtn) {
+            const id = replySubmitBtn.dataset.storyId;
+            const form = replySubmitBtn.closest('.story-reply-form');
+            const textarea = form && form.querySelector('.reply-textarea');
+            if (id && textarea && textarea.value.trim()) {
+              replySubmitBtn.disabled = true;
+              const ok = await submitReply(id, textarea.value);
+              if (ok) {
+                textarea.value = '';
+                const note = form && form.nextElementSibling;
+                if (note && note.classList.contains('story-replies-moderation-note')) {
+                  note.textContent = 'Reply submitted! It will appear after review.';
+                }
+              }
+              replySubmitBtn.disabled = false;
+            }
+            return;
+          }
+
+          // Tag chip in story card — filter by tag
+          const storyTag = e.target.closest('.story-tag[data-filter-tag]');
+          if (storyTag) {
+            const tag = storyTag.dataset.filterTag;
+            communityActiveTag = communityActiveTag === tag ? null : tag;
+            document.querySelectorAll('.community-tag-chip').forEach(c => {
+              c.classList.toggle('active', c.dataset.tag === communityActiveTag);
+            });
+            loadCommunityStories();
+            return;
+          }
+        });
+      }
+
+      /* ── Community: saved panel delegated events ─────────────── */
+      const savedPanel = document.getElementById('community-saved-panel');
+      if (savedPanel) {
+        savedPanel.addEventListener('click', async function onSavedPanelClick(e) {
+          const shareBtn = e.target.closest('.story-share-btn');
+          if (shareBtn) { await copyStoryShareLink(shareBtn.dataset.storyId); return; }
+          const saveBtn = e.target.closest('.story-save-btn');
+          if (saveBtn) {
+            const id = saveBtn.dataset.storyId;
+            if (id) {
+              toggleSavedPost(id);
+              loadSavedPostsFeed();
+            }
+            return;
+          }
+          const listenBtn = e.target.closest('.story-listen-btn');
+          if (listenBtn && window.speechSynthesis) {
+            window.speechSynthesis.cancel();
+            const content = listenBtn.dataset.storyContent || '';
+            if (content) window.speechSynthesis.speak(new SpeechSynthesisUtterance(content));
+          }
+        });
+      }
+
+      /* ── Community: load more ────────────────────────────────── */
+      const loadMoreBtn = document.getElementById('community-load-more-btn');
+      if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', function() {
+          loadCommunityStories({ append: true });
+        });
+      }
+
+      /* ── Community: flag modal submit ────────────────────────── */
+      const submitFlagBtn = document.getElementById('submit-story-flag-btn');
+      if (submitFlagBtn) {
+        submitFlagBtn.addEventListener('click', submitStoryFlag);
+      }
+
+      /* ── Flag modal: .selected fallback for radio ─────────────── */
+      const flagModal = document.getElementById('modal-story-flag');
+      if (flagModal) {
+        flagModal.addEventListener('click', function(e) {
+          const opt = e.target.closest('.flag-reason-option');
+          if (opt) {
+            document.querySelectorAll('.flag-reason-option').forEach(o => o.classList.remove('selected'));
+            opt.classList.add('selected');
+          }
+        });
+      }
+
+      /* ── SOTD: init on browse page ───────────────────────────── */
+      if (getCurrentRoute() === '#/browse') {
+        initSotd();
+      }
     }
 
-   // --- World Map Toggle (similar to US Map) ---
-const worldMapContainer = document.getElementById('world-map');
-const toggleWorldMapBtn = document.getElementById('toggle-world-map-btn');
-const WORLD_MAP_VISIBILITY_KEY = 'namehim_world_map_visible';
 
-function setWorldMapVisibility(isVisible, persistPreference = true) {
-  if (!worldMapContainer || !toggleWorldMapBtn) return;
+  // ─── Leaflet Interactive Map ────────────────────────────────────────────────
+  const LEAFLET_MAP_KEY = 'sv_leaflet_visible';
+  const GEO_CACHE_KEY   = 'sv_geocache_v1';
+  const GEO_RATE_MS     = 1150; // Nominatim: 1 req/sec max
 
-  if (isVisible && typeof setMapVisibility === 'function') {
-    setMapVisibility(false);
+  const LEAFLET_CSS_URL  = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+  const LEAFLET_JS_URL   = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+  const LEAFLET_HEAT_URL = 'https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js';
+
+  let _leafletMap    = null;
+  let _heatLayer     = null;
+  let _dotLayer      = null;
+  let _mapViewMode   = 'heat'; // 'heat' | 'dots'
+  let _geoCache      = {};
+  let _geoQueue      = [];
+  let _geoRunning    = false;
+  let _pendingRender = false;
+  let _leafletLoaded = false;
+  let _leafletLoading = false;
+
+  function _loadGeoCache() {
+    try { _geoCache = JSON.parse(localStorage.getItem(GEO_CACHE_KEY) || '{}'); }
+    catch { _geoCache = {}; }
   }
 
-  worldMapContainer.style.display = isVisible ? 'block' : 'none';
-  toggleWorldMapBtn.textContent = isVisible ? 'Hide World Map' : 'Show World Map';
-  toggleWorldMapBtn.setAttribute('aria-expanded', String(isVisible));
-  if (persistPreference) {
-    localStorage.setItem(WORLD_MAP_VISIBILITY_KEY, isVisible ? '1' : '0');
-  }
-  if (isVisible) {
-    window.requestAnimationFrame(function onWorldMapShow() {
-      if (
-        window.simplemaps_worldmap &&
-        typeof window.simplemaps_worldmap.refresh === 'function'
-      ) {
-        window.simplemaps_worldmap.refresh();
+  function _loadLeafletScripts() {
+    return new Promise(function(resolve, reject) {
+      if (_leafletLoaded && typeof L !== 'undefined' && typeof L.heatLayer === 'function') {
+        resolve(); return;
       }
-      if (
-        window.simplemaps_worldmap &&
-        typeof window.simplemaps_worldmap.resize === 'function'
-      ) {
-        window.simplemaps_worldmap.resize();
+      // Inject CSS
+      if (!document.querySelector('link[href*="leaflet@1.9.4"]')) {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = LEAFLET_CSS_URL;
+        document.head.appendChild(link);
+      }
+      // Load leaflet.js then leaflet-heat.js in sequence
+      function loadScript(src, cb) {
+        const s = document.createElement('script');
+        s.src = src;
+        s.onload = cb;
+        s.onerror = function() { reject(new Error('Failed to load ' + src)); };
+        document.head.appendChild(s);
+      }
+      if (typeof L === 'undefined') {
+        loadScript(LEAFLET_JS_URL, function() {
+          loadScript(LEAFLET_HEAT_URL, function() { _leafletLoaded = true; resolve(); });
+        });
+      } else if (typeof L.heatLayer !== 'function') {
+        loadScript(LEAFLET_HEAT_URL, function() { _leafletLoaded = true; resolve(); });
+      } else {
+        _leafletLoaded = true; resolve();
       }
     });
   }
-}
 
-function initWorldMapToggle() {
-  if (!worldMapContainer || !toggleWorldMapBtn) return;
-  const saved = localStorage.getItem(WORLD_MAP_VISIBILITY_KEY);
-  setWorldMapVisibility(saved === '1', false);
-  toggleWorldMapBtn.addEventListener('click', () => {
-    const isVisible = worldMapContainer.style.display !== 'none';
-    setWorldMapVisibility(!isVisible);
-  });
-}
+  function _saveGeoCache() {
+    try { localStorage.setItem(GEO_CACHE_KEY, JSON.stringify(_geoCache)); }
+    catch {}
+  }
 
-function initWorldMapInteractions() {
-  window.applyCountryFilterFromWorldMap = function applyCountryFilterFromWorldMap(countryName) {
-    if (typeof window.filterReportsByCountryFromMap === 'function') {
-      window.filterReportsByCountryFromMap(countryName);
-      return;
+  function _cacheKey(city, country) {
+    return (city || '').toLowerCase().trim() + '|' + (country || '').toLowerCase().trim();
+  }
+
+  async function _geocodeOnce(city, country) {
+    const key = _cacheKey(city, country);
+    if (_geoCache[key] !== undefined) return _geoCache[key];
+    const q = [city, country].filter(Boolean).join(', ');
+    if (!q) { _geoCache[key] = null; return null; }
+    try {
+      const r = await fetch(
+        'https://nominatim.openstreetmap.org/search?format=json&limit=1&q=' + encodeURIComponent(q),
+        { headers: { 'Accept-Language': 'en' } }
+      );
+      const d = await r.json();
+      const coords = (d && d[0]) ? [parseFloat(d[0].lat), parseFloat(d[0].lon)] : null;
+      _geoCache[key] = coords;
+      _saveGeoCache();
+      return coords;
+    } catch { return undefined; }
+  }
+
+  function _enqueueGeocode(city, country) {
+    const key = _cacheKey(city, country);
+    if (_geoCache[key] !== undefined) return Promise.resolve(_geoCache[key]);
+    return new Promise(resolve => {
+      _geoQueue.push({ city, country, resolve });
+      _drainGeoQueue();
+    });
+  }
+
+  async function _drainGeoQueue() {
+    if (_geoRunning) return;
+    _geoRunning = true;
+    while (_geoQueue.length > 0) {
+      const { city, country, resolve } = _geoQueue.shift();
+      const result = await _geocodeOnce(city, country);
+      resolve(result);
+      if (_geoQueue.length > 0) await new Promise(r => setTimeout(r, GEO_RATE_MS));
     }
-    filterReportsByCountry(countryName);
-  };
-}
-
-const WORLD_MAP_DEFAULT_COLOR = '#2d3748';
-const WORLD_MAP_HOVER_COLOR = '#a855f7';
-const WORLD_MAP_ACTIVE_COLOR = '#7c3aed';
-let selectedWorldCountryId = null;
-
-function getWorldMapCountryDisplayName(stateId) {
-  const stateSpecific = (window.simplemaps_worldmap_mapdata && window.simplemaps_worldmap_mapdata.state_specific) || {};
-  return stateSpecific[stateId] && stateSpecific[stateId].name ? stateSpecific[stateId].name : stateId;
-}
-
-function getWorldCountryIdByName(countryName) {
-  const stateSpecific = (window.simplemaps_worldmap_mapdata && window.simplemaps_worldmap_mapdata.state_specific) || {};
-  const target = normalizeCountryForFiltering(countryName);
-  if (!target) {
-    return null;
-  }
-
-  return Object.keys(stateSpecific).find((stateId) => {
-    return normalizeCountryForFiltering(stateSpecific[stateId] && stateSpecific[stateId].name) === target;
-  }) || null;
-}
-
-function getReportCountByCountryName(countryName) {
-  const target = normalizeCountryForFiltering(countryName);
-  if (!target) {
-    return 0;
-  }
-
-  return allReports.reduce((count, report) => {
-    return count + (normalizeCountryForFiltering(report && report.country) === target ? 1 : 0);
-  }, 0);
-}
-
-function setWorldCountryFill(stateId, color) {
-  if (!stateId || !window.simplemaps_worldmap || !window.simplemaps_worldmap.states || !window.simplemaps_worldmap.states[stateId]) {
-    return;
-  }
-
-  const state = window.simplemaps_worldmap.states[stateId];
-  if (state && typeof state.attr === 'function') {
-    state.attr({ fill: color });
-  }
-}
-
-function updateWorldMapStateDescriptions() {
-  const mapData = window.simplemaps_worldmap_mapdata;
-  const stateSpecific = (mapData && mapData.state_specific) || {};
-
-  Object.keys(stateSpecific).forEach((stateId) => {
-    const countryName = stateSpecific[stateId] && stateSpecific[stateId].name;
-    const count = getReportCountByCountryName(countryName);
-    stateSpecific[stateId].description = 'Reports: ' + count;
-    stateSpecific[stateId].url = '';
-  });
-}
-
-function applyWorldMapSelectionById(stateId, shouldFilter) {
-  if (selectedWorldCountryId && selectedWorldCountryId !== stateId) {
-    setWorldCountryFill(selectedWorldCountryId, WORLD_MAP_DEFAULT_COLOR);
-  }
-
-  selectedWorldCountryId = stateId || null;
-
-  if (!selectedWorldCountryId) {
-    setCountryDropdownValue('');
-    applySearchFilter();
-    return;
-  }
-
-  setWorldCountryFill(selectedWorldCountryId, WORLD_MAP_ACTIVE_COLOR);
-
-  const countryName = getWorldMapCountryDisplayName(selectedWorldCountryId);
-  if (shouldFilter) {
-    if (typeof window.filterReportsByCountryFromMap === 'function') {
-      window.filterReportsByCountryFromMap(countryName);
-    } else {
-      filterReportsByCountry(countryName);
+    _geoRunning = false;
+    if (_pendingRender) {
+      _pendingRender = false;
+      const reports = (currentFilteredReports && currentFilteredReports.length > 0)
+        ? currentFilteredReports : (window.allReports || []);
+      _renderMap(reports);
     }
   }
-}
 
-function attachWorldMapHooks() {
-  const worldMap = window.simplemaps_worldmap;
-  if (!worldMap || !worldMap.hooks || worldMap.__namehimHooksApplied) {
-    return;
+  function _initLeafletMap() {
+    if (_leafletMap || typeof L === 'undefined') return;
+    _leafletMap = L.map('leaflet-map', {
+      center: [20, 0], zoom: 2, minZoom: 2, worldCopyJump: true,
+    });
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors',
+      maxZoom: 19,
+    }).addTo(_leafletMap);
+    _heatLayer = L.heatLayer([], {
+      radius: 28, blur: 18, maxZoom: 12,
+      gradient: { 0.15: '#818cf8', 0.4: '#a855f7', 0.7: '#f97316', 1.0: '#ef4444' },
+    });
+    _dotLayer = L.layerGroup();
+    _heatLayer.addTo(_leafletMap);
+    _addMapControls();
   }
 
-  worldMap.__namehimHooksApplied = true;
-  const chainHook = (hookName, handler) => {
-    const previous = worldMap.hooks[hookName];
-    worldMap.hooks[hookName] = function chainedWorldHook() {
-      if (typeof previous === 'function') {
-        previous.apply(this, arguments);
+  function _addMapControls() {
+    const MapCtrl = L.Control.extend({
+      onAdd() {
+        const d = L.DomUtil.create('div', 'sv-map-ctrl');
+        d.innerHTML =
+          '<button type="button" class="sv-mc-btn sv-mc-active" id="sv-mc-heat">Heatmap</button>' +
+          '<button type="button" class="sv-mc-btn" id="sv-mc-dots">Markers</button>';
+        L.DomEvent.disableClickPropagation(d);
+        d.querySelector('#sv-mc-heat').addEventListener('click', () => _setViewMode('heat'));
+        d.querySelector('#sv-mc-dots').addEventListener('click', () => _setViewMode('dots'));
+        return d;
       }
-      handler.apply(this, arguments);
-    };
-  };
+    });
+    new MapCtrl({ position: 'topright' }).addTo(_leafletMap);
+  }
 
-  chainHook('complete', function onWorldComplete() {
-    updateWorldMapStateDescriptions();
-  });
-
-  chainHook('over_state', function onWorldOver(stateId) {
-    if (selectedWorldCountryId !== stateId) {
-      setWorldCountryFill(stateId, WORLD_MAP_HOVER_COLOR);
+  function _setViewMode(mode) {
+    _mapViewMode = mode;
+    const heatBtn = document.getElementById('sv-mc-heat');
+    const dotsBtn = document.getElementById('sv-mc-dots');
+    if (heatBtn) heatBtn.classList.toggle('sv-mc-active', mode === 'heat');
+    if (dotsBtn) dotsBtn.classList.toggle('sv-mc-active', mode === 'dots');
+    if (!_leafletMap) return;
+    if (mode === 'heat') {
+      if (_leafletMap.hasLayer(_dotLayer)) _dotLayer.remove();
+      if (!_leafletMap.hasLayer(_heatLayer)) _heatLayer.addTo(_leafletMap);
+    } else {
+      if (_leafletMap.hasLayer(_heatLayer)) _heatLayer.remove();
+      if (!_leafletMap.hasLayer(_dotLayer)) _dotLayer.addTo(_leafletMap);
     }
-  });
+  }
 
-  chainHook('out_state', function onWorldOut(stateId) {
-    setWorldCountryFill(stateId, selectedWorldCountryId === stateId ? WORLD_MAP_ACTIVE_COLOR : WORLD_MAP_DEFAULT_COLOR);
-  });
+  async function _renderMap(reports) {
+    if (!_leafletMap) return;
+    const statusEl = document.getElementById('sv-map-status');
 
-  chainHook('preclick_state', function onWorldClick(stateId, event) {
-    if (event && typeof event.preventDefault === 'function') {
-      event.preventDefault();
+    // Aggregate reports by unique city+country
+    const byLoc = {};
+    for (const r of (reports || [])) {
+      const k = _cacheKey(r.city, r.country);
+      if (!byLoc[k]) byLoc[k] = { city: r.city, country: r.country, count: 0 };
+      byLoc[k].count++;
     }
-    if (event && typeof event.stopPropagation === 'function') {
-      event.stopPropagation();
+    const locs = Object.values(byLoc);
+
+    // Queue uncached locations for geocoding
+    const uncached = locs.filter(l => _geoCache[_cacheKey(l.city, l.country)] === undefined);
+    if (uncached.length > 0) {
+      if (statusEl) { statusEl.textContent = 'Geocoding ' + uncached.length + ' location(s)…'; statusEl.style.display = ''; }
+      _pendingRender = true;
+      for (const l of uncached) _enqueueGeocode(l.city, l.country);
+    } else {
+      if (statusEl) statusEl.style.display = 'none';
     }
-    applyWorldMapSelectionById(stateId, true);
-  });
-}
 
-function syncWorldMapWithCurrentFilters() {
-  updateWorldMapStateDescriptions();
-  if (selectedWorldCountryId) {
-    setWorldCountryFill(selectedWorldCountryId, WORLD_MAP_DEFAULT_COLOR);
+    // Render with already-cached coords immediately
+    const ready = locs
+      .filter(l => _geoCache[_cacheKey(l.city, l.country)])
+      .map(l => ({ ...l, coords: _geoCache[_cacheKey(l.city, l.country)] }));
+    _updateLayers(ready);
+
+    // Fit map to visible points (only when few locations to avoid confusing full-world zoom)
+    if (ready.length > 0) {
+      try {
+        const pts = ready.map(l => l.coords);
+        const bounds = L.latLngBounds(pts);
+        _leafletMap.fitBounds(bounds, { padding: [50, 50], maxZoom: 8 });
+      } catch {}
+    }
   }
-  selectedWorldCountryId = null;
-}
 
-window.clearSelectedWorldCountry = function clearSelectedWorldCountry() {
-  if (selectedWorldCountryId) {
-    setWorldCountryFill(selectedWorldCountryId, WORLD_MAP_DEFAULT_COLOR);
+  function _updateLayers(geocodedLocs) {
+    if (!_heatLayer || !_dotLayer) return;
+
+    // Heatmap points (weight by count, capped at 10)
+    const pts = [];
+    for (const l of geocodedLocs) {
+      const weight = Math.min(l.count / 5, 1.0);
+      for (let i = 0; i < Math.min(l.count, 8); i++) {
+        pts.push([l.coords[0], l.coords[1], 0.4 + weight * 0.6]);
+      }
+    }
+    _heatLayer.setLatLngs(pts);
+
+    // Circle markers for dot view
+    _dotLayer.clearLayers();
+    for (const l of geocodedLocs) {
+      const radius = Math.max(5, Math.min(20, 5 + Math.sqrt(l.count) * 3));
+      const safeCity = escapeHTML(l.city || '');
+      const safeCountry = escapeHTML(l.country || '');
+      const popupHtml = '<strong>' + safeCity + ', ' + safeCountry + '</strong><br>' +
+        l.count + ' report' + (l.count !== 1 ? 's' : '');
+      L.circleMarker(l.coords, {
+        radius, fillColor: '#a855f7', color: '#7c3aed',
+        weight: 2, opacity: 1, fillOpacity: 0.8,
+      }).bindPopup(popupHtml).addTo(_dotLayer);
+    }
   }
-  selectedWorldCountryId = null;
-};
 
-window.selectWorldCountryOnMapByName = function selectWorldCountryOnMapByName(countryName) {
-  const stateId = getWorldCountryIdByName(countryName);
-  if (stateId) {
-    applyWorldMapSelectionById(stateId, false);
+  function _setLeafletVisible(show, persist) {
+    if (persist === undefined) persist = true;
+    const container = document.getElementById('leaflet-map-container');
+    const btn       = document.getElementById('toggle-map-btn');
+    if (!container || !btn) return;
+
+    container.classList.toggle('hidden', !show);
+    btn.setAttribute('aria-expanded', String(show));
+    const lbl = btn.querySelector('.sv-map-label');
+    if (lbl) lbl.textContent = show ? 'Hide Map' : 'Map View';
+
+    if (persist) localStorage.setItem(LEAFLET_MAP_KEY, show ? '1' : '0');
+
+    if (show) {
+      const statusEl = document.getElementById('sv-map-status');
+      if (!_leafletMap) {
+        _loadGeoCache();
+        if (statusEl) { statusEl.textContent = 'Loading map…'; statusEl.style.display = ''; }
+        if (_leafletLoading) return;
+        _leafletLoading = true;
+        _loadLeafletScripts().then(function() {
+          _leafletLoading = false;
+          _initLeafletMap();
+          if (_leafletMap) {
+            requestAnimationFrame(function() {
+              _leafletMap.invalidateSize();
+              const reports = (currentFilteredReports && currentFilteredReports.length > 0)
+                ? currentFilteredReports : (window.allReports || []);
+              _renderMap(reports);
+            });
+          }
+        }).catch(function(err) {
+          _leafletLoading = false;
+          if (statusEl) { statusEl.textContent = 'Map failed to load. Check your internet connection.'; statusEl.style.display = ''; }
+          console.error('Leaflet load error:', err);
+        });
+      } else {
+        requestAnimationFrame(function() {
+          _leafletMap.invalidateSize();
+          const reports = (currentFilteredReports && currentFilteredReports.length > 0)
+            ? currentFilteredReports : (window.allReports || []);
+          _renderMap(reports);
+        });
+      }
+    }
   }
-};
 
-window.refreshWorldMapReportData = function refreshWorldMapReportData() {
-  attachWorldMapHooks();
-  syncWorldMapWithCurrentFilters();
-  if (window.simplemaps_worldmap && typeof window.simplemaps_worldmap.refresh === 'function') {
-    window.simplemaps_worldmap.refresh();
+  function refreshLeafletMap() {
+    const container = document.getElementById('leaflet-map-container');
+    if (container && !container.classList.contains('hidden') && _leafletMap) {
+      const reports = (currentFilteredReports && currentFilteredReports.length > 0)
+        ? currentFilteredReports : (window.allReports || []);
+      _renderMap(reports);
+    }
   }
-};
 
-initWorldMapToggle();
-initWorldMapInteractions();
-window.setTimeout(function initializeWorldMapHooks() {
-  attachWorldMapHooks();
-  syncWorldMapWithCurrentFilters();
-}, 0);
+  function initLeafletMapToggle() {
+    _loadGeoCache();
+    const btn = document.getElementById('toggle-map-btn');
+    if (btn) {
+      btn.addEventListener('click', function() {
+        const container = document.getElementById('leaflet-map-container');
+        const isHidden = container ? container.classList.contains('hidden') : true;
+        _setLeafletVisible(isHidden);
+      });
+    }
+    // Restore saved visibility state
+    if (localStorage.getItem(LEAFLET_MAP_KEY) === '1') {
+      // Defer until after page is fully painted so Leaflet can size correctly
+      requestAnimationFrame(function() { _setLeafletVisible(true, false); });
+    }
+  }
 
     init();
   </script>
-  <!-- At the end of your <body>, before the closing </body> tag -->
-<script src="mapdata.js?v=2026-04-24-3"></script>
-<script src="usmap.js?v=2026-04-24-4"></script>
-<script src="wmapdata.js?v=2026-04-25-1"></script>
-<script>
-  if (window.simplemaps_worldmap_mapdata && window.simplemaps_worldmap_mapdata.main_settings) {
-    window.simplemaps_worldmap_mapdata.main_settings.div = 'world-map';
-    window.simplemaps_worldmap_mapdata.main_settings.auto_load = 'yes';
-  }
-</script>
-<script src="worldmap.js?v=2026-04-25-4"></script>
 
 </body>
 </html>

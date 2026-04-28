@@ -2,19 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <script>(function(){var t=localStorage.getItem('sv_theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);})()</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About NameHim | Mission, Purpose, and Disclaimer</title>
-  <meta name="description" content="Learn the mission behind NameHim, how the platform is intended to be used, and the legal and safety disclaimers that guide this awareness project." />
+  <title>About SafeVoice | Mission, Purpose &amp; Transparency</title>
+  <meta name="description" content="Learn the mission behind SafeVoice, how the platform works, and the safety and legal disclaimers that guide this inclusive community awareness project." />
   <meta name="robots" content="index, follow, max-image-preview:large" />
-  <meta name="theme-color" content="#0b1220" />
+  <meta name="theme-color" content="#0d9488" />
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="About NameHim | Mission, Purpose, and Disclaimer" />
-  <meta property="og:description" content="Read what NameHim is, why it exists, and how to use it responsibly as a community awareness tool." />
-  <meta property="og:site_name" content="NameHim" />
+  <meta property="og:title" content="About SafeVoice | Mission, Purpose &amp; Transparency" />
+  <meta property="og:description" content="Read what SafeVoice is, why it exists, and how to use it responsibly as a community awareness tool." />
+  <meta property="og:site_name" content="SafeVoice" />
   <meta property="og:image" content="favicon.svg" />
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="About NameHim" />
-  <meta name="twitter:description" content="Understand the purpose and guidelines behind NameHim." />
+  <meta name="twitter:title" content="About SafeVoice" />
+  <meta name="twitter:description" content="Understand the purpose and guidelines behind SafeVoice." />
   <meta name="twitter:image" content="favicon.svg" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="shortcut icon" href="favicon.svg" />
@@ -22,403 +23,270 @@
     {
       "@context": "https://schema.org",
       "@type": "AboutPage",
-      "name": "About NameHim",
-      "description": "Mission, intent, and responsible-use disclaimer for the NameHim awareness platform.",
+      "name": "About SafeVoice",
+      "description": "Mission, intent, and responsible-use disclaimer for the SafeVoice community awareness platform.",
       "inLanguage": "en"
     }
   </script>
-  <style>
-    :root {
-      --bg: #0b1220;
-      --panel: #111827;
-      --panel-2: #1f2937;
-      --text: #e5e7eb;
-      --muted: #9ca3af;
-      --border: #334155;
-    }
-
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .disclaimer {
-      background: #fbcfe8;
-      color: #1f2937;
-      border-bottom: 1px solid #f9a8d4;
-      font-size: 0.8rem;
-      line-height: 1.4;
-      padding: 0.75rem 1rem;
-      text-align: center;
-    }
-
-    header {
-      border-bottom: 1px solid var(--border);
-      background: rgba(17, 24, 39, 0.92);
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      backdrop-filter: blur(6px);
-    }
-
-    .container {
-      max-width: 1080px;
-      margin: 0 auto;
-      width: 100%;
-      padding-left: max(1rem, calc(env(safe-area-inset-left) + 0.75rem));
-      padding-right: max(1rem, calc(env(safe-area-inset-right) + 0.75rem));
-    }
-
-    .header-inner {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
-      padding: 1rem 0;
-    }
-
-    .site-title-wrap {
-      display: flex;
-      flex-direction: column;
-      gap: 0.2rem;
-    }
-
-    h1 { margin: 0; font-size: 1.7rem; }
-
-    .site-title-link { color: inherit; text-decoration: none; }
-    .site-title-link:hover { text-decoration: underline; text-underline-offset: 0.18em; }
-
-    .report-count {
-      margin: 0;
-      font-size: 0.92rem;
-      color: #93c5fd;
-      letter-spacing: 0.02em;
-      text-shadow: 0 0 18px rgba(96, 165, 250, 0.35);
-    }
-
-    nav {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-
-    .nav-link {
-      border: 1px solid var(--border);
-      background: var(--panel-2);
-      color: var(--text);
-      text-decoration: none;
-      padding: 0.5rem 0.75rem;
-      border-radius: 0.5rem;
-      font-size: 0.9rem;
-    }
-
-    .nav-link:hover,
-    .nav-link.active { background: #334155; }
-
-    main {
-      flex: 1;
-      padding: 1.5rem 0;
-    }
-
-    .about-wrap {
-      max-width: 860px;
-    }
-
-    .panel {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 0.7rem;
-      padding: 1.5rem;
-      line-height: 1.6;
-    }
-
-    h2 {
-      margin-top: 0;
-      margin-bottom: 1rem;
-      font-size: 1.6rem;
-    }
-
-    h3 {
-      margin: 0 0 0.5rem;
-      font-size: 1.1rem;
-    }
-
-    section + section {
-      margin-top: 1.25rem;
-    }
-
-    p {
-      margin: 0;
-      color: #dbe3ee;
-    }
-
-    p + p {
-      margin-top: 0.75rem;
-    }
-
-    a {
-      color: #93c5fd;
-      text-underline-offset: 0.15em;
-    }
-
-    a:hover {
-      color: #bfdbfe;
-    }
-
-    .support-buttons {
-      margin-top: 0.9rem;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      gap: 0.7rem;
-      flex-wrap: wrap;
-    }
-
-    footer {
-      border-top: 1px solid var(--border);
-      background: rgba(17, 24, 39, 0.85);
-      margin-top: 2rem;
-    }
-
-    .footer-inner {
-      padding: 1rem 0;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.5rem;
-      font-size: 0.9rem;
-      color: #cbd5e1;
-    }
-
-    .footer-inner a {
-      color: inherit;
-    }
-
-    @media (max-width: 760px) {
-      .container {
-        padding-left: max(1.15rem, calc(env(safe-area-inset-left) + 0.85rem));
-        padding-right: max(1.15rem, calc(env(safe-area-inset-right) + 0.85rem));
-      }
-
-      .panel {
-        padding: 1.15rem;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="i18n.js"></script>
 </head>
 <body>
   <div class="disclaimer">
-    DISCLAIMER: All user-submitted statements on this site are unverified and generated by third-party users, not by the operator of this site. We do not endorse, confirm, or investigate the truth of any user submission. This information is presented for informational purposes only and is not a substitute for professional legal advice or law enforcement investigation.
+    <span data-i18n="disclaimer.main">All reports are user-submitted and unverified. Not a substitute for law enforcement.</span>
   </div>
 
   <header>
     <div class="container header-inner">
-      <div class="site-title-wrap">
-        <h1><a class="site-title-link" href="index.html#/browse">NameHim</a></h1>
-        <p id="report-count" class="report-count">Loading reports and counting...</p>
+      <div class="site-logo">
+        <div class="site-title-wrap">
+          <h1><a class="site-title-link" href="index.html#/browse"><span class="site-name-gradient">SafeVoice</span></a></h1>
+          <p id="report-count" class="report-count" data-i18n="loading.reports">Loading reports…</p>
+        </div>
       </div>
-      <nav>
-        <a href="index.html#/browse" class="nav-link">Browse</a>
-        <a href="index.html#/submit" class="nav-link">Submit</a>
-        <a href="index.html#/community" class="nav-link">Community</a>
-        <a href="about.html" class="nav-link active">About</a>
-      </nav>
+      <div class="header-right">
+        <nav>
+          <a href="index.html#/browse" class="nav-link" data-i18n="nav.browse">Browse</a>
+          <a href="index.html#/submit" class="nav-link" data-i18n="nav.submit">Submit</a>
+          <a href="index.html#/community" class="nav-link" data-i18n="nav.community">Community</a>
+          <a href="resources.html" class="nav-link" data-i18n="nav.resources">Resources</a>
+          <a href="about.html" class="nav-link active" data-i18n="nav.about">About</a>
+        </nav>
+        <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light mode" title="Toggle light/dark mode"></button>
+        <button class="lang-toggle" id="lang-toggle" onclick="svToggleLanguage()" aria-label="Cambiar a Español" lang="es">ES</button>
+        <button class="community-exit-btn" type="button"
+          title="Quick exit: leaves this page immediately"
+          onclick="window.location.href='https://weather.com'"
+          aria-label="Exit quickly">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          <span data-i18n="flow.exit.btn">Exit quickly</span>
+        </button>
+      </div>
     </div>
   </header>
 
   <main>
-    <div class="container about-wrap">
-      <article class="panel">
-        <h2>About This Site</h2>
+    <div class="container about-wrap" style="padding-top:1.75rem; padding-bottom:3rem;">
+      <article class="about-panel">
+        <h2 data-i18n="about.title" style="margin-bottom:1.5rem;background:var(--gradient-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block;">About SafeVoice</h2>
 
-        <section>
-          <h3>What this is</h3>
-          <p>This is a community-driven, open-source awareness tool. It is not a place to make legal accusations. It is simply a place for people to say: 'This person raised concerns for me in these specific ways.'</p>
-        </section>
+        <div class="about-section">
+          <h3 data-i18n="about.what.h">What this is</h3> <button class="info-btn" onclick="openModal('modal-about-what')" aria-label="More about this">i</button>
+          <p data-i18n-html="about.what.p">SafeVoice is a community-driven, open-source awareness tool. It is not a place to make legal accusations. It is simply a place for people to say: "This person raised concerns for me in these specific ways." It is welcoming to people of all genders, sexual orientations, and backgrounds.</p>
+        </div>
 
-        <section>
-          <h3>Why "Name Him?"</h3>
-          <p>Nothing stops people from adding the names of their abusers of any gender. But this site is called NameHim on purpose.</p>
-          <p>Over 98% of violent crimes are committed by men. The vast majority of sexual assaults, harassment, and other forms of abuse are perpetrated by men. This is not about blaming every man; it's about naming a real, measurable, patriarchal problem in our society.</p>
-          <p>Calling it out is the first step. The name NameHim is intentional: it points to the pattern, not the exception. It is a tool for awareness, not a weapon against any gender.</p>
-          <p>Anyone is free to add abusers of any gender to this site. But the name stays. Because until we face who is doing most of the harm, we can't begin to fix it.</p>
-        </section>
+        <div class="about-section">
+          <h3 data-i18n="about.name.h">About the original name and mission</h3> <button class="info-btn" onclick="openModal('modal-about-name')" aria-label="More about this">i</button>
+          <p data-i18n-html="about.name.p1">This platform was forked from a project called "NameHim" — a name chosen with purpose. Over 98% of violent crimes are committed by men. The vast majority of sexual assaults, harassment, and other forms of abuse are perpetrated by men. This is not about blaming every man; it's about naming a real, measurable, systemic problem in our society.</p>
+          <p data-i18n-html="about.name.p2">Nothing stops people from adding the names of abusers of any gender. Anyone is free to do so. But the original name pointed to the pattern, not the exception. We have evolved the name to SafeVoice to reflect our commitment to being a fully inclusive, welcoming space — for women, LGBTQ+ people, and everyone else who needs a safe place to speak.</p>
+        </div>
 
-        <section>
-          <h3>How to use this information</h3>
-          <p>Everything on this site is user-generated and unverified. We do not investigate, confirm, or endorse any claim. If you come across a name here, treat it as a starting point; someone to watch out for, to do your own further investigation on if you ever meet them. It is not about demonizing anyone or saying they are damned forever. It is just a signal: be aware, and check for yourself.</p>
-        </section>
+        <div class="about-section">
+          <h3 data-i18n="about.use.h">How to use this information</h3> <button class="info-btn" onclick="openModal('modal-about-use')" aria-label="More about this">i</button>
+          <p data-i18n-html="about.use.p">Everything on this site is user-generated and unverified. We do not investigate, confirm, or endorse any claim. If you come across a name here, treat it as a starting point — someone to be aware of, to do your own research on. It is not about demonizing anyone permanently. It is a signal: be aware, and check for yourself.</p>
+        </div>
 
-        <section>
-          <h3>Legal &amp; safety notice</h3>
-          <p>This site does not replace law enforcement, courts, or professional advice. If you believe someone is in immediate danger, call 911 (or your local emergency number). For serious accusations, go to the police, not just this website.</p>
-        </section>
+        <div class="about-section">
+          <h3 data-i18n="about.legal.h">Legal &amp; safety notice</h3> <button class="info-btn" onclick="openModal('modal-about-legal')" aria-label="More about this">i</button>
+          <p data-i18n-html="about.legal.p">This site does not replace law enforcement, courts, or professional advice. If you believe someone is in immediate danger, call 911 (or your local emergency number). For serious accusations, go to the police — not just this website. See our <a href="resources.html">Resources page</a> for hotlines, legal options, and support.</p>
+        </div>
 
-        <section>
-          <h3>Open source &amp; transparency</h3>
-          <p>
-            This entire project is open source. You can read every line of code, suggest improvements, or report issues at our GitHub repository:
-            <a href="https://github.com/namehim/namehim">https://github.com/namehim/namehim</a>
-          </p>
-          <p>
-            If you want to fork this project or run your own version, you can download the live, moderated dataset at:
-            <a href="https://api.namehim.app/filtered-reports">https://api.namehim.app/filtered-reports</a>.
-            The data is updated every 30 seconds and excludes any entries removed by moderation (trolls, fakes, or successful appeals).
-          </p>
-        </section>
+        <div class="about-section">
+          <h3 data-i18n="about.oss.h">Open source &amp; transparency</h3> <button class="info-btn" onclick="openModal('modal-about-oss')" aria-label="More about this">i</button>
+          <p data-i18n-html="about.oss.p1">This entire project is open source. You can read every line of code, suggest improvements, or report issues at our GitHub repository: <a href="https://github.com/namehim/namehim" rel="noopener noreferrer">github.com/namehim/namehim</a></p>
+          <p data-i18n-html="about.oss.p2">If you want to fork this project or run your own version, you can download the live, moderated dataset at: <a href="https://api.namehim.app/filtered-reports" rel="noopener noreferrer">api.namehim.app/filtered-reports</a>. The data is updated every 30 seconds and excludes entries removed by moderation.</p>
+        </div>
 
-              <section>
-        <h3 class="text-lg font-semibold mb-2">Privacy &amp; data collection</h3>
-        <p><strong>We collect almost nothing.</strong> Your privacy is central to how NameHim works.</p>
-        <ul class="list-disc pl-5 space-y-2 mt-2">
-          <li><strong>No accounts, no emails, no passwords.</strong> You never sign up or log in.</li>
-          <li><strong>No IP addresses are stored.</strong> We never record your IP address in the database, logs, or anywhere else. (A temporary IP check is used only for rate limiting – it is never saved and expires within 60 seconds.)</li>
-          <li><strong>No cookies are used for tracking.</strong> We only store a random, anonymous ID in your browser's local storage to enforce rate limits (max 3 reports per hour). This ID is not linked to any personal information and cannot be used to identify you.</li>
-          <li><strong>What you see in browser dev tools is the same data that is displayed on the page:</strong> the name and location of the accused, the category of concern, and a timestamp. There is no hidden data that can re‑identify submitters.</li>
-          <li><strong>The `submitter_uuid` field that appears in the raw API response is a random, one‑time identifier.</strong> It cannot be linked to your real identity or IP address. It is only used to prevent spam (3 submissions per hour). You can clear it at any time by clearing your browser's local storage.</li>
-        </ul>
-        <p class="mt-2">In short: we don't know who you are, and we don't want to. Your safety and anonymity are the whole point.</p>
-      </section>
+        <div class="about-section">
+          <h3 data-i18n="about.privacy.h">Privacy &amp; data collection</h3> <button class="info-btn" onclick="openModal('modal-about-privacy')" aria-label="More about this">i</button>
+          <p data-i18n-html="about.privacy.intro"><strong>We collect almost nothing.</strong> Your privacy is central to how SafeVoice works.</p>
+          <ul>
+            <li data-i18n-html="about.privacy.li1"><strong>No accounts, no emails, no passwords.</strong> You never sign up or log in.</li>
+            <li data-i18n-html="about.privacy.li2"><strong>No IP addresses are stored.</strong> A temporary IP check is used only for rate limiting — it is never saved and expires within 60 seconds.</li>
+            <li data-i18n-html="about.privacy.li3"><strong>No tracking cookies.</strong> We only store a random anonymous ID in localStorage to enforce rate limits (max 3 reports per hour). This ID cannot identify you.</li>
+            <li data-i18n-html="about.privacy.li4"><strong>What you see in browser dev tools is the same data shown on the page</strong> — name, location, category, timestamp. No hidden data can re-identify submitters.</li>
+            <li data-i18n-html="about.privacy.li5"><strong>The <code>submitter_uuid</code> field</strong> in the raw API is a random, one-time identifier. It cannot be linked to your real identity. You can clear it anytime by clearing your browser storage.</li>
+          </ul>
+          <p style="margin-top:0.75rem;" data-i18n="about.privacy.footer">In short: we don't know who you are, and we don't want to. Your safety and anonymity are the whole point.</p>
+        </div>
 
-        <section>
-          <h3>Build your own</h3>
-          <p>I encourage anyone who cares about this to make your own site – fork this code, improve it, run it your own way. If anything ever happens to this site, the work can continue in the hands of anyone who wants to carry it forward. This should never be controlled by one person.</p>
-        </section>
+        <div class="about-section">
+          <h3 data-i18n="about.build.h">Build your own</h3> <button class="info-btn" onclick="openModal('modal-about-build')" aria-label="More about this">i</button>
+          <p data-i18n-html="about.build.p">We encourage anyone who cares about this mission to fork this code, improve it, and run their own version. If anything ever happens to this site, the work can continue in the hands of anyone who wants to carry it forward. This should never be controlled by one person or one organization.</p>
+        </div>
 
-        <section>
-          <h3>Why this exists</h3>
-          <p>The original site (that someone else made) went down within days. People still need a space to share concerns anonymously, responsibly, without fear. This is my attempt to keep that door open. I'll improve it over time. Suggestions are welcome.</p>
-        </section>
+        <div class="about-section">
+          <h3 data-i18n="about.why.h">Why this exists</h3> <button class="info-btn" onclick="openModal('modal-about-why')" aria-label="More about this">i</button>
+          <p data-i18n-html="about.why.p">The original site went down within days of launching. People still need a space to share concerns anonymously and responsibly, without fear. This is an attempt to keep that door open — improved and maintained over time. Suggestions are always welcome.</p>
+        </div>
 
-        <section>
-          <h3>Financial Transparency and Optional Support</h3>
-          <p>Hello, I built this open source project as a single developer and have so far spent about $40 on hosting and maintaining the site and database it displays. I'm not sure what other costs might arise, but I've already put many hours into developing and maintaining it and am willing to continue doing that. My fiance is 9 months pregnant and we are already using credit to maintain our bills and our rental. Beyond that, the transmission for our car just went out.</p>
-          <p>I am committed to keeping this site up, functional, and free. If you want to support that by helping with the costs of the site, or if there's any extra to help me and my family with our bills or other necessities so we can bring our child into a stable environment, it is greatly appreciated.</p>
-          <p>(When things develop, such as the arrival of our baby or when we get into a more stable position, I will update this section to let you guys know.)</p>
-          <div class="support-buttons">
-            <div>
-              <script src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
-              <script>kofiwidget2.init('Support me on Ko-fi', '#72a4f2', 'R5R81YISDW');kofiwidget2.draw();</script>
+        <div class="about-section">
+          <h3 data-i18n="platform.title">How This Site Works</h3> <button class="info-btn" onclick="openModal('modal-about-platform')" aria-label="About this section">i</button>
+          <p data-i18n="platform.desc">SafeVoice is an anonymous, open-source community awareness platform. Here is exactly what happens when you submit, browse, or interact with the site.</p>
+          <div class="accordion" style="margin-top:1rem;">
+            <div class="accordion-item open">
+              <button class="accordion-trigger" onclick="toggleAccordion(this)" type="button" aria-expanded="true"><span data-i18n="platform.acc.submit">Submitting a Report</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button>
+              <div class="accordion-body open"><div class="accordion-content">
+                <p>Reports are stored publicly and include: name, city, country, and category tags. You can submit via the standard form or the <a href="report-flow.html">guided step-by-step wizard</a>.</p>
+                <ul>
+                  <li>Reports are permanent but can be appealed via the platform review process.</li>
+                  <li>You can submit up to 3 reports per hour from the same browser.</li>
+                  <li>A CAPTCHA is required to prevent spam — no data from this is linked to your identity.</li>
+                </ul>
+              </div></div>
             </div>
-            <div>
-              <style>.pp-Y88TMRL6PM2EQ{text-align:center;border:none;border-radius:0.25rem;min-width:11.625rem;padding:0 2rem;height:2.625rem;font-weight:bold;background-color:#FFD140;color:#000000;font-family:"Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.25rem;cursor:pointer;}</style>
-              <form action="https://www.paypal.com/ncp/payment/Y88TMRL6PM2EQ" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
-                <input class="pp-Y88TMRL6PM2EQ" type="submit" value="Support via Paypal" />
-                <img src=https://www.paypalobjects.com/images/Debit_Credit_APM.svg alt="cards" />
-                <section style="font-size: 0.75rem;"> Powered by <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/></section>
-              </form>
+            <div class="accordion-item">
+              <button class="accordion-trigger" onclick="toggleAccordion(this)" type="button" aria-expanded="false"><span data-i18n="platform.acc.privacy">Your Privacy &amp; Anonymity</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button>
+              <div class="accordion-body"><div class="accordion-content">
+                <ul>
+                  <li>No account, email, or password — ever.</li>
+                  <li>We do not store your IP address. A temporary rate-limit check expires in 60 seconds.</li>
+                  <li>Only a random anonymous browser ID is stored in localStorage (for the 3-per-hour limit). You can clear it anytime.</li>
+                  <li>The <code>submitter_uuid</code> in API responses is a random one-time ID with no link to your real identity.</li>
+                </ul>
+              </div></div>
+            </div>
+            <div class="accordion-item">
+              <button class="accordion-trigger" onclick="toggleAccordion(this)" type="button" aria-expanded="false"><span data-i18n="platform.acc.moderation">Moderation &amp; Flagging</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button>
+              <div class="accordion-body"><div class="accordion-content">
+                <p>Community-flagged or spam reports are reviewed and may be removed. The moderated dataset is at <a href="https://api.namehim.app/filtered-reports" rel="noopener noreferrer" target="_blank">api.namehim.app/filtered-reports</a>.</p>
+              </div></div>
+            </div>
+            <div class="accordion-item">
+              <button class="accordion-trigger" onclick="toggleAccordion(this)" type="button" aria-expanded="false"><span data-i18n="platform.acc.appeal">Appealing a Report About You</span><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button>
+              <div class="accordion-body"><div class="accordion-content">
+                <p>Email <a href="mailto:namehim.app@proton.me">namehim.app@proton.me</a> with the name and city as listed, and explain why you believe the report should be reviewed.</p>
+              </div></div>
             </div>
           </div>
-        </section>
-        <section>
-          <p>Contact: namehim.app@proton.me</p>
-        </section>
+          <div style="margin-top:1.5rem;padding:1rem 1.25rem;background:var(--gradient-soft);border:1px solid var(--border);border-radius:var(--radius);font-size:0.875rem;line-height:1.6;color:var(--text-2);">
+            <strong style="display:block;margin-bottom:0.4rem;color:var(--text);" data-i18n="platform.acc.oss">Open source</strong>
+            Full source code at <a href="https://github.com/namehim/namehim" rel="noopener noreferrer" target="_blank">github.com/namehim/namehim</a>. Anyone can audit, fork, or run their own instance.
+          </div>
+        </div>
+
+
       </article>
     </div>
   </main>
 
   <footer>
+    <div class="footer-rainbow-bar"></div>
     <div class="container footer-inner">
-      <div>
-        <a href="about.html">About</a> ·
-        <a href="https://github.com/namehim/namehim">GitHub</a>
+      <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;">
+        <a href="resources.html" data-i18n="footer.resources">Resources</a> ·
+        <a href="about.html" data-i18n="footer.about">About</a> ·
+        <a href="https://github.com/namehim/namehim" rel="noopener noreferrer">GitHub</a>
       </div>
-      <span>Open source</span>
+      <span data-i18n="footer.tagline">SafeVoice — Open source community safety</span>
     </div>
   </footer>
 
+  <script>
+    function openModal(id) {
+      var overlay = document.getElementById(id);
+      if (!overlay) return;
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      var closeBtn = overlay.querySelector('.modal-close');
+      if (closeBtn) closeBtn.focus();
+    }
+    function closeModal(id) {
+      var overlay = document.getElementById(id);
+      if (!overlay) return;
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('click', function(e) {
+      if (e.target && e.target.classList.contains('modal-overlay')) {
+        e.target.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.modal-overlay.open').forEach(function(el) {
+          el.classList.remove('open');
+          document.body.style.overflow = '';
+        });
+      }
+    });
+
+    var SVG_MOON = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>';
+
+    function toggleAccordion(trigger) {
+      var item = trigger.closest('.accordion-item');
+      var body = item.querySelector('.accordion-body');
+      var isOpen = item.classList.contains('open');
+      item.classList.toggle('open', !isOpen);
+      body.classList.toggle('open', !isOpen);
+      trigger.setAttribute('aria-expanded', !isOpen ? 'true' : 'false');
+    }
+    document.querySelectorAll('.accordion-body.open').forEach(function(body) {
+      var item = body.closest('.accordion-item');
+      if (item) item.classList.add('open');
+    });
+    var SVG_SUN  = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>';
+    function toggleTheme() {
+      var html = document.documentElement;
+      var current = html.getAttribute('data-theme');
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var isDark = current === 'dark' || (!current && prefersDark);
+      var next = isDark ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('sv_theme', next);
+      var btn = document.getElementById('theme-toggle');
+      if (btn) btn.innerHTML = next === 'dark' ? SVG_SUN : SVG_MOON;
+    }
+    (function initThemeBtn() {
+      var t = document.documentElement.getAttribute('data-theme');
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var isDark = t === 'dark' || (!t && prefersDark);
+      var btn = document.getElementById('theme-toggle');
+      if (btn) btn.innerHTML = isDark ? SVG_SUN : SVG_MOON;
+    })();
+  </script>
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
-    function formatReportTotal(total) {
-      const parsedTotal = Number(total) || 0;
-      return parsedTotal.toLocaleString('en-US');
-    }
-
-    const loadingDots = ['.', '..', '...'];
-    let loadingDotIndex = 0;
-    let reportCountLoadingInterval = null;
-
-    function startReportCountLoadingAnimation(reportCount) {
-      if (!reportCount || reportCountLoadingInterval) {
-        return;
-      }
-
-      reportCount.textContent = 'Loading reports and counting' + loadingDots[loadingDotIndex];
-      reportCountLoadingInterval = setInterval(() => {
-        loadingDotIndex = (loadingDotIndex + 1) % loadingDots.length;
-        reportCount.textContent = 'Loading reports and counting' + loadingDots[loadingDotIndex];
-      }, 1000);
-    }
-
-    function stopReportCountLoadingAnimation() {
-      if (!reportCountLoadingInterval) {
-        return;
-      }
-
-      clearInterval(reportCountLoadingInterval);
-      reportCountLoadingInterval = null;
-      loadingDotIndex = 0;
-    }
-
-    const SUPABASE_URL = 'https://cmmggaprguusffiphegy.supabase.co';
-    const SUPABASE_ANON_KEY = 'sb_publishable_G9Doh6gciyFVT1NDum55ZA_8ryL3fOw';
-    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-    async function loadReportCount() {
+    (function() {
+      const SUPABASE_URL = 'https://rdxsvvoyqzvymcjqyjvx.supabase.co';
+      const SUPABASE_ANON_KEY = 'sb_publishable_QppckTiCmGyI4Z-_dAqE2A_PT2HN6dq';
+      const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       const reportCount = document.getElementById('report-count');
-      if (!reportCount) {
-        return;
-      }
-      startReportCountLoadingAnimation(reportCount);
 
-      const WORKER_URL = 'https://api.namehim.app/filtered-reports';
-
-      try {
-        const response = await fetch(WORKER_URL);
-        if (!response.ok) {
-          throw new Error('Worker returned ' + response.status);
-        }
-
-        const reports = await response.json();
-        if (!Array.isArray(reports)) {
-          throw new Error('Worker did not return an array');
-        }
-
-        let totalReports = reports.length;
-
+      async function loadReportCount() {
+        if (!reportCount) return;
+        reportCount.textContent = 'Loading…';
         try {
-          const { count, error: countError } = await supabaseClient
-            .from('reports')
-            .select('*', { count: 'exact', head: true });
-
-          if (countError) {
-            throw countError;
-          }
-
-          totalReports = Math.max(totalReports, Number(count) || 0);
-        } catch (countFallbackError) {
-          console.warn('Unable to fetch exact report count, using worker total:', countFallbackError);
+          const response = await fetch('https://api.namehim.app/filtered-reports');
+          if (!response.ok) throw new Error('Worker returned ' + response.status);
+          const reports = await response.json();
+          if (!Array.isArray(reports)) throw new Error('Not an array');
+          let total = reports.length;
+          try {
+            const { count } = await supabaseClient.from('reports').select('*', { count: 'exact', head: true });
+            total = Math.max(total, Number(count) || 0);
+          } catch (_) {}
+          reportCount.textContent = total.toLocaleString('en-US') + ' reports';
+        } catch (e) {
+          reportCount.textContent = '';
         }
-
-        reportCount.textContent = formatReportTotal(totalReports) + ' reports and counting...';
-      } catch (error) {
-        console.error('Failed to load report count:', error);
-        reportCount.textContent = '0 reports and counting...';
-      } finally {
-        stopReportCountLoadingAnimation();
       }
-    }
-
-    loadReportCount();
+      loadReportCount();
+    })();
   </script>
+
+  <!-- ══ INFO MODALS: About page ══ -->
+  <div id="modal-about-what" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-about-what')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.about.what.title">What SafeVoice Is</h2><div data-i18n-html="modal.about.what.body"></div></div></div>
+  <div id="modal-about-name" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-about-name')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.about.name.title">The Original Name</h2><div data-i18n-html="modal.about.name.body"></div></div></div>
+  <div id="modal-about-use" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-about-use')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.about.use.title">How to Use This Site</h2><div data-i18n-html="modal.about.use.body"></div></div></div>
+  <div id="modal-about-legal" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-about-legal')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.about.legal.title">Legal &amp; Safety Notice</h2><div data-i18n-html="modal.about.legal.body"></div></div></div>
+  <div id="modal-about-oss" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-about-oss')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.about.oss.title">Open Source &amp; Transparency</h2><div data-i18n-html="modal.about.oss.body"></div></div></div>
+  <div id="modal-about-privacy" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-about-privacy')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.about.privacy.title">Privacy &amp; Data Collection</h2><div data-i18n-html="modal.about.privacy.body"></div></div></div>
+  <div id="modal-about-build" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-about-build')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.about.build.title">Build Your Own</h2><div data-i18n-html="modal.about.build.body"></div></div></div>
+  <div id="modal-about-why" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-about-why')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.about.why.title">Why This Exists</h2><div data-i18n-html="modal.about.why.body"></div></div></div>
+  <div id="modal-about-platform" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-about-platform')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.res.platform.title">How This Site Works</h2><div data-i18n-html="modal.res.platform.body"></div></div></div>
+
 </body>
 </html>

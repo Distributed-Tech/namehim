@@ -1,0 +1,4 @@
+# Local dev database (created by local-server.js)
+local.db
+local.db-shm
+local.db-wal

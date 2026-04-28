@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>(function(){var t=localStorage.getItem('sv_theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);})()</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guided Report Flow | SafeVoice</title>
+  <meta name="description" content="Submit a community safety report step-by-step with the SafeVoice guided flow." />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="i18n.js"></script>
+</head>
+<body>
+
+  <div class="disclaimer">
+    <span data-i18n="disclaimer.submit">All reports are public and permanent. Submit only honest, good-faith reports.</span>
+  </div>
+
+  <header>
+    <div class="container header-inner">
+      <div class="site-logo">
+        <div class="site-title-wrap">
+          <h1><a class="site-title-link" href="index.html#/browse"><span class="site-name-gradient">SafeVoice</span></a></h1>
+        </div>
+      </div>
+      <div class="header-right">
+        <nav>
+          <a href="index.html#/browse" class="nav-link" data-i18n="nav.browse">Browse</a>
+          <a href="index.html#/submit" class="nav-link active" data-i18n="nav.submit">Submit</a>
+          <a href="index.html#/community" class="nav-link" data-i18n="nav.community">Community</a>
+          <a href="resources.html" class="nav-link" data-i18n="nav.resources">Resources</a>
+          <a href="about.html" class="nav-link" data-i18n="nav.about">About</a>
+        </nav>
+        <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light mode"></button>
+        <button class="lang-toggle" id="lang-toggle" onclick="svToggleLanguage()" aria-label="Cambiar a Español" lang="es">ES</button>
+        <button class="community-exit-btn" type="button"
+          title="Quick exit: leaves this page immediately"
+          onclick="window.location.href='https://weather.com'"
+          aria-label="Exit quickly">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          <span data-i18n="flow.exit.btn">Exit quickly</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container wizard-outer">
+      <div class="wizard-container">
+
+        <!-- Progress indicator -->
+        <div class="wizard-progress" id="wizard-progress">
+          <div class="wstep-wrap active" id="ws-1">
+            <div class="wstep-dot">1</div>
+            <div class="wstep-label" data-i18n="flow.step1.label">Before you start</div>
+          </div>
+          <div class="wconnector" id="wc-1"></div>
+          <div class="wstep-wrap" id="ws-2">
+            <div class="wstep-dot">2</div>
+            <div class="wstep-label" data-i18n="flow.step2.label">What happened</div>
+          </div>
+          <div class="wconnector" id="wc-2"></div>
+          <div class="wstep-wrap" id="ws-3">
+            <div class="wstep-dot">3</div>
+            <div class="wstep-label" data-i18n="flow.step3.label">About the person</div>
+          </div>
+          <div class="wconnector" id="wc-3"></div>
+          <div class="wstep-wrap" id="ws-4">
+            <div class="wstep-dot">4</div>
+            <div class="wstep-label" data-i18n="flow.step4.label">Your experience</div>
+          </div>
+          <div class="wconnector" id="wc-4"></div>
+          <div class="wstep-wrap" id="ws-5">
+            <div class="wstep-dot">5</div>
+            <div class="wstep-label" data-i18n="flow.step5.label">Review &amp; submit</div>
+          </div>
+        </div>
+
+        <!-- ══ STEP 1: Before you start ══ -->
+        <div class="wizard-pane active" id="step-1">
+          <div class="wizard-card">
+            <div class="wizard-card-title">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+              <span data-i18n="flow.step1.title">Before you start</span> <button class="info-btn" onclick="openModal('modal-flow-start')" aria-label="About this step">i</button>
+            </div>
+            <p class="wizard-subtitle" data-i18n="flow.step1.subtitle">Please read this carefully. SafeVoice is a public community safety awareness tool. What you submit will be visible to everyone.</p>
+
+            <div style="display:flex;flex-direction:column;gap:0.75rem;margin-bottom:1.5rem;">
+              <div style="display:flex;align-items:flex-start;gap:0.875rem;padding:1rem;background:var(--bg-2);border:1.5px solid var(--border);border-radius:var(--radius);">
+                <div style="width:2rem;height:2rem;border-radius:var(--radius-full);background:var(--teal-soft);color:var(--teal);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <div style="font-size:0.875rem;line-height:1.6;" data-i18n-html="flow.step1.card1"><strong>Reports are permanent.</strong> Once submitted, your report is publicly visible and cannot be removed by you. The subject may appeal through the platform's review process.</div>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:0.875rem;padding:1rem;background:var(--bg-2);border:1.5px solid var(--border);border-radius:var(--radius);">
+                <div style="width:2rem;height:2rem;border-radius:var(--radius-full);background:var(--teal-soft);color:var(--teal);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <div style="font-size:0.875rem;line-height:1.6;" data-i18n-html="flow.step1.card2"><strong>Honesty is required.</strong> Submit only reports based on genuine experiences. False reports undermine community safety and may expose you to legal liability.</div>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:0.875rem;padding:1rem;background:var(--bg-2);border:1.5px solid var(--border);border-radius:var(--radius);">
+                <div style="width:2rem;height:2rem;border-radius:var(--radius-full);background:var(--teal-soft);color:var(--teal);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                </div>
+                <div style="font-size:0.875rem;line-height:1.6;" data-i18n-html="flow.step1.card3"><strong>Your anonymity is protected.</strong> No account, email, or IP address is stored. A CAPTCHA is required to prevent spam — it is not linked to your identity.</div>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:0.875rem;padding:1rem;background:var(--bg-2);border:1.5px solid var(--border);border-radius:var(--radius);">
+                <div style="width:2rem;height:2rem;border-radius:var(--radius-full);background:var(--teal-soft);color:var(--teal);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.36 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                </div>
+                <div style="font-size:0.875rem;line-height:1.6;" data-i18n-html="flow.step1.card4"><strong>Need support first?</strong> If you're in crisis or need guidance, visit <a href="resources.html#/hotlines">our resources page</a> before submitting. Trained advocates can help you decide what to do.</div>
+              </div>
+            </div>
+
+            <div style="display:flex;align-items:flex-start;gap:0.65rem;padding:0.875rem 1rem;background:var(--violet-soft);border:1.5px solid var(--border-2);border-radius:var(--radius);margin-bottom:1.75rem;">
+              <label style="display:flex;align-items:flex-start;gap:0.6rem;cursor:pointer;font-size:0.875rem;line-height:1.55;width:100%;">
+                <input type="checkbox" id="consent-check" style="width:auto;margin-top:0.2rem;accent-color:var(--violet);flex-shrink:0;" onchange="document.getElementById('btn-step1-next').disabled = !this.checked;" />
+                <span data-i18n="flow.step1.consent">I understand that this report will be publicly visible and permanent, and I am submitting it in good faith based on my genuine experience.</span>
+              </label>
+            </div>
+
+            <div class="wizard-nav" style="border-top:none;padding-top:0;margin-top:0;justify-content:flex-end;">
+              <div class="wizard-nav-right">
+                <a href="index.html#/submit" class="btn-ghost" style="text-decoration:none;display:inline-flex;align-items:center;gap:0.4rem;border:1.5px solid var(--border);color:var(--muted);padding:0.6rem 1rem;border-radius:var(--radius-sm);font-size:0.875rem;font-weight:500;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+                  <span data-i18n="flow.step1.std-form">Use standard form instead</span>
+                </a>
+                <button class="primary" id="btn-step1-next" onclick="goStep(2)" disabled style="display:flex;align-items:center;gap:0.45rem;">
+                  <span data-i18n="flow.btn.continue">Continue</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ STEP 2: What happened ══ -->
+        <div class="wizard-pane" id="step-2">
+          <div class="wizard-card">
+            <div class="wizard-card-title">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+              <span data-i18n="flow.step2.title">What happened?</span> <button class="info-btn" onclick="openModal('modal-flow-what')" aria-label="About this step">i</button>
+            </div>
+            <p class="wizard-subtitle" data-i18n="flow.step2.subtitle">Select all categories that apply to your experience. You can choose multiple. These are community awareness classifications, not legal definitions.</p>
+
+            <div class="category-grid" id="category-grid">
+              <!-- populated by JS -->
+            </div>
+            <p id="cat-error" class="message error hidden" style="margin-top:0.75rem;" data-i18n="flow.step2.error">Please select at least one category.</p>
+
+            <div class="wizard-nav">
+              <button class="btn-ghost" onclick="goStep(1)" type="button" style="display:flex;align-items:center;gap:0.4rem;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+                <span data-i18n="flow.btn.back">Back</span>
+              </button>
+              <div class="wizard-nav-right">
+                <span id="cat-count" style="font-size:0.8rem;color:var(--muted);">0 selected</span>
+                <button class="primary" onclick="validateStep2()" type="button" style="display:flex;align-items:center;gap:0.45rem;">
+                  <span data-i18n="flow.btn.continue">Continue</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ STEP 3: About the person ══ -->
+        <div class="wizard-pane" id="step-3">
+          <div class="wizard-card">
+            <div class="wizard-card-title">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <span data-i18n="flow.step3.title">About the person</span> <button class="info-btn" onclick="openModal('modal-flow-who')" aria-label="About this step">i</button>
+            </div>
+            <p class="wizard-subtitle" data-i18n="flow.step3.subtitle">Enter the person's name and location. Only letters A–Z are accepted to protect privacy. All fields with * are required.</p>
+
+            <div class="row">
+              <label for="wf-name" data-i18n="flow.step3.name.label">Full name *</label>
+              <input type="text" id="wf-name" maxlength="20" data-i18n-placeholder="flow.step3.name.placeholder" placeholder="First and last name" autocomplete="off" oninput="sanitizeLetters(this)" />
+              <p id="wf-name-error" class="message error hidden" data-i18n="flow.step3.name.error">Name is required (letters only, 2–20 characters).</p>
+            </div>
+
+            <div class="row">
+              <label for="wf-city" data-i18n="flow.step3.city.label">City *</label>
+              <input type="text" id="wf-city" maxlength="20" data-i18n-placeholder="flow.step3.city.placeholder" placeholder="City where they reside or where the incident occurred" autocomplete="off" oninput="sanitizeLetters(this)" />
+              <p id="wf-city-error" class="message error hidden" data-i18n="flow.step3.city.error">City is required (letters only).</p>
+            </div>
+
+            <div class="row">
+              <label for="wf-country" data-i18n="flow.step3.country.label">Country *</label>
+              <select id="wf-country">
+                <option value="" data-i18n="flow.step3.country.default">Select a country</option>
+                <option>Afghanistan</option><option>Albania</option><option>Algeria</option><option>Andorra</option><option>Angola</option><option>Argentina</option><option>Armenia</option><option>Australia</option><option>Austria</option><option>Azerbaijan</option><option>Bahamas</option><option>Bahrain</option><option>Bangladesh</option><option>Belarus</option><option>Belgium</option><option>Bolivia</option><option>Bosnia and Herzegovina</option><option>Brazil</option><option>Bulgaria</option><option>Canada</option><option>Chile</option><option>China</option><option>Colombia</option><option>Croatia</option><option>Cuba</option><option>Cyprus</option><option>Czechia</option><option>Denmark</option><option>Dominican Republic</option><option>Ecuador</option><option>Egypt</option><option>Estonia</option><option>Ethiopia</option><option>Finland</option><option>France</option><option>Georgia</option><option>Germany</option><option>Ghana</option><option>Greece</option><option>Guatemala</option><option>Hungary</option><option>Iceland</option><option>India</option><option>Indonesia</option><option>Iran</option><option>Iraq</option><option>Ireland</option><option>Italy</option><option>Jamaica</option><option>Japan</option><option>Jordan</option><option>Kazakhstan</option><option>Kenya</option><option>Latvia</option><option>Lebanon</option><option>Lithuania</option><option>Luxembourg</option><option>Malaysia</option><option>Mexico</option><option>Morocco</option><option>Netherlands</option><option>New Zealand</option><option>Nigeria</option><option>Norway</option><option>Pakistan</option><option>Palestine</option><option>Panama</option><option>Peru</option><option>Philippines</option><option>Poland</option><option>Portugal</option><option>Republic of Korea</option><option>Romania</option><option>Russian Federation</option><option>Saudi Arabia</option><option>Senegal</option><option>Serbia</option><option>Singapore</option><option>Slovakia</option><option>Slovenia</option><option>South Africa</option><option>Spain</option><option>Sri Lanka</option><option>Sweden</option><option>Switzerland</option><option>Thailand</option><option>Trinidad and Tobago</option><option>Tunisia</option><option>Turkiye</option><option>Uganda</option><option>Ukraine</option><option>United Arab Emirates</option><option>United Kingdom</option><option>USA</option><option>Uruguay</option><option>Venezuela</option><option>Viet Nam</option><option>Yemen</option><option>Zimbabwe</option>
+              </select>
+              <p id="wf-country-error" class="message error hidden" data-i18n="flow.step3.country.error">Please select a country.</p>
+            </div>
+
+            <div class="row">
+              <label for="wf-state" data-i18n="flow.step3.state.label">State / Province (optional)</label>
+              <input type="text" id="wf-state" maxlength="20" data-i18n-placeholder="flow.step3.state.placeholder" placeholder="State or province (optional)" autocomplete="off" oninput="sanitizeLetters(this)" />
+            </div>
+
+            <div class="wizard-nav">
+              <button class="btn-ghost" onclick="goStep(2)" type="button" style="display:flex;align-items:center;gap:0.4rem;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+                <span data-i18n="flow.btn.back">Back</span>
+              </button>
+              <button class="primary" onclick="validateStep3()" type="button" style="display:flex;align-items:center;gap:0.45rem;">
+                <span data-i18n="flow.btn.continue">Continue</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ STEP 4: Description ══ -->
+        <div class="wizard-pane" id="step-4">
+          <div class="wizard-card">
+            <div class="wizard-card-title">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              <span data-i18n="flow.step4.title">Your experience</span> <button class="info-btn" onclick="openModal('modal-flow-exp')" aria-label="About this step">i</button>
+            </div>
+            <p class="wizard-subtitle" data-i18n="flow.step4.subtitle">Describe what happened in your own words. Be specific but avoid including identifying information about yourself. This field is optional but helps the community understand the nature of your concern.</p>
+
+            <div class="row">
+              <label for="wf-description" data-i18n="flow.step4.desc.label">Description (optional, max 1000 characters)</label>
+              <textarea id="wf-description" rows="7" maxlength="1000" data-i18n-placeholder="flow.step4.desc.placeholder" placeholder="Describe what happened. You may include dates, context, and the nature of the behavior. Do not include your own identifying information." style="min-height:10rem;"></textarea>
+              <p style="font-size:0.75rem;color:var(--muted);margin-top:0.35rem;text-align:right;" id="desc-counter">0 / 1000</p>
+            </div>
+
+            <div style="padding:0.875rem 1rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius);font-size:0.8rem;color:var(--text-2);line-height:1.55;margin-bottom:0.5rem;">
+              <strong style="color:var(--text);" data-i18n="flow.step4.tips.title">Tips for a helpful report:</strong> <span data-i18n="flow.step4.tips.text">Include approximate dates, describe specific behaviors (not just "he was abusive"), and mention any patterns. Avoid names of other people who are not the subject of the report.</span>
+            </div>
+
+            <div class="wizard-nav">
+              <button class="btn-ghost" onclick="goStep(3)" type="button" style="display:flex;align-items:center;gap:0.4rem;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+                <span data-i18n="flow.btn.back">Back</span>
+              </button>
+              <button class="primary" onclick="goStep(5)" type="button" style="display:flex;align-items:center;gap:0.45rem;">
+                <span data-i18n="flow.btn.review">Review</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ STEP 5: Review & Submit ══ -->
+        <div class="wizard-pane" id="step-5">
+          <div class="wizard-card">
+            <div class="wizard-card-title">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+              <span data-i18n="flow.step5.title">Review &amp; Submit</span> <button class="info-btn" onclick="openModal('modal-flow-review')" aria-label="About this step">i</button>
+            </div>
+            <p class="wizard-subtitle" data-i18n="flow.step5.subtitle">Please review your report carefully before submitting. Once submitted, it cannot be changed or removed by you.</p>
+
+            <div class="wizard-review-table" id="review-table">
+              <!-- populated by JS -->
+            </div>
+
+            <!-- ⚠️ TODO BEFORE PRODUCTION: Replace the Turnstile sitekey below with your own
+                 from dash.cloudflare.com → Turnstile → Add site. The current key belongs to
+                 the original namehim.app project and will not work on a different domain.
+                 Also add server-side token verification via a Cloudflare Worker or Supabase
+                 Edge Function — client-side Turnstile alone can be bypassed. -->
+            <div class="row" style="margin-bottom:1.25rem;">
+              <div class="cf-turnstile" data-sitekey="0x4AAAAAADCC51BDmfY6JgSc" data-theme="auto"></div>
+              <p id="wf-turnstile-warning" class="warning hidden" data-i18n="flow.step5.captcha.warning">Please complete the CAPTCHA.</p>
+            </div>
+
+            <p id="wf-rate-warning" class="message error hidden" data-i18n="flow.step5.rate-limit">You have reached the limit of 3 submissions in the last hour. Please try again later.</p>
+            <p id="wf-submit-message" class="message"></p>
+
+            <div class="wizard-nav">
+              <button class="btn-ghost" onclick="goStep(4)" type="button" style="display:flex;align-items:center;gap:0.4rem;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+                <span data-i18n="flow.btn.edit">Edit</span>
+              </button>
+              <button class="primary" id="wf-submit-btn" onclick="submitWizard()" type="button" style="display:flex;align-items:center;gap:0.45rem;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                <span data-i18n="flow.btn.submit">Submit Report</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ STEP 6: Success ══ -->
+        <div class="wizard-pane" id="step-success">
+          <div class="wizard-card" style="text-align:center;padding:3rem 2rem;">
+            <div style="width:4rem;height:4rem;border-radius:var(--radius-full);background:var(--teal-soft);color:var(--teal);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <h2 style="font-size:1.4rem;margin-bottom:0.5rem;" data-i18n="flow.success.title">Report submitted</h2>
+            <p style="color:var(--text-2);font-size:0.9rem;line-height:1.6;max-width:440px;margin:0 auto 2rem;" data-i18n="flow.success.desc">Thank you for contributing to community safety. Your report is now publicly visible in the browse listing.</p>
+            <div style="display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;">
+              <a href="index.html#/browse" class="primary" style="text-decoration:none;display:inline-flex;align-items:center;gap:0.45rem;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <span data-i18n="flow.success.browse">Browse reports</span>
+              </a>
+              <a href="resources.html" style="text-decoration:none;display:inline-flex;align-items:center;gap:0.45rem;border:1.5px solid var(--border);padding:0.7rem 1.75rem;border-radius:var(--radius-full);font-size:0.9rem;font-weight:600;color:var(--text);"><span data-i18n="flow.success.resources">Resources &amp; support</span></a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-rainbow-bar"></div>
+    <div class="container footer-inner">
+      <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;">
+        <a href="resources.html" data-i18n="footer.resources">Resources</a> ·
+        <a href="about.html" data-i18n="footer.about">About</a> ·
+        <a href="https://github.com/namehim/namehim" rel="noopener noreferrer">GitHub</a>
+      </div>
+      <span data-i18n="footer.tagline">SafeVoice — Open source community safety</span>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+  <script>
+    /* ── Theme ──────────────────────────────────────────────── */
+    var SVG_MOON = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>';
+    var SVG_SUN  = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>';
+
+    function toggleTheme() {
+      var html = document.documentElement;
+      var current = html.getAttribute('data-theme');
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var isDark = current === 'dark' || (!current && prefersDark);
+      var next = isDark ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('sv_theme', next);
+      var btn = document.getElementById('theme-toggle');
+      if (btn) btn.innerHTML = next === 'dark' ? SVG_SUN : SVG_MOON;
+    }
+    (function initThemeBtn() {
+      var t = document.documentElement.getAttribute('data-theme');
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var isDark = t === 'dark' || (!t && prefersDark);
+      var btn = document.getElementById('theme-toggle');
+      if (btn) btn.innerHTML = isDark ? SVG_SUN : SVG_MOON;
+    })();
+
+    /* ── Constants ──────────────────────────────────────────── */
+    var SUPABASE_URL = 'https://rdxsvvoyqzvymcjqyjvx.supabase.co';
+    var SUPABASE_ANON_KEY = 'sb_publishable_QppckTiCmGyI4Z-_dAqE2A_PT2HN6dq';
+    var MAX_SUBMISSIONS_PER_HOUR = 3;
+    var RATE_LIMIT_STORAGE_KEY = 'submission_timestamps';
+    var SUBMITTER_ID_KEY = 'submitter_id';
+
+    var supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    var CATEGORIES = [
+      { id: 'emotional abuse',    desc: 'Verbal, psychological, or emotional manipulation' },
+      { id: 'physical abuse',     desc: 'Physical violence or threats thereof' },
+      { id: 'stalking',           desc: 'Repeated unwanted contact, surveillance, or following' },
+      { id: 'sexual assault',     desc: 'Non-consensual sexual contact' },
+      { id: 'sexual harassment',  desc: 'Unwanted sexual advances or conduct in workplace/school' },
+      { id: 'harrassment',        desc: 'Persistent unwanted conduct causing distress' },
+      { id: 'rape',               desc: 'Non-consensual penetration' },
+      { id: 'pedo',               desc: 'Sexual abuse or exploitation of minors' }
+    ];
+
+    var selectedCategories = new Set();
+    var currentStep = 1;
+
+    /* ── Build category grid ────────────────────────────────── */
+    (function buildCategoryGrid() {
+      var grid = document.getElementById('category-grid');
+      CATEGORIES.forEach(function(cat) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'category-card';
+        btn.dataset.id = cat.id;
+        btn.innerHTML = '<span class="category-card-name">' + escHtml(cat.id.charAt(0).toUpperCase() + cat.id.slice(1)) + '</span><span class="category-card-desc">' + escHtml(cat.desc) + '</span>';
+        btn.onclick = function() {
+          if (selectedCategories.has(cat.id)) {
+            selectedCategories.delete(cat.id);
+            btn.classList.remove('selected');
+            btn.setAttribute('aria-pressed', 'false');
+          } else {
+            selectedCategories.add(cat.id);
+            btn.classList.add('selected');
+            btn.setAttribute('aria-pressed', 'true');
+          }
+          var cnt = document.getElementById('cat-count');
+          if (cnt) cnt.textContent = svT('flow.step2.count').replace('{n}', selectedCategories.size);
+        };
+        btn.setAttribute('aria-pressed', 'false');
+        grid.appendChild(btn);
+      });
+    })();
+
+    /* ── Modal system ────────────────────────────────────────── */
+    function openModal(id) {
+      var overlay = document.getElementById(id);
+      if (!overlay) return;
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      var closeBtn = overlay.querySelector('.modal-close');
+      if (closeBtn) closeBtn.focus();
+    }
+    function closeModal(id) {
+      var overlay = document.getElementById(id);
+      if (!overlay) return;
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('click', function(e) {
+      if (e.target && e.target.classList.contains('modal-overlay')) {
+        e.target.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.modal-overlay.open').forEach(function(el) {
+          el.classList.remove('open');
+          document.body.style.overflow = '';
+        });
+      }
+    });
+
+    /* ── Step navigation ────────────────────────────────────── */
+    function goStep(n) {
+      // hide all panes
+      document.querySelectorAll('.wizard-pane').forEach(function(p) { p.classList.remove('active'); });
+      var pane = document.getElementById('step-' + n) || document.getElementById('step-success');
+      if (pane) pane.classList.add('active');
+      currentStep = n;
+      // update progress dots
+      for (var i = 1; i <= 5; i++) {
+        var dot = document.getElementById('ws-' + i);
+        var conn = document.getElementById('wc-' + i);
+        if (dot) {
+          dot.classList.remove('active', 'done');
+          if (i < n) dot.classList.add('done');
+          else if (i === n) dot.classList.add('active');
+          // update checkmark for done steps
+          var dotEl = dot.querySelector('.wstep-dot');
+          if (dotEl) {
+            if (i < n) {
+              dotEl.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>';
+            } else {
+              dotEl.textContent = i;
+            }
+          }
+        }
+        if (conn) conn.classList.toggle('done', i < n);
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* ── Step 2 validate ───────────────────────────────────── */
+    function validateStep2() {
+      var err = document.getElementById('cat-error');
+      if (selectedCategories.size === 0) {
+        err.classList.remove('hidden');
+        return;
+      }
+      err.classList.add('hidden');
+      goStep(3);
+    }
+
+    /* ── Step 3 validate ───────────────────────────────────── */
+    function validateStep3() {
+      var name = document.getElementById('wf-name').value.trim();
+      var city = document.getElementById('wf-city').value.trim();
+      var country = document.getElementById('wf-country').value;
+      var nameErr = document.getElementById('wf-name-error');
+      var cityErr = document.getElementById('wf-city-error');
+      var countryErr = document.getElementById('wf-country-error');
+      var ok = true;
+
+      if (!name || name.length < 2 || !/^[a-zA-Z\s\-']+$/.test(name)) {
+        nameErr.classList.remove('hidden'); ok = false;
+      } else { nameErr.classList.add('hidden'); }
+
+      if (!city || !/^[a-zA-Z\s\-']+$/.test(city)) {
+        cityErr.classList.remove('hidden'); ok = false;
+      } else { cityErr.classList.add('hidden'); }
+
+      if (!country) {
+        countryErr.classList.remove('hidden'); ok = false;
+      } else { countryErr.classList.add('hidden'); }
+
+      if (ok) goStep(4);
+    }
+
+    /* ── Step 5 populate review ────────────────────────────── */
+    function populateReview() {
+      var table = document.getElementById('review-table');
+      var name = document.getElementById('wf-name').value.trim();
+      var city = document.getElementById('wf-city').value.trim();
+      var country = document.getElementById('wf-country').value;
+      var state = document.getElementById('wf-state').value.trim();
+      var desc = document.getElementById('wf-description').value.trim();
+      var cats = Array.from(selectedCategories).map(function(c) { return c.charAt(0).toUpperCase() + c.slice(1); }).join(', ');
+      var location = city + (state ? ', ' + state : '') + ', ' + country;
+
+      table.innerHTML = [
+        makeReviewRow(svT('flow.review.name'), escHtml(name) || '<span style="color:var(--muted);">(' + svT('flow.review.not-provided') + ')</span>'),
+        makeReviewRow(svT('flow.review.location'), escHtml(location)),
+        makeReviewRow(svT('flow.review.categories'), escHtml(cats) || '<span style="color:var(--muted);">(' + svT('flow.review.not-provided') + ')</span>'),
+        makeReviewRow(svT('flow.review.description'), desc ? '<span style="white-space:pre-wrap">' + escHtml(desc) + '</span>' : '<span style="color:var(--muted);">' + svT('flow.review.no-desc') + '</span>')
+      ].join('');
+    }
+
+    function makeReviewRow(label, value) {
+      return '<div class="wizard-review-row"><div class="wizard-review-label">' + label + '</div><div class="wizard-review-value">' + value + '</div></div>';
+    }
+
+    // Override goStep to populate review when reaching step 5
+    var _goStepOrig = goStep;
+    goStep = function(n) {
+      _goStepOrig(n);
+      if (n === 5) populateReview();
+    };
+
+    /* ── Description counter ────────────────────────────────── */
+    var descTextarea = document.getElementById('wf-description');
+    if (descTextarea) {
+      descTextarea.addEventListener('input', function() {
+        var counter = document.getElementById('desc-counter');
+        if (counter) counter.textContent = descTextarea.value.length + ' / 1000';
+      });
+    }
+
+    /* ── Sanitize inputs ────────────────────────────────────── */
+    function sanitizeLetters(input) {
+      // allow letters, spaces, hyphens, apostrophes only
+      input.value = input.value.replace(/[^a-zA-Z\s\-']/g, '');
+    }
+
+    function escHtml(str) {
+      return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    /* ── Rate limiting ──────────────────────────────────────── */
+    function checkRateLimit() {
+      var now = Date.now();
+      var stored = JSON.parse(localStorage.getItem(RATE_LIMIT_STORAGE_KEY) || '[]');
+      var recent = stored.filter(function(t) { return now - t < 3600000; });
+      return recent.length < MAX_SUBMISSIONS_PER_HOUR ? recent : null;
+    }
+
+    function recordSubmission() {
+      var now = Date.now();
+      var stored = JSON.parse(localStorage.getItem(RATE_LIMIT_STORAGE_KEY) || '[]');
+      var recent = stored.filter(function(t) { return now - t < 3600000; });
+      recent.push(now);
+      localStorage.setItem(RATE_LIMIT_STORAGE_KEY, JSON.stringify(recent));
+    }
+
+    function getSubmitterId() {
+      var id = localStorage.getItem(SUBMITTER_ID_KEY);
+      if (!id) { id = Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2); localStorage.setItem(SUBMITTER_ID_KEY, id); }
+      return id;
+    }
+
+    /* ── Submit wizard ──────────────────────────────────────── */
+    function submitWizard() {
+      var rateOk = checkRateLimit();
+      var rateWarn = document.getElementById('wf-rate-warning');
+      var turnstileWarn = document.getElementById('wf-turnstile-warning');
+      var submitBtn = document.getElementById('wf-submit-btn');
+      var submitMsg = document.getElementById('wf-submit-message');
+
+      if (rateOk === null) { rateWarn.classList.remove('hidden'); return; }
+      rateWarn.classList.add('hidden');
+
+      // Turnstile token
+      var token = '';
+      var responses = document.querySelectorAll('[name="cf-turnstile-response"]');
+      if (responses.length > 0) token = responses[responses.length - 1].value;
+      if (!token) { turnstileWarn.classList.remove('hidden'); return; }
+      turnstileWarn.classList.add('hidden');
+
+      var name = document.getElementById('wf-name').value.trim();
+      var city = document.getElementById('wf-city').value.trim();
+      var country = document.getElementById('wf-country').value;
+      var state = document.getElementById('wf-state').value.trim();
+      var description = document.getElementById('wf-description').value.trim();
+      var categories = Array.from(selectedCategories);
+
+      submitBtn.disabled = true;
+      submitMsg.textContent = 'Submitting…';
+      submitMsg.className = 'message';
+
+      supabaseClient.from('reports').insert([{
+        name: name,
+        city: city,
+        state: state || null,
+        country: country,
+        categories: categories,
+        description: description || null,
+        submitter_uuid: getSubmitterId(),
+        turnstile_token: token
+      }]).then(function(result) {
+        if (result.error) {
+          submitBtn.disabled = false;
+          submitMsg.textContent = 'Error: ' + (result.error.message || 'Submission failed. Please try again.');
+          submitMsg.className = 'message error';
+        } else {
+          recordSubmission();
+          // Show success step
+          document.querySelectorAll('.wizard-pane').forEach(function(p) { p.classList.remove('active'); });
+          document.getElementById('step-success').classList.add('active');
+          // Mark all progress done
+          for (var i = 1; i <= 5; i++) {
+            var dot = document.getElementById('ws-' + i);
+            var conn = document.getElementById('wc-' + i);
+            if (dot) {
+              dot.classList.remove('active'); dot.classList.add('done');
+              var dotEl = dot.querySelector('.wstep-dot');
+              if (dotEl) dotEl.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+            }
+            if (conn) conn.classList.add('done');
+          }
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+    }
+  </script>
+
+  <!-- ══ INFO MODALS: Report flow ══ -->
+  <div id="modal-flow-start" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-flow-start')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.flow.start.title">Before You Start</h2><div data-i18n-html="modal.flow.start.body"></div></div></div>
+  <div id="modal-flow-what" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-flow-what')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.flow.what.title">What Happened — Categories</h2><div data-i18n-html="modal.flow.what.body"></div></div></div>
+  <div id="modal-flow-who" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-flow-who')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.flow.who.title">About the Person</h2><div data-i18n-html="modal.flow.who.body"></div></div></div>
+  <div id="modal-flow-exp" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-flow-exp')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.flow.exp.title">Your Experience</h2><div data-i18n-html="modal.flow.exp.body"></div></div></div>
+  <div id="modal-flow-review" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-flow-review')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.flow.review.title">Review &amp; Submit</h2><div data-i18n-html="modal.flow.review.body"></div></div></div>
+
+</body>
+</html>

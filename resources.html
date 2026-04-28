@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>(function(){var t=localStorage.getItem('sv_theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);})()</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resources &amp; Support | Recursos y Apoyo | SafeVoice</title>
+  <meta name="description" content="Education, crisis hotlines, legal options, LGBTQ+ resources, and emotional support for survivors and community members." />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#0d9488" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Resources &amp; Support | SafeVoice" />
+  <meta property="og:description" content="Hotlines, legal guidance, LGBTQ+ resources, and emotional support for survivors." />
+  <meta property="og:site_name" content="SafeVoice" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="shortcut icon" href="favicon.svg" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="i18n.js"></script>
+  <style>
+    @media print {
+      header, footer, .disclaimer, .resource-tab-nav, .resource-tab-btn:not(.active) { display: none !important; }
+      .resource-pane { display: block !important; }
+      body { background: white; color: black; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="disclaimer">
+    <span data-i18n="disclaimer.resources">Resources listed here are for informational purposes only. If you are in immediate danger, call 911 now.</span>
+  </div>
+
+  <header>
+    <div class="container header-inner">
+      <div class="site-logo">
+        <div class="site-title-wrap">
+          <h1><a class="site-title-link" href="index.html#/browse"><span class="site-name-gradient">SafeVoice</span></a></h1>
+        </div>
+      </div>
+      <div class="header-right">
+        <nav>
+          <a href="index.html#/browse" class="nav-link" data-i18n="nav.browse">Browse</a>
+          <a href="index.html#/submit" class="nav-link" data-i18n="nav.submit">Submit</a>
+          <a href="index.html#/community" class="nav-link" data-i18n="nav.community">Community</a>
+          <a href="resources.html" class="nav-link active" data-i18n="nav.resources">Resources</a>
+          <a href="about.html" class="nav-link" data-i18n="nav.about">About</a>
+        </nav>
+        <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light mode"></button>
+        <button class="lang-toggle" id="lang-toggle" onclick="svToggleLanguage()" aria-label="Cambiar a Español" lang="es">ES</button>
+        <button class="community-exit-btn" type="button"
+          title="Quick exit: leaves this page immediately"
+          onclick="window.location.href='https://weather.com'"
+          aria-label="Exit quickly">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          <span data-i18n="flow.exit.btn">Exit quickly</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container" style="padding-top:1.75rem; padding-bottom:3rem;">
+
+      <!-- Page header -->
+      <div class="resources-hero">
+        <h2 data-i18n="resources.hero.title">Resources &amp; Support</h2>
+        <p data-i18n="resources.hero.desc">You are not alone. Whether you've experienced abuse, harassment, or assault — or you're supporting someone who has — this is your starting point. Take what you need, in the order that feels right.</p>
+      </div>
+
+      <!-- Tab navigation -->
+      <nav class="resource-tab-nav" role="tablist" aria-label="Resource sections">
+        <button class="resource-tab-btn active" role="tab" aria-selected="true" aria-controls="pane-immediate" onclick="showTab('immediate',this)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span class="tab-label" data-i18n="tab.immediate">Right Now</span>
+        </button>
+        <button class="resource-tab-btn" id="tab-hotlines" role="tab" aria-selected="false" aria-controls="pane-hotlines" onclick="showTab('hotlines',this)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.36 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span class="tab-label" data-i18n="tab.hotlines">Hotlines</span>
+        </button>
+        <button class="resource-tab-btn" role="tab" aria-selected="false" aria-controls="pane-lgbtq" onclick="showTab('lgbtq',this)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+          <span class="tab-label" data-i18n="tab.lgbtq">LGBTQ+</span>
+        </button>
+        <button class="resource-tab-btn" role="tab" aria-selected="false" aria-controls="pane-healing" onclick="showTab('healing',this)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+          <span class="tab-label" data-i18n="tab.healing">Healing</span>
+        </button>
+        <button class="resource-tab-btn" role="tab" aria-selected="false" aria-controls="pane-safety" onclick="showTab('safety',this)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <span class="tab-label" data-i18n="tab.safety">Safety Plan</span>
+        </button>
+        <button class="resource-tab-btn" role="tab" aria-selected="false" aria-controls="pane-legal" onclick="showTab('legal',this)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg>
+          <span class="tab-label" data-i18n="tab.legal">Legal</span>
+        </button>
+      </nav>
+
+      <!-- ══════════ TAB 1: IMMEDIATE STEPS ══════════ -->
+      <div id="pane-immediate" class="resource-pane active" role="tabpanel">
+        <div class="resource-pane-header">
+          <div class="resource-pane-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="resource-pane-title">
+            <h3 data-i18n="immediate.title">What to Do Right Now</h3> <button class="info-btn" onclick="openModal('modal-res-immediate')" aria-label="About this section">i</button>
+            <p data-i18n="immediate.desc">If you've just experienced abuse, assault, or harassment — these steps can protect you and preserve your options. You don't have to do everything at once. Check each step as you complete it.</p>
+          </div>
+        </div>
+
+        <div class="checklist-meta">
+          <span class="checklist-progress-text" id="checklist-progress" data-i18n="immediate.progress">0 of 6 steps completed</span>
+          <button type="button" onclick="resetChecklist()" style="font-size:0.75rem;padding:0.3rem 0.75rem;" data-i18n="immediate.reset">Reset</button>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="checklist-bar" style="width:0%"></div></div>
+
+        <div class="interactive-checklist" id="checklist">
+          <button type="button" class="checklist-item" onclick="toggleCheck(this,0)" aria-pressed="false">
+            <div class="check-circle" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="checklist-item-body">
+              <strong data-i18n="immediate.step1.title">Get to safety</strong> <button class="info-btn" onclick="event.stopPropagation();openModal('modal-step-safety')" aria-label="Why this step matters">i</button>
+              <span data-i18n="immediate.step1.desc">Leave the situation if you can do so safely. Go somewhere you feel protected — a trusted person's home, a public space, or a shelter.</span>
+            </div>
+          </button>
+          <button type="button" class="checklist-item" onclick="toggleCheck(this,1)" aria-pressed="false">
+            <div class="check-circle" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="checklist-item-body">
+              <strong data-i18n="immediate.step2.title">Don't shower or change clothes (if sexual assault)</strong> <button class="info-btn" onclick="event.stopPropagation();openModal('modal-step-preserve')" aria-label="Why this step matters">i</button>
+              <span data-i18n="immediate.step2.desc">Forensic evidence can be collected up to 120 hours after an assault. Preserve your clothes in a paper bag if possible.</span>
+            </div>
+          </button>
+          <button type="button" class="checklist-item" onclick="toggleCheck(this,2)" aria-pressed="false">
+            <div class="check-circle" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="checklist-item-body">
+              <strong data-i18n="immediate.step3.title">Seek medical attention</strong> <button class="info-btn" onclick="event.stopPropagation();openModal('modal-step-medical')" aria-label="Why this step matters">i</button>
+              <span data-i18n="immediate.step3.desc">Even if you feel okay, a medical exam can document injuries and preserve evidence without committing to a police report.</span>
+            </div>
+          </button>
+          <button type="button" class="checklist-item" onclick="toggleCheck(this,3)" aria-pressed="false">
+            <div class="check-circle" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="checklist-item-body">
+              <strong data-i18n="immediate.step4.title">Tell someone you trust</strong> <button class="info-btn" onclick="event.stopPropagation();openModal('modal-step-tell')" aria-label="Why this step matters">i</button>
+              <span data-i18n="immediate.step4.desc">A friend, family member, or counselor. Saying it out loud to someone who supports you can be the first step toward healing.</span>
+            </div>
+          </button>
+          <button type="button" class="checklist-item" onclick="toggleCheck(this,4)" aria-pressed="false">
+            <div class="check-circle" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="checklist-item-body">
+              <strong data-i18n="immediate.step5.title">Document evidence</strong> <button class="info-btn" onclick="event.stopPropagation();openModal('modal-step-document')" aria-label="Why this step matters">i</button>
+              <span data-i18n="immediate.step5.desc">Save screenshots, messages, photos of injuries. Write down what happened while it's fresh. Email copies to yourself or a trusted person for safekeeping.</span>
+            </div>
+          </button>
+          <button type="button" class="checklist-item" onclick="toggleCheck(this,5)" aria-pressed="false">
+            <div class="check-circle" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="checklist-item-body">
+              <strong data-i18n="immediate.step6.title">Contact a crisis hotline</strong> <button class="info-btn" onclick="event.stopPropagation();openModal('modal-step-hotline')" aria-label="Why this step matters">i</button>
+              <span data-i18n="immediate.step6.desc">Trained advocates can walk you through every next step. You don't have to decide anything — just talk to someone who understands.</span>
+            </div>
+          </button>
+        </div>
+
+        <div class="checklist-done-callout" id="checklist-done" data-i18n="immediate.done">
+          You've completed all six steps. That took real courage. A crisis advocate can help you decide what to do next — see the Hotlines tab. You are not alone.
+        </div>
+
+        <div style="margin-top:1.5rem;padding:1rem 1.25rem;background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);font-size:0.875rem;color:var(--text-2);line-height:1.6;">
+          <strong style="display:block;margin-bottom:0.4rem;color:var(--text);" data-i18n="immediate.notready.title">Not ready to take action yet?</strong>
+          <span data-i18n="immediate.notready.desc">That's okay. Simply knowing these steps exist is enough for today. This page will be here when you're ready. You are not obligated to do anything on anyone else's timeline.</span>
+        </div>
+      </div>
+
+      <!-- ══════════ TAB 2: HOTLINES ══════════ -->
+      <div id="pane-hotlines" class="resource-pane" role="tabpanel" aria-labelledby="tab-hotlines" tabindex="0">
+        <div class="resource-pane-header">
+          <div class="resource-pane-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.36 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div class="resource-pane-title">
+            <h3 data-i18n="hotlines.title">Crisis Hotlines</h3> <button class="info-btn" onclick="openModal('modal-res-hotlines')" aria-label="About this section">i</button>
+            <p data-i18n="hotlines.desc">Free, confidential, available 24/7. You do not need to be in crisis to call — they are there for any level of distress. Calls do not appear on most phone bills when called from a landline.</p>
+          </div>
+        </div>
+
+        <div class="hotline-group-label" data-i18n="hotlines.group.us">United States</div> <button class="info-btn" onclick="openModal('modal-hl-us')" aria-label="About US hotlines">i</button>
+        <div class="hotline-cards">
+          <div class="hotline-card">
+            <div class="hotline-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.36 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+            <div>
+              <h4 class="hotline-card-name">National Sexual Assault Hotline (RAINN)</h4>
+              <div class="hotline-card-number"><a href="tel:18006564673" aria-label="Call RAINN National Sexual Assault Hotline at 1-800-656-4673">1-800-656-4673</a></div>
+              <div class="hotline-card-desc">Talk with a trained staff member. Live chat at <a href="https://www.rainn.org" rel="noopener noreferrer" target="_blank" aria-label="Visit RAINN website for live chat (opens in new tab)">rainn.org</a> — 24/7</div>
+            </div>
+          </div>
+          <div class="hotline-card">
+            <div class="hotline-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+            <div>
+              <h4 class="hotline-card-name">National Domestic Violence Hotline</h4>
+              <div class="hotline-card-number"><a href="tel:18007997233" aria-label="Call National Domestic Violence Hotline at 1-800-799-7233">1-800-799-7233</a></div>
+              <div class="hotline-card-desc">Or text START to 88788. Live chat at <a href="https://www.thehotline.org" rel="noopener noreferrer" target="_blank" aria-label="Visit National Domestic Violence Hotline live chat (opens in new tab)">thehotline.org</a> — 24/7</div>
+            </div>
+          </div>
+          <div class="hotline-card">
+            <div class="hotline-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+            <div>
+              <h4 class="hotline-card-name">Crisis Text Line</h4>
+              <div class="hotline-card-number">Text <strong>HOME</strong> to 741741</div>
+              <div class="hotline-card-desc">Free crisis counseling by text for any crisis — 24/7, no voice call required</div>
+            </div>
+          </div>
+          <div class="hotline-card">
+            <div class="hotline-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.36 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+            <div>
+              <h4 class="hotline-card-name">988 Suicide &amp; Crisis Lifeline</h4>
+              <div class="hotline-card-number"><a href="tel:988" aria-label="Call 988 Suicide and Crisis Lifeline">988</a></div>
+              <div class="hotline-card-desc">Call or text 988 for anyone in emotional distress or suicidal crisis — 24/7. En Español disponible.</div>
+            </div>
+          </div>
+          <div class="hotline-card">
+            <div class="hotline-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <div>
+              <h4 class="hotline-card-name">Childhelp National Child Abuse Hotline</h4>
+              <div class="hotline-card-number"><a href="tel:18004224453" aria-label="Call Childhelp National Child Abuse Hotline at 1-800-422-4453">1-800-422-4453</a></div>
+              <div class="hotline-card-desc">For children and adults — crisis intervention and local referrals — 24/7</div>
+            </div>
+          </div>
+          <div class="hotline-card">
+            <div class="hotline-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.36 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+            <div>
+              <h4 class="hotline-card-name">StrongHearts Native Helpline</h4>
+              <div class="hotline-card-number"><a href="tel:18443627774" aria-label="Call StrongHearts Native Helpline at 1-844-762-8483">1-844-762-8483</a></div>
+              <div class="hotline-card-desc">Culturally appropriate DV &amp; sexual violence support for Native Americans &amp; Alaska Natives — 24/7</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hotline-group-label" style="margin-top:0.5rem;" data-i18n="hotlines.group.lgbtq">LGBTQ+ Specific Lines</div> <button class="info-btn" onclick="openModal('modal-hl-lgbtq')" aria-label="About LGBTQ+ hotlines">i</button>
+        <div class="hotline-cards">
+          <div class="hotline-card">
+            <div class="hotline-card-icon" style="background:var(--pink-soft);color:var(--pink);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.36 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+            <div>
+              <h4 class="hotline-card-name">The Trevor Project (LGBTQ+ youth, under 25)</h4>
+              <div class="hotline-card-number"><a href="tel:18664887386" aria-label="Call The Trevor Project at 1-866-488-7386">1-866-488-7386</a></div>
+              <div class="hotline-card-desc">Crisis intervention for LGBTQ+ youth. TrevorChat and TrevorText (text START to 678-678) also available — 24/7</div>
+            </div>
+          </div>
+          <div class="hotline-card">
+            <div class="hotline-card-icon" style="background:var(--pink-soft);color:var(--pink);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <div>
+              <h4 class="hotline-card-name">Trans Lifeline</h4>
+              <div class="hotline-card-number"><a href="tel:18775658860" aria-label="Call Trans Lifeline US at 1-877-565-8860">1-877-565-8860</a> (US) &nbsp;·&nbsp; <a href="tel:18773307290" aria-label="Call Trans Lifeline Canada at 1-877-330-6366">1-877-330-6366</a> (CA)</div>
+              <div class="hotline-card-desc">Peer support run by and for trans people. Staffed by trans operators — 24/7</div>
+            </div>
+          </div>
+          <div class="hotline-card">
+            <div class="hotline-card-icon" style="background:var(--pink-soft);color:var(--pink);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.36 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+            <div>
+              <h4 class="hotline-card-name">LGBT National Help Center</h4>
+              <div class="hotline-card-number"><a href="tel:18888434564" aria-label="Call LGBT National Help Center at 1-888-843-4564">1-888-843-4564</a></div>
+              <div class="hotline-card-desc">Peer support for all ages and all LGBTQ+ identities. Mon–Fri 1–9pm PT, Sat 9am–2pm PT</div>
+            </div>
+          </div>
+          <div class="hotline-card">
+            <div class="hotline-card-icon" style="background:var(--pink-soft);color:var(--pink);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <div>
+              <h4 class="hotline-card-name">GLBT National Youth Talkline (under 25)</h4>
+              <div class="hotline-card-number"><a href="tel:18002467743" aria-label="Call GLBT National Youth Talkline at 1-800-246-7743">1-800-246-7743</a></div>
+              <div class="hotline-card-desc">Peer support for youth — Mon–Fri 4pm–12am ET, Sat 12–5pm ET</div>
+            </div>
+          </div>
+          <div class="hotline-card">
+            <div class="hotline-card-icon" style="background:var(--pink-soft);color:var(--pink);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+            <div>
+              <h4 class="hotline-card-name">FORGE (For LGBTQ+ survivors of sexual violence)</h4>
+              <div class="hotline-card-number"><a href="https://forge-forward.org" rel="noopener noreferrer" target="_blank" aria-label="Visit FORGE website (opens in new tab)">forge-forward.org</a></div>
+              <div class="hotline-card-desc">Specialized support for transgender and gender non-conforming survivors of sexual violence — referrals and resources</div>
+            </div>
+          </div>
+          <div class="hotline-card">
+            <div class="hotline-card-icon" style="background:var(--pink-soft);color:var(--pink);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.36 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+            <div>
+              <h4 class="hotline-card-name">The Network / La Red (LGBTQ+ DV)</h4>
+              <div class="hotline-card-number"><a href="tel:16174229550" aria-label="Call The Network / La Red at 617-742-4911">617-742-4911</a></div>
+              <div class="hotline-card-desc">Domestic violence support for LGBTQ+ people, polyamorous communities, and kink communities — hotline, shelter, and legal advocacy</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hotline-group-label" style="margin-top:0.5rem;" data-i18n="hotlines.group.ca">Canada</div> <button class="info-btn" onclick="openModal('modal-hl-ca')" aria-label="About Canadian hotlines">i</button>
+        <div class="hotline-cards">
+          <div class="hotline-card">
+            <div class="hotline-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg></div>
+            <div>
+              <h4 class="hotline-card-name">Assaulted Women's Helpline</h4>
+              <div class="hotline-card-number"><a href="tel:18668630511" aria-label="Call Assaulted Women's Helpline at 1-866-863-0511">1-866-863-0511</a></div>
+              <div class="hotline-card-desc">Available in 154 languages — 24/7. TTY: 1-866-863-7868</div>
+            </div>
+          </div>
+          <div class="hotline-card">
+            <div class="hotline-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.36 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+            <div>
+              <h4 class="hotline-card-name">Kids Help Phone</h4>
+              <div class="hotline-card-number"><a href="tel:18006686868" aria-label="Call Kids Help Phone at 1-800-668-6868">1-800-668-6868</a></div>
+              <div class="hotline-card-desc">Canada's only 24/7 counselling service for young people. Also text CONNECT to 686868 — bilingual (EN/FR)</div>
+            </div>
+          </div>
+          <div class="hotline-card">
+            <div class="hotline-card-icon" style="background:var(--pink-soft);color:var(--pink);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></div>
+            <div>
+              <h4 class="hotline-card-name">Egale Canada — LGBTQ+ Support</h4>
+              <div class="hotline-card-number"><a href="https://egale.ca" rel="noopener noreferrer" target="_blank" aria-label="Visit Egale Canada website (opens in new tab)">egale.ca</a></div>
+              <div class="hotline-card-desc">Canada's leading LGBTQ+ rights org. Resources, referrals, and advocacy for LGBTQ+ people experiencing violence or discrimination</div>
+            </div>
+          </div>
+          <div class="hotline-card">
+            <div class="hotline-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.36 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+            <div>
+              <h4 class="hotline-card-name">Suicide Crisis Helpline Canada</h4>
+              <div class="hotline-card-number"><a href="tel:18334564566" aria-label="Call Suicide Crisis Helpline Canada at 1-833-456-4566">1-833-456-4566</a></div>
+              <div class="hotline-card-desc">24/7 crisis support — bilingual (EN/FR). Text 45645 (4pm–12am ET)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hotline-group-label" style="margin-top:0.5rem;" data-i18n="hotlines.group.mx">México</div> <button class="info-btn" onclick="openModal('modal-hl-mx')" aria-label="About Mexican hotlines">i</button>
+        <div class="hotline-cards">
+          <div class="hotline-card">
+            <div class="hotline-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.36 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+            <div>
+              <h4 class="hotline-card-name">INMUJERES — Línea de la Mujer</h4>
+              <div class="hotline-card-number"><a href="tel:800911200" aria-label="Llamar a INMUJERES Línea de la Mujer al 800 911 2000">800 911 2000</a></div>
+              <div class="hotline-card-desc">Atención a mujeres en situación de violencia — gratuita, 24/7. Instituto Nacional de las Mujeres</div>
+            </div>
+          </div>
+          <div class="hotline-card">
+            <div class="hotline-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+            <div>
+              <h4 class="hotline-card-name">CNDH — Centro de Atención a Víctimas</h4>
+              <div class="hotline-card-number"><a href="tel:8008002000" aria-label="Llamar a CNDH Centro de Atención a Víctimas al 800 800 2000">800 800 2000</a></div>
+              <div class="hotline-card-desc">Comisión Nacional de los Derechos Humanos — asesoría y orientación a víctimas de delitos, 24/7</div>
+            </div>
+          </div>
+          <div class="hotline-card">
+            <div class="hotline-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+            <div>
+              <h4 class="hotline-card-name">SAPTEL — Apoyo Emocional</h4>
+              <div class="hotline-card-number"><a href="tel:525555259292" aria-label="Llamar a SAPTEL Apoyo Emocional al (55) 5259-8121">(55) 5259-8121</a></div>
+              <div class="hotline-card-desc">Servicio de Apoyo Psicológico Telefónico — orientación emocional para cualquier crisis, 24/7 (Ciudad de México y área)</div>
+            </div>
+          </div>
+          <div class="hotline-card">
+            <div class="hotline-card-icon" style="background:var(--pink-soft);color:var(--pink);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></div>
+            <div>
+              <h4 class="hotline-card-name">Letra S — Salud, Sexualidad y Sida (LGBTQ+)</h4>
+              <div class="hotline-card-number"><a href="https://www.letraese.org.mx" rel="noopener noreferrer" target="_blank" aria-label="Visitar sitio web de Letra S en letraese.org.mx (abre en nueva pestaña)">letraese.org.mx</a></div>
+              <div class="hotline-card-desc">Organización de derechos LGBTQ+ en México — información, apoyo y recursos para personas de la comunidad que han vivido violencia</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════ TAB 3: LGBTQ+ ══════════ -->
+      <div id="pane-lgbtq" class="resource-pane" role="tabpanel">
+        <div class="resource-pane-header">
+          <div class="resource-pane-icon" style="color:var(--pink);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+          </div>
+          <div class="resource-pane-title">
+            <h3 data-i18n="lgbtq.title">LGBTQ+ Resources &amp; Support</h3> <button class="info-btn" onclick="openModal('modal-res-lgbtq')" aria-label="About this section">i</button>
+            <p data-i18n="lgbtq.desc">Abuse happens in every community. LGBTQ+ survivors face unique barriers — including fear of being outed, discrimination by law enforcement, and difficulty finding affirming services. You deserve support that fully sees and respects who you are.</p>
+          </div>
+        </div>
+
+        <div class="support-callout" style="margin-bottom:1.5rem;">
+          <p data-i18n="lgbtq.callout"><strong>You deserve support regardless of your gender identity, sexual orientation, or relationship structure.</strong> Being LGBTQ+ does not make abuse more acceptable — and it does not mean you have to face it alone.</p>
+        </div>
+
+        <!-- Hotlines note -->
+        <div style="margin-bottom:1.5rem;padding:0.875rem 1.1rem;background:var(--pink-soft);border:1px solid var(--pink);border-radius:var(--radius);font-size:0.875rem;display:flex;gap:0.65rem;align-items:flex-start;line-height:1.55;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--pink);flex-shrink:0;margin-top:0.1rem;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.36 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span>Looking for crisis phone lines? All LGBTQ+ hotlines (Trevor Project, Trans Lifeline, LGBT National Help Center, and more) are on the <button type="button" onclick="showTab('hotlines',document.querySelector('[aria-controls=pane-hotlines]'))" style="border:none;background:none;color:var(--teal);font-weight:600;cursor:pointer;padding:0;font-size:inherit;text-decoration:underline;">Hotlines tab →</button></span>
+        </div>
+
+        <!-- Organizations: US -->
+        <div class="section-label" data-i18n="lgbtq.section.us">Organizations &amp; Advocacy (United States)</div> <button class="info-btn" onclick="openModal('modal-lgbtq-us')" aria-label="About US LGBTQ+ organizations">i</button>
+        <div class="org-grid">
+          <div class="org-card">
+            <div class="org-card-name">PFLAG</div>
+            <div class="org-card-desc">Nation's largest organization for LGBTQ+ people, families, and allies. Local chapters nationwide — support, education, and advocacy.</div>
+            <a href="https://pflag.org" rel="noopener noreferrer" target="_blank" class="org-card-link">pflag.org →</a>
+          </div>
+          <div class="org-card">
+            <div class="org-card-name">Human Rights Campaign (HRC)</div>
+            <div class="org-card-desc">Largest LGBTQ+ civil rights organization in the US. Resources on workplace rights, healthcare, and state laws.</div>
+            <a href="https://www.hrc.org" rel="noopener noreferrer" target="_blank" class="org-card-link">hrc.org →</a>
+          </div>
+          <div class="org-card">
+            <div class="org-card-name">GLAAD</div>
+            <div class="org-card-desc">Media advocacy and cultural resource guides. Great starting point for understanding representation and finding community.</div>
+            <a href="https://www.glaad.org" rel="noopener noreferrer" target="_blank" class="org-card-link">glaad.org →</a>
+          </div>
+          <div class="org-card">
+            <div class="org-card-name">GLSEN</div>
+            <div class="org-card-desc">Creating safe and affirming schools for LGBTQ+ students. Resources for students, educators, and families.</div>
+            <a href="https://www.glsen.org" rel="noopener noreferrer" target="_blank" class="org-card-link">glsen.org →</a>
+          </div>
+          <div class="org-card">
+            <div class="org-card-name">Lambda Legal</div>
+            <div class="org-card-desc">National legal organization pursuing litigation and education on behalf of LGBTQ+ people. Know Your Rights resources.</div>
+            <a href="https://www.lambdalegal.org" rel="noopener noreferrer" target="_blank" class="org-card-link">lambdalegal.org →</a>
+          </div>
+          <div class="org-card">
+            <div class="org-card-name">National Center for Transgender Equality</div>
+            <div class="org-card-desc">Policy and rights resources specifically for trans people — healthcare, ID documents, housing, and employment protections.</div>
+            <a href="https://transequality.org" rel="noopener noreferrer" target="_blank" class="org-card-link">transequality.org →</a>
+          </div>
+          <div class="org-card">
+            <div class="org-card-name">National Black Justice Coalition</div>
+            <div class="org-card-desc">Civil rights org dedicated to empowerment of Black LGBTQ+ people and people living with HIV. Community resources and advocacy.</div>
+            <a href="https://nbjc.org" rel="noopener noreferrer" target="_blank" class="org-card-link">nbjc.org →</a>
+          </div>
+          <div class="org-card">
+            <div class="org-card-name">Familia: Trans Queer Liberation Movement</div>
+            <div class="org-card-desc">Organizing with and for Latinx LGBTQ+ people — community support, immigrant rights, and healing resources in English &amp; Spanish.</div>
+            <a href="https://familiatqlm.org" rel="noopener noreferrer" target="_blank" class="org-card-link">familiatqlm.org →</a>
+          </div>
+        </div>
+
+        <!-- Organizations: Canada -->
+        <div class="section-label" style="margin-top:0.5rem;" data-i18n="lgbtq.section.ca">Organizations &amp; Advocacy (Canada)</div> <button class="info-btn" onclick="openModal('modal-lgbtq-ca')" aria-label="About Canadian LGBTQ+ organizations">i</button>
+        <div class="org-grid">
+          <div class="org-card">
+            <div class="org-card-name">Egale Canada</div>
+            <div class="org-card-desc">Canada's leading LGBTQ2+ rights organization. Policy resources, community stories, and anti-violence programs.</div>
+            <a href="https://egale.ca" rel="noopener noreferrer" target="_blank" class="org-card-link">egale.ca →</a>
+          </div>
+          <div class="org-card">
+            <div class="org-card-name">Rainbow Health Ontario</div>
+            <div class="org-card-desc">Health programs and resources for LGBTQ+ people across Ontario. Provider directory for affirming care.</div>
+            <a href="https://www.rainbowhealthontario.ca" rel="noopener noreferrer" target="_blank" class="org-card-link">rainbowhealthontario.ca →</a>
+          </div>
+          <div class="org-card">
+            <div class="org-card-name">Gender Creative Kids</div>
+            <div class="org-card-desc">Canadian resource for gender-diverse children and their families — books, guides, and family support.</div>
+            <a href="https://gendercreativekids.com" rel="noopener noreferrer" target="_blank" class="org-card-link">gendercreativekids.com →</a>
+          </div>
+        </div>
+
+        <!-- Organizations: Mexico -->
+        <div class="section-label" style="margin-top:0.5rem;" data-i18n="lgbtq.section.mx">Organizaciones (México)</div> <button class="info-btn" onclick="openModal('modal-lgbtq-mx')" aria-label="About Mexican LGBTQ+ organizations">i</button>
+        <div class="org-grid">
+          <div class="org-card">
+            <div class="org-card-name">Letra S — Salud, Sexualidad y Sida</div>
+            <div class="org-card-desc">Organización LGBTQ+ con amplia trayectoria en derechos sexuales y salud en México. Recursos y apoyo comunitario.</div>
+            <a href="https://www.letraese.org.mx" rel="noopener noreferrer" target="_blank" class="org-card-link">letraese.org.mx →</a>
+          </div>
+          <div class="org-card">
+            <div class="org-card-name">Cuenta Conmigo</div>
+            <div class="org-card-desc">Diversidad Sexual, A.C. — apoyo a personas LGBTQ+ y sus familias en México. Talleres, grupos de apoyo y orientación.</div>
+            <a href="https://cuentaconmigo.org.mx" rel="noopener noreferrer" target="_blank" class="org-card-link">cuentaconmigo.org.mx →</a>
+          </div>
+          <div class="org-card">
+            <div class="org-card-name">CONAPRED</div>
+            <div class="org-card-desc">Consejo Nacional para Prevenir la Discriminación — denuncias por discriminación, incluyendo orientación sexual e identidad de género.</div>
+            <a href="https://www.conapred.org.mx" rel="noopener noreferrer" target="_blank" class="org-card-link">conapred.org.mx →</a>
+          </div>
+        </div>
+
+        <!-- Survivor-specific resources -->
+        <div class="section-label" style="margin-top:0.5rem;" data-i18n="lgbtq.section.survivors">For LGBTQ+ Survivors of Abuse</div> <button class="info-btn" onclick="openModal('modal-lgbtq-survivors')" aria-label="About LGBTQ+ survivor resources">i</button>
+        <ul class="resource-link-list">
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+            <span><a href="https://forge-forward.org" rel="noopener noreferrer" target="_blank"><strong>FORGE Forward</strong></a> — resources specifically for transgender and non-binary survivors of sexual violence, plus training for providers</span>
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+            <span><a href="https://tnlr.org" rel="noopener noreferrer" target="_blank"><strong>The Network / La Red</strong></a> — DV support and shelter specifically for LGBTQ+, polyamorous, and kink communities in Boston; national resources list</span>
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+            <span><a href="https://www.avp.org" rel="noopener noreferrer" target="_blank"><strong>NYC Anti-Violence Project (AVP)</strong></a> — national coalition of LGBTQ+ anti-violence programs; safety planning and crisis support</span>
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+            <span><a href="https://www.glbtqlegaladvocates.org" rel="noopener noreferrer" target="_blank"><strong>GLBTQ Legal Advocates &amp; Defenders (GLAD)</strong></a> — free legal help for LGBTQ+ people in New England</span>
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+            <span><a href="https://www.hrc.org/resources/violence-against-the-transgender-and-gender-non-conforming-community" rel="noopener noreferrer" target="_blank"><strong>HRC Violence Against Trans &amp; GNC Community</strong></a> — data, resources, and guidance for trans survivors</span>
+          </li>
+        </ul>
+
+        <!-- Mental health -->
+        <div class="section-label" style="margin-top:0.5rem;" data-i18n="lgbtq.section.mental">LGBTQ+-Affirming Mental Health</div> <button class="info-btn" onclick="openModal('modal-lgbtq-mh')" aria-label="About affirming mental health">i</button>
+        <ul class="resource-link-list">
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+            <span><a href="https://www.therapyden.com/lgbtq-therapist" rel="noopener noreferrer" target="_blank"><strong>Therapy Den — LGBTQ+ Affirming Therapists</strong></a> — searchable directory of therapists who affirm all identities and orientations</span>
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+            <span><a href="https://nqttcn.com" rel="noopener noreferrer" target="_blank"><strong>NQTTCN — National Queer &amp; Trans Therapists of Color Network</strong></a> — healing justice for QTBIPOC communities</span>
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+            <span><a href="https://www.genderspectrum.org" rel="noopener noreferrer" target="_blank"><strong>Gender Spectrum</strong></a> — mental health and family resources for gender-diverse youth and those who support them</span>
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+            <span><a href="https://openpathcollective.org" rel="noopener noreferrer" target="_blank"><strong>Open Path Collective</strong></a> — affordable therapy ($30–$80/session), many LGBTQ+-affirming therapists available</span>
+          </li>
+        </ul>
+
+        <!-- Community & online spaces -->
+        <div class="section-label" style="margin-top:0.5rem;" data-i18n="lgbtq.section.community">Community &amp; Online Spaces</div> <button class="info-btn" onclick="openModal('modal-lgbtq-community')" aria-label="About online community spaces">i</button>
+        <ul class="resource-link-list">
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+            <span><a href="https://www.reddit.com/r/LGBTsurvivor/" rel="noopener noreferrer" target="_blank"><strong>r/LGBTsurvivor</strong></a> on Reddit — peer support community for LGBTQ+ survivors of abuse and sexual violence</span>
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+            <span><a href="https://www.reddit.com/r/asktransgender/" rel="noopener noreferrer" target="_blank"><strong>r/asktransgender</strong></a> and <a href="https://www.reddit.com/r/transgender/" rel="noopener noreferrer" target="_blank"><strong>r/transgender</strong></a> on Reddit — large, active communities with peer support threads</span>
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+            <span><a href="https://trevorspace.org" rel="noopener noreferrer" target="_blank"><strong>TrevorSpace</strong></a> — affirming, moderated online community for LGBTQ+ young people ages 13–24 (run by The Trevor Project)</span>
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+            <span><strong>Gender Dysphoria Support Network</strong> on Discord — peer-led server for trans and non-binary people</span>
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+            <span><a href="https://www.rainbowrailroad.org" rel="noopener noreferrer" target="_blank"><strong>Rainbow Railroad</strong></a> (Canada-based, global reach) — helps LGBTQ+ people escape violence and persecution; emergency assistance</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- ══════════ TAB 4: LEGAL OPTIONS (last tab) ══════════ -->
+      <div id="pane-legal" class="resource-pane" role="tabpanel">
+        <div class="resource-pane-header">
+          <div class="resource-pane-icon" style="color:var(--teal);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg>
+          </div>
+          <div class="resource-pane-title">
+            <h3 data-i18n="legal.title">Legal Options</h3> <button class="info-btn" onclick="openModal('modal-res-legal')" aria-label="About this section">i</button>
+            <p data-i18n="legal.desc">You have legal options beyond filing a police report. These protections exist independently of any criminal prosecution. A victim advocacy organization or attorney can help you understand what applies — many services are free.</p>
+          </div>
+        </div>
+        <div class="accordion">
+          <div class="accordion-item">
+            <button class="accordion-trigger" onclick="toggleAccordion(this)" type="button" aria-expanded="false">
+              <span class="accordion-title-block">
+                <span class="accordion-title-main" data-i18n="legal.acc.protective">Protective &amp; Restraining Orders</span> <button class="info-btn" onclick="event.stopPropagation();openModal('modal-legal-ro')" aria-label="About protective orders">i</button>
+                <span class="accordion-tagline"> — <strong>Immediate legal protection that can be issued the same day, no attorney required.</strong></span>
+              </span>
+              <svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="accordion-body"><div class="accordion-content">
+              <p>A protective order prohibits the abuser from contacting you, coming near you, or entering your home. Emergency protective orders can often be issued the same day.</p>
+              <ul>
+                <li>File at your local courthouse — many have a self-help desk. No attorney required in most states.</li>
+                <li>Violating a protective order is a criminal offense — the abuser can be arrested immediately.</li>
+                <li>Available for domestic violence, sexual assault, stalking, and harassment.</li>
+                <li><strong>Canada:</strong> "Peace bonds" (Criminal Code s. 810) and civil restraining orders are available in all provinces.</li>
+                <li><strong>México:</strong> Las órdenes de protección se pueden obtener ante el Ministerio Público o un juez familiar.</li>
+              </ul>
+            </div></div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-trigger" onclick="toggleAccordion(this)" type="button" aria-expanded="false">
+              <span class="accordion-title-block">
+                <span class="accordion-title-main" data-i18n="legal.acc.reporting">Reporting to Law Enforcement</span> <button class="info-btn" onclick="event.stopPropagation();openModal('modal-legal-le')" aria-label="About reporting">i</button>
+                <span class="accordion-tagline"> — <strong>Reporting is always your choice — a victim advocate can help you weigh your options for free.</strong></span>
+              </span>
+              <svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="accordion-body"><div class="accordion-content">
+              <p>Reporting to police is entirely your choice. A trained victim advocate can help you weigh the options — they are free and can accompany you to any police interaction.</p>
+              <ul>
+                <li>You can have a SANE (forensic) exam done without filing a police report — preserving the option for later.</li>
+                <li>Statutes of limitations vary by state, province, and offense — contact a legal aid org to know your timeline.</li>
+                <li>If your report isn't taken seriously, a victim advocacy organization can help you escalate.</li>
+                <li><strong>Canada:</strong> Sexual assault centres can accompany you to police and court — find yours at <a href="https://www.casac.ca" rel="noopener noreferrer" target="_blank">casac.ca</a>.</li>
+                <li><strong>México:</strong> Puedes denunciar ante el Ministerio Público (MP). Algunos estados tienen fiscalías especializadas en delitos sexuales.</li>
+              </ul>
+            </div></div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-trigger" onclick="toggleAccordion(this)" type="button" aria-expanded="false">
+              <span class="accordion-title-block">
+                <span class="accordion-title-main" data-i18n="legal.acc.civil">Civil Lawsuit</span> <button class="info-btn" onclick="event.stopPropagation();openModal('modal-legal-civil')" aria-label="About civil lawsuits">i</button>
+                <span class="accordion-tagline"> — <strong>You can sue for damages independently of any criminal case, even if charges were dropped.</strong></span>
+              </span>
+              <svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="accordion-body"><div class="accordion-content">
+              <p>You can sue an abuser for damages independently of any criminal case. Civil suits have a lower standard of proof and can proceed even if criminal charges were dropped.</p>
+              <ul>
+                <li>Damages can include medical costs, therapy, lost wages, and pain and suffering.</li>
+                <li>Many attorneys handling sexual assault civil cases work on contingency — no upfront cost.</li>
+                <li><strong>Canada:</strong> Civil claims can be filed in provincial courts. Many provinces have extended limitation periods for childhood abuse claims.</li>
+              </ul>
+            </div></div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-trigger" onclick="toggleAccordion(this)" type="button" aria-expanded="false">
+              <span class="accordion-title-block">
+                <span class="accordion-title-main" data-i18n="legal.acc.eeoc">Workplace Protections (EEOC / Title VII)</span> <button class="info-btn" onclick="event.stopPropagation();openModal('modal-legal-eeoc')" aria-label="About EEOC">i</button>
+                <span class="accordion-tagline"> — <strong>Sexual harassment at work is illegal — file a free complaint with the EEOC.</strong></span>
+              </span>
+              <svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="accordion-body"><div class="accordion-content">
+              <p>Sexual harassment and assault at work may trigger EEOC protections under Title VII. File at no cost at <a href="https://www.eeoc.gov" rel="noopener noreferrer" target="_blank">eeoc.gov</a>.</p>
+              <ul>
+                <li>You must generally file within 180 or 300 days of the incident (varies by state).</li>
+                <li>Retaliation for reporting harassment is also illegal under Title VII.</li>
+                <li><strong>Canada:</strong> Workplace harassment protections exist under provincial human rights codes and the federal <em>Canada Labour Code</em>. File with your provincial Human Rights Commission.</li>
+                <li><strong>México:</strong> La Ley Federal del Trabajo prohíbe el acoso laboral y sexual. Puedes presentar una queja ante la STPS o la CNDH.</li>
+              </ul>
+            </div></div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-trigger" onclick="toggleAccordion(this)" type="button" aria-expanded="false">
+              <span class="accordion-title-block">
+                <span class="accordion-title-main" data-i18n="legal.acc.titleix">Title IX (Schools &amp; Universities)</span> <button class="info-btn" onclick="event.stopPropagation();openModal('modal-legal-titleix')" aria-label="About Title IX">i</button>
+                <span class="accordion-tagline"> — <strong>Federally funded schools must respond to sexual misconduct — you can file directly with the Dept. of Education.</strong></span>
+              </span>
+              <svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="accordion-body"><div class="accordion-content">
+              <p>If the incident occurred at a school receiving federal funding, Title IX provides protections and requires a formal complaint process.</p>
+              <ul>
+                <li>Contact your school's Title IX coordinator — they are required to respond and provide support measures.</li>
+                <li>File directly with the Dept. of Education at <a href="https://www2.ed.gov/about/offices/list/ocr/complaintintro.html" rel="noopener noreferrer" target="_blank">ed.gov/ocr</a>.</li>
+                <li>RAINN Title IX guide: <a href="https://www.rainn.org/title-ix" rel="noopener noreferrer" target="_blank">rainn.org/title-ix</a></li>
+                <li><strong>Canada:</strong> Contact your institution's sexual violence policy office. File with your provincial human rights commission if the school fails to respond adequately.</li>
+              </ul>
+            </div></div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-trigger" onclick="toggleAccordion(this)" type="button" aria-expanded="false">
+              <span class="accordion-title-block">
+                <span class="accordion-title-main" data-i18n="legal.acc.compensation">Victim Compensation Programs</span> <button class="info-btn" onclick="event.stopPropagation();openModal('modal-legal-comp')" aria-label="About victim compensation">i</button>
+                <span class="accordion-tagline"> — <strong>Every US state and Canadian province has a fund to help cover costs — even without a conviction.</strong></span>
+              </span>
+              <svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="accordion-body"><div class="accordion-content">
+              <p>Government programs can help pay for medical care, therapy, lost wages, and other expenses resulting from a crime — a conviction is not required in most cases.</p>
+              <ul>
+                <li><a href="https://nacvcb.org" rel="noopener noreferrer" target="_blank">National Association of Crime Victim Compensation Boards</a> — find your state's program</li>
+                <li>You typically need to report the crime to police, but exceptions exist for sexual assault and domestic violence survivors.</li>
+                <li><strong>Canada:</strong> Each province has a Criminal Injuries Compensation Board. Search "[your province] criminal injuries compensation."</li>
+                <li><strong>México:</strong> La Comisión Ejecutiva de Atención a Víctimas (CEAV) administra el Fondo de Ayuda, Asistencia y Reparación Integral.</li>
+              </ul>
+            </div></div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-trigger" onclick="toggleAccordion(this)" type="button" aria-expanded="false">
+              <span class="accordion-title-block">
+                <span class="accordion-title-main" data-i18n="legal.acc.freelegal">Free Legal Help</span> <button class="info-btn" onclick="event.stopPropagation();openModal('modal-legal-free')" aria-label="About free legal help">i</button>
+                <span class="accordion-tagline"> — <strong>Free or low-cost legal aid is available — you don't need to afford an attorney to get help.</strong></span>
+              </span>
+              <svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="accordion-body"><div class="accordion-content">
+              <ul>
+                <li><a href="https://www.legalaid.org" rel="noopener noreferrer" target="_blank">legalaid.org</a> — find free legal aid in your area (US)</li>
+                <li><a href="https://www.lawhelp.org" rel="noopener noreferrer" target="_blank">lawhelp.org</a> — free legal information and referrals by state (US)</li>
+                <li><a href="https://www.womenslaw.org" rel="noopener noreferrer" target="_blank">womenslaw.org</a> — legal information for abuse survivors with free online chat (US)</li>
+                <li><a href="https://www.vawa.gov" rel="noopener noreferrer" target="_blank">vawa.gov</a> — Violence Against Women Act resources (US)</li>
+                <li><a href="https://www.legalaid.on.ca" rel="noopener noreferrer" target="_blank">legalaid.on.ca</a> — Legal Aid Ontario (other provinces have similar programs)</li>
+                <li><a href="https://www.casac.ca" rel="noopener noreferrer" target="_blank">casac.ca</a> — Canadian Association of Sexual Assault Centres; legal accompaniment and advocacy</li>
+                <li><strong>México:</strong> Consulta el Bufete Jurídico Gratuito de tu universidad local o la Procuraduría de Protección de la Familia en tu estado.</li>
+              </ul>
+            </div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════ TAB 5: HEALING ══════════ -->
+      <div id="pane-healing" class="resource-pane" role="tabpanel">
+        <div class="resource-pane-header">
+          <div class="resource-pane-icon" style="color:var(--pink);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+          </div>
+          <div class="resource-pane-title">
+            <h3 data-i18n="healing.title">Healing &amp; Emotional Support</h3> <button class="info-btn" onclick="openModal('modal-res-healing')" aria-label="About this section">i</button>
+            <p data-i18n="healing.desc">Healing from trauma is deeply personal, nonlinear, and takes as long as it takes. There is no right way — and no deadline. Reaching out for support is not weakness; it is one of the bravest things you can do.</p>
+          </div>
+        </div>
+        <div class="support-callout" style="margin-bottom:1.75rem;">
+          <p data-i18n="healing.callout"><strong>What happened to you was not your fault.</strong> You are allowed to feel everything — anger, grief, numbness, confusion. None of it defines who you are.</p>
+        </div>
+        <div class="accordion">
+          <div class="accordion-item">
+            <button class="accordion-trigger" onclick="toggleAccordion(this)" type="button" aria-expanded="false"><span data-i18n="healing.acc.communities">Online Communities &amp; Support Groups</span> <button class="info-btn" onclick="event.stopPropagation();openModal('modal-heal-communities')" aria-label="About online communities">i</button><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button>
+            <div class="accordion-body"><div class="accordion-content">
+              <p>Sometimes the most accessible support is a community of people who truly understand. These spaces are moderated and survivor-centered.</p>
+              <ul>
+                <li><a href="https://www.aftersilence.org" rel="noopener noreferrer" target="_blank"><strong>After Silence</strong></a> — online message board and support community for sexual assault survivors; moderated and private</li>
+                <li><a href="https://www.rainn.org/get-help/online-hotline" rel="noopener noreferrer" target="_blank"><strong>RAINN Online Support Groups</strong></a> — free, moderated, anonymous groups for survivors</li>
+                <li><a href="https://www.reddit.com/r/survivorsofabuse/" rel="noopener noreferrer" target="_blank"><strong>r/survivorsofabuse</strong></a> on Reddit — peer support community for all forms of abuse (270k+ members)</li>
+                <li><a href="https://www.reddit.com/r/domesticviolence/" rel="noopener noreferrer" target="_blank"><strong>r/domesticviolence</strong></a> on Reddit — support and resources for DV survivors</li>
+                <li><a href="https://www.reddit.com/r/rape/" rel="noopener noreferrer" target="_blank"><strong>r/rape</strong></a> on Reddit — peer support for survivors of sexual assault; strictly moderated</li>
+                <li><a href="https://www.reddit.com/r/CPTSD/" rel="noopener noreferrer" target="_blank"><strong>r/CPTSD</strong></a> on Reddit — community for complex PTSD, which often results from prolonged abuse</li>
+                <li><a href="https://www.7cups.com" rel="noopener noreferrer" target="_blank"><strong>7 Cups</strong></a> — free online chat with trained volunteers, 24/7; also has community forums for trauma</li>
+                <li>Local rape crisis centers and DV shelters often offer free in-person and virtual survivor groups — search "[your city] rape crisis center support group"</li>
+              </ul>
+            </div></div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-trigger" onclick="toggleAccordion(this)" type="button" aria-expanded="false"><span data-i18n="healing.acc.social">Social Media &amp; Hashtag Communities</span> <button class="info-btn" onclick="event.stopPropagation();openModal('modal-heal-social')" aria-label="About social media communities">i</button><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button>
+            <div class="accordion-body"><div class="accordion-content">
+              <p>Social media can be a powerful way to feel less alone and find community. A few survivor and trauma communities worth knowing:</p>
+              <ul>
+                <li><strong>#MeToo</strong> — millions of survivors sharing their stories across platforms; can be validating and community-building</li>
+                <li><strong>#SurvivorTwitter / #SurvivorX</strong> — active community of survivors on X/Twitter sharing resources and solidarity</li>
+                <li><strong>#TraumaRecovery</strong> and <strong>#HealingFromTrauma</strong> on Instagram — follow therapists, advocates, and survivors sharing coping strategies</li>
+                <li>TikTok accounts worth following: <a href="https://www.tiktok.com/@traumarecovery" rel="noopener noreferrer" target="_blank"><strong>@traumarecovery</strong></a>, <a href="https://www.tiktok.com/@drjenniferfreyd" rel="noopener noreferrer" target="_blank"><strong>@drjenniferfreyd</strong></a> (betrayal trauma), <a href="https://www.tiktok.com/@nedratawwab" rel="noopener noreferrer" target="_blank"><strong>@nedratawwab</strong></a> (boundaries and abuse recovery)</li>
+                <li>Instagram accounts: <a href="https://www.instagram.com/themighty/" rel="noopener noreferrer" target="_blank"><strong>@themighty</strong></a> (mental health stories), <a href="https://www.instagram.com/survivorsalliance/" rel="noopener noreferrer" target="_blank"><strong>@survivorsalliance</strong></a>, <a href="https://www.instagram.com/rainn/" rel="noopener noreferrer" target="_blank"><strong>@rainn</strong></a></li>
+                <li><strong>Facebook Groups:</strong> "Sexual Assault Survivors Support Group" (private, moderated), "Domestic Violence Survivors Support" — search and request to join</li>
+              </ul>
+            </div></div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-trigger" onclick="toggleAccordion(this)" type="button" aria-expanded="false"><span data-i18n="healing.acc.podcasts">Podcasts for Survivors</span> <button class="info-btn" onclick="event.stopPropagation();openModal('modal-heal-podcasts')" aria-label="About podcasts">i</button><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button>
+            <div class="accordion-body"><div class="accordion-content">
+              <p>Listening to others' experiences and expert guidance can be deeply healing — on your own time, at your own pace.</p>
+              <ul>
+                <li><a href="https://momastery.com/blog/we-can-do-hard-things/" rel="noopener noreferrer" target="_blank"><strong>We Can Do Hard Things</strong></a> (Glennon Doyle) — conversations on trauma, resilience, and reclaiming your life</li>
+                <li><a href="https://brenebrown.com/podcasts/" rel="noopener noreferrer" target="_blank"><strong>Unlocking Us</strong></a> (Brené Brown) — shame, vulnerability, and courageous healing</li>
+                <li><a href="https://therapychatpodcast.com" rel="noopener noreferrer" target="_blank"><strong>Therapy Chat</strong></a> (Laura Reagan, LCSW-C) — trauma therapy concepts explained accessibly</li>
+                <li><a href="https://www.thetraumatherapistproject.com" rel="noopener noreferrer" target="_blank"><strong>The Trauma Therapist Podcast</strong></a> — interviews with leading trauma specialists; practical and validating</li>
+                <li><strong>Healing Trauma Podcast</strong> (Monique Koven) — somatic and body-based approaches to trauma recovery</li>
+                <li><strong>Sobrevivir al Trauma</strong> — recursos en español para sobrevivientes de trauma (busca en Spotify y Apple Podcasts)</li>
+              </ul>
+            </div></div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-trigger" onclick="toggleAccordion(this)" type="button" aria-expanded="false"><span data-i18n="healing.acc.books">Books &amp; Reading</span> <button class="info-btn" onclick="event.stopPropagation();openModal('modal-heal-books')" aria-label="About books">i</button><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button>
+            <div class="accordion-body"><div class="accordion-content">
+              <ul>
+                <li><a href="https://www.goodreads.com/book/show/18693771-the-body-keeps-the-score" rel="noopener noreferrer" target="_blank"><strong><em>The Body Keeps the Score</em></strong></a> by Bessel van der Kolk — the landmark book on trauma and the body; essential reading</li>
+                <li><a href="https://www.goodreads.com/book/show/349552.Trauma_and_Recovery" rel="noopener noreferrer" target="_blank"><strong><em>Trauma and Recovery</em></strong></a> by Judith Herman — foundational text on recovery from violence and abuse</li>
+                <li><a href="https://www.goodreads.com/book/show/393781.Healing_Sex" rel="noopener noreferrer" target="_blank"><strong><em>Healing Sex: A Mind-Body Approach to Healing Sexual Trauma</em></strong></a> by Staci Haines — practical and compassionate</li>
+                <li><a href="https://www.goodreads.com/book/show/373504.I_Never_Called_It_Rape" rel="noopener noreferrer" target="_blank"><strong><em>I Never Called It Rape</em></strong></a> by Robin Warshaw — survivor experiences and recovery paths</li>
+                <li><a href="https://www.nedratawwab.com/set-boundaries-find-peace" rel="noopener noreferrer" target="_blank"><strong><em>Set Boundaries, Find Peace</em></strong></a> by Nedra Tawwab — accessible guide to creating safety in relationships after abuse</li>
+                <li><a href="https://www.goodreads.com/book/show/884607.Why_Does_He_Do_That_" rel="noopener noreferrer" target="_blank"><strong><em>Why Does He Do That?</em></strong></a> by Lundy Bancroft — for survivors of emotional and physical abuse by partners</li>
+                <li><strong>(En español)</strong> <a href="https://www.goodreads.com/book/show/230164.Women_Who_Run_With_the_Wolves" rel="noopener noreferrer" target="_blank"><em>Mujeres que corren con los lobos</em></a> de Clarissa Pinkola Estés — sanar el alma femenina; psicología arquetípica del trauma</li>
+              </ul>
+            </div></div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-trigger" onclick="toggleAccordion(this)" type="button" aria-expanded="false"><span data-i18n="healing.acc.apps">Apps for Healing &amp; Grounding</span> <button class="info-btn" onclick="event.stopPropagation();openModal('modal-heal-apps')" aria-label="About healing apps">i</button><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button>
+            <div class="accordion-body"><div class="accordion-content">
+              <ul>
+                <li><a href="https://insighttimer.com" rel="noopener noreferrer" target="_blank"><strong>Insight Timer</strong></a> (free) — thousands of meditations including trauma-specific programs by therapists</li>
+                <li><a href="https://www.calm.com" rel="noopener noreferrer" target="_blank"><strong>Calm</strong></a> — sleep, breathwork, and anxiety programs; trauma-sensitive meditations available</li>
+                <li><a href="https://www.sanvello.com" rel="noopener noreferrer" target="_blank"><strong>Sanvello</strong></a> (free tier) — CBT-based tools for anxiety, depression, and trauma; guided mood tracking</li>
+                <li><strong>EMDR Coach</strong> — guided EMDR exercises for self-use between therapy sessions</li>
+                <li><a href="https://woebothealth.com" rel="noopener noreferrer" target="_blank"><strong>Woebot</strong></a> (free) — AI-assisted CBT check-ins; low-pressure mental health support anytime</li>
+                <li><a href="https://www.irest.org" rel="noopener noreferrer" target="_blank"><strong>iRest</strong></a> — yoga nidra meditation specifically developed for PTSD recovery (used by VA hospitals)</li>
+              </ul>
+            </div></div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-trigger" onclick="toggleAccordion(this)" type="button" aria-expanded="false"><span data-i18n="healing.acc.somatic">Body-Based &amp; Somatic Healing</span> <button class="info-btn" onclick="event.stopPropagation();openModal('modal-heal-somatic')" aria-label="About somatic healing">i</button><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button>
+            <div class="accordion-body"><div class="accordion-content">
+              <p>Trauma is stored in the body as much as in the mind. Body-centered practices can complement talk therapy and support nervous system recovery.</p>
+              <ul>
+                <li><strong>Trauma-sensitive yoga</strong> — search "trauma-sensitive yoga [your city]" or find online classes via <a href="https://www.traumasensitiveyoga.com" rel="noopener noreferrer" target="_blank">traumasensitiveyoga.com</a></li>
+                <li><strong>Somatic experiencing</strong> — a body-based therapy that helps release stored trauma; find practitioners at <a href="https://traumahealing.org" rel="noopener noreferrer" target="_blank">traumahealing.org</a></li>
+                <li><strong>Mindfulness and breathwork</strong> — apps like Insight Timer and Calm have trauma-specific programs</li>
+                <li><strong>Movement and dance</strong> — any movement done with intention can support nervous system regulation; even short walks count</li>
+              </ul>
+            </div></div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-trigger" onclick="toggleAccordion(this)" type="button" aria-expanded="false"><span data-i18n="healing.acc.therapist">Finding a Counselor</span> <button class="info-btn" onclick="event.stopPropagation();openModal('modal-heal-therapist')" aria-label="About finding a therapist">i</button><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button>
+            <div class="accordion-body"><div class="accordion-content">
+              <p>Look specifically for counselors who specialize in trauma, PTSD, or sexual assault recovery. Trauma-informed care makes a significant difference.</p>
+              <ul>
+                <li><a href="https://www.psychologytoday.com/us/therapists/trauma-and-ptsd" rel="noopener noreferrer" target="_blank">Psychology Today therapist finder</a> — filter by specialization, insurance, and cost</li>
+                <li>Ask for a provider trained in <strong>EMDR</strong>, <strong>CPT</strong>, or <strong>somatic therapy</strong> — evidence-based approaches for trauma recovery</li>
+                <li>Many therapists offer sliding-scale fees based on income — always ask</li>
+                <li><a href="https://openpathcollective.org" rel="noopener noreferrer" target="_blank">Open Path Collective</a> — affordable sessions ($30–$80); many trauma-informed, LGBTQ+-affirming therapists</li>
+                <li><a href="https://www.therapyden.com" rel="noopener noreferrer" target="_blank">Therapy Den</a> — easy filtering for LGBTQ+-affirming, BIPOC, and trauma-specialized therapists</li>
+                <li><strong>Canada:</strong> <a href="https://www.betterhelp.com" rel="noopener noreferrer" target="_blank">BetterHelp</a> and <a href="https://www.talkspace.com" rel="noopener noreferrer" target="_blank">Talkspace</a> offer online therapy across Canada. Provincial health plans may cover therapy — check your benefits.</li>
+                <li><strong>México:</strong> Pregunta en tu IMSS o ISSSTE por psicólogos — tienen servicios de salud mental. <a href="https://www.unam.mx/vida-en-la-unam/capsi" rel="noopener noreferrer" target="_blank">UNAM CAPSI</a> ofrece atención psicológica de bajo costo.</li>
+              </ul>
+            </div></div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-trigger" onclick="toggleAccordion(this)" type="button" aria-expanded="false"><span data-i18n="healing.acc.supporting">Supporting Someone Else</span> <button class="info-btn" onclick="event.stopPropagation();openModal('modal-heal-supporting')" aria-label="About supporting others">i</button><svg class="accordion-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button>
+            <div class="accordion-body"><div class="accordion-content">
+              <ul>
+                <li><strong>Listen without judgment.</strong> Believe them. Don't ask "why didn't you leave?" or "are you sure?"</li>
+                <li><strong>Follow their lead.</strong> Ask what they need rather than deciding for them.</li>
+                <li><strong>Don't pressure them to report</strong> — this is their decision and their timeline.</li>
+                <li>Remember to care for yourself too — supporting a survivor can be emotionally demanding. Secondary trauma is real.</li>
+                <li>RAINN guide for friends and family: <a href="https://www.rainn.org/articles/help-friend" rel="noopener noreferrer" target="_blank">rainn.org/articles/help-friend</a></li>
+              </ul>
+            </div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════ TAB 6: SAFETY PLAN ══════════ -->
+      <div id="pane-safety" class="resource-pane" role="tabpanel">
+        <div class="resource-pane-header">
+          <div class="resource-pane-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <div class="resource-pane-title">
+            <h3 data-i18n="safety.title">Safety Planning</h3> <button class="info-btn" onclick="openModal('modal-res-safety')" aria-label="About this section">i</button>
+            <p data-i18n="safety.desc">A safety plan is a personalized, practical plan for staying safer in an ongoing or potentially dangerous situation. Use the fields below to draft one privately — <strong>nothing here is saved or transmitted.</strong></p>
+          </div>
+        </div>
+        <div style="background:var(--warning-bg);border:1px solid var(--warning);border-radius:var(--radius);padding:0.875rem 1.1rem;margin-bottom:1.5rem;font-size:0.875rem;display:flex;gap:0.65rem;align-items:flex-start;line-height:1.55;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--warning);flex-shrink:0;margin-top:0.1rem;"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+          <span data-i18n="safety.privacy"><strong>Your privacy:</strong> This form exists only in your browser. Nothing typed here is sent anywhere or saved after you close the tab. A domestic violence advocate can also help you build a customized plan — call any hotline on the Hotlines tab.</span>
+        </div>
+        <div class="form-panel" style="max-width:100%;">
+          <div class="form-section-label" data-i18n="safety.contacts.label">Emergency contacts</div>
+          <div class="row"><label for="sp-contact1" data-i18n="safety.contact1">Trusted person #1 (name &amp; phone)</label><input type="text" id="sp-contact1" data-i18n-placeholder="safety.contact1.placeholder" placeholder="e.g. Maria — 555-0100" autocomplete="off" /></div>
+          <div class="row"><label for="sp-contact2" data-i18n="safety.contact2">Trusted person #2 (name &amp; phone)</label><input type="text" id="sp-contact2" data-i18n-placeholder="safety.contact2.placeholder" placeholder="e.g. Alex — 555-0200" autocomplete="off" /></div>
+          <div class="row"><label for="sp-code" data-i18n="safety.code">Code word (a phrase that signals you need help)</label><input type="text" id="sp-code" data-i18n-placeholder="safety.code.placeholder" placeholder='e.g. "Can you bring me the blue book?"' autocomplete="off" /></div>
+          <div class="form-section-label" data-i18n="safety.exit.label">Exit strategy</div>
+          <div class="row"><label for="sp-exits" data-i18n="safety.exits">Safe exits from your home or workplace</label><textarea id="sp-exits" rows="3" data-i18n-placeholder="safety.exits.placeholder" placeholder="e.g. Back door → alley → neighbor's house. Fire escape on north side…" autocomplete="off"></textarea></div>
+          <div class="row"><label for="sp-safe-place" data-i18n="safety.place">Where you can go quickly if you need to leave</label><input type="text" id="sp-safe-place" data-i18n-placeholder="safety.place.placeholder" placeholder="e.g. Maria's home at 123 Oak St / public library on Main" autocomplete="off" /></div>
+          <div class="form-section-label" data-i18n="safety.docs.label">Documents &amp; essentials</div>
+          <div class="row">
+            <label data-i18n="safety.checklist.prompt">Check off what you have accessible or have prepared:</label>
+            <div class="checkboxes" style="margin-top:0.6rem;">
+              <label class="check"><input type="checkbox" /> <span data-i18n="safety.check.id">ID / Passport</span></label>
+              <label class="check"><input type="checkbox" /> <span data-i18n="safety.check.cash">Cash or card</span></label>
+              <label class="check"><input type="checkbox" /> <span data-i18n="safety.check.meds">Medications</span></label>
+              <label class="check"><input type="checkbox" /> <span data-i18n="safety.check.phone">Phone charger</span></label>
+              <label class="check"><input type="checkbox" /> <span data-i18n="safety.check.docs">Documents backed up</span></label>
+              <label class="check"><input type="checkbox" /> <span data-i18n="safety.check.plan">Trusted person knows my plan</span></label>
+            </div>
+          </div>
+          <div class="form-section-label" data-i18n="safety.notes.label">Notes</div>
+          <div class="row"><label for="sp-notes" data-i18n="safety.notes">Any other details important to your plan</label><textarea id="sp-notes" rows="4" data-i18n-placeholder="safety.notes.placeholder" placeholder="Warning signs to watch for, situations to avoid, local shelter address…" autocomplete="off"></textarea></div>
+          <div style="margin-top:0.5rem;display:flex;gap:0.75rem;flex-wrap:wrap;">
+            <button type="button" onclick="window.print()" class="primary" style="display:flex;align-items:center;gap:0.4rem;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+              <span data-i18n="safety.print">Print / Save as PDF</span>
+            </button>
+            <button type="button" onclick="clearSafetyPlan()"><span data-i18n="safety.clear">Clear all fields</span></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════ TAB 6: HOW THIS SITE WORKS ══════════ -->
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-rainbow-bar"></div>
+    <div class="container footer-inner">
+      <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;">
+        <a href="resources.html" data-i18n="footer.resources">Resources</a> ·
+        <a href="about.html" data-i18n="footer.about">About</a> ·
+        <a href="https://github.com/namehim/namehim" rel="noopener noreferrer">GitHub</a>
+      </div>
+      <span data-i18n="footer.tagline">SafeVoice — Open source community safety</span>
+    </div>
+  </footer>
+
+  <script>
+    var SVG_MOON = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>';
+    var SVG_SUN  = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>';
+
+    function toggleTheme() {
+      var html = document.documentElement;
+      var current = html.getAttribute('data-theme');
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var isDark = current === 'dark' || (!current && prefersDark);
+      var next = isDark ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('sv_theme', next);
+      var btn = document.getElementById('theme-toggle');
+      if (btn) btn.innerHTML = next === 'dark' ? SVG_SUN : SVG_MOON;
+    }
+
+    (function initThemeBtn() {
+      var t = document.documentElement.getAttribute('data-theme');
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var isDark = t === 'dark' || (!t && prefersDark);
+      var btn = document.getElementById('theme-toggle');
+      if (btn) btn.innerHTML = isDark ? SVG_SUN : SVG_MOON;
+    })();
+
+    function openModal(id) {
+      var overlay = document.getElementById(id);
+      if (!overlay) return;
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      var closeBtn = overlay.querySelector('.modal-close');
+      if (closeBtn) closeBtn.focus();
+    }
+    function closeModal(id) {
+      var overlay = document.getElementById(id);
+      if (!overlay) return;
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('click', function(e) {
+      if (e.target && e.target.classList.contains('modal-overlay')) {
+        e.target.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.modal-overlay.open').forEach(function(el) {
+          el.classList.remove('open');
+          document.body.style.overflow = '';
+        });
+      }
+    });
+
+    function showTab(id, btn) {
+      document.querySelectorAll('.resource-pane').forEach(function(p) { p.classList.remove('active'); });
+      document.querySelectorAll('.resource-tab-btn').forEach(function(b) { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+      var pane = document.getElementById('pane-' + id);
+      if (pane) pane.classList.add('active');
+      if (btn) { btn.classList.add('active'); btn.setAttribute('aria-selected', 'true'); }
+      if (history.replaceState) history.replaceState(null, '', '#/' + id);
+    }
+
+    (function initTab() {
+      var hash = location.hash;
+      if (hash && hash.startsWith('#/')) {
+        var id = hash.slice(2);
+        var btn = document.querySelector('[aria-controls="pane-' + id + '"]');
+        if (btn) showTab(id, btn);
+      }
+    })();
+
+    var checkStates = [false, false, false, false, false, false];
+
+    function toggleCheck(el, idx) {
+      checkStates[idx] = !checkStates[idx];
+      el.classList.toggle('done', checkStates[idx]);
+      el.setAttribute('aria-pressed', checkStates[idx] ? 'true' : 'false');
+      updateChecklist();
+    }
+
+    function updateChecklist() {
+      var done = checkStates.filter(Boolean).length;
+      var pct = Math.round((done / checkStates.length) * 100);
+      var bar = document.getElementById('checklist-bar');
+      var prog = document.getElementById('checklist-progress');
+      var callout = document.getElementById('checklist-done');
+      if (bar) bar.style.width = pct + '%';
+      if (prog) prog.textContent = svT('immediate.progress.fmt').replace('{n}', done);
+      if (callout) callout.classList.toggle('visible', done === checkStates.length);
+    }
+
+    function resetChecklist() {
+      checkStates = [false, false, false, false, false, false];
+      document.querySelectorAll('.checklist-item').forEach(function(el) {
+        el.classList.remove('done');
+        el.setAttribute('aria-pressed', 'false');
+      });
+      updateChecklist();
+    }
+
+    function toggleAccordion(trigger) {
+      var item = trigger.closest('.accordion-item');
+      var body = item.querySelector('.accordion-body');
+      var isOpen = item.classList.contains('open');
+      item.classList.toggle('open', !isOpen);
+      body.classList.toggle('open', !isOpen);
+      trigger.setAttribute('aria-expanded', !isOpen ? 'true' : 'false');
+    }
+
+    // Ensure pre-open accordions have the item class
+    document.querySelectorAll('.accordion-body.open').forEach(function(body) {
+      var item = body.closest('.accordion-item');
+      if (item) item.classList.add('open');
+    });
+
+    function clearSafetyPlan() {
+      ['sp-contact1','sp-contact2','sp-code','sp-exits','sp-safe-place','sp-notes'].forEach(function(id) {
+        var el = document.getElementById(id); if (el) el.value = '';
+      });
+      document.querySelectorAll('#pane-safety input[type="checkbox"]').forEach(function(cb) { cb.checked = false; });
+    }
+  </script>
+  <!-- Emergency banner -->
+  <div class="emergency-banner" role="alert">
+    <div style="display:flex;align-items:center;gap:0.65rem;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0;"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+      <div>
+        <strong data-i18n="emergency.danger">Consider calling emergency services now.</strong>
+      </div>
+    </div>
+    <div class="emergency-numbers">
+      <div class="emergency-number-item"><span class="emergency-number" data-i18n="emergency.911.num">911</span><span class="emergency-label" data-i18n="emergency.911.lbl">US / Canada / Mexico</span></div>
+    </div>
+  </div>
+
+  <!-- ══ INFO MODALS: Resources page ══ -->
+  <div id="modal-res-immediate" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-res-immediate')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.res.immediate.title">About This Checklist</h2><div data-i18n-html="modal.res.immediate.body"></div></div></div>
+  <div id="modal-res-hotlines" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-res-hotlines')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.res.hotlines.title">About These Hotlines</h2><div data-i18n-html="modal.res.hotlines.body"></div></div></div>
+  <div id="modal-res-lgbtq" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-res-lgbtq')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.res.lgbtq.title">About LGBTQ+ Resources</h2><div data-i18n-html="modal.res.lgbtq.body"></div></div></div>
+  <div id="modal-res-legal" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-res-legal')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.res.legal.title">About Legal Options</h2><div data-i18n-html="modal.res.legal.body"></div></div></div>
+  <div id="modal-res-healing" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-res-healing')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.res.healing.title">About Healing Resources</h2><div data-i18n-html="modal.res.healing.body"></div></div></div>
+  <div id="modal-res-safety" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-res-safety')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.res.safety.title">About Safety Planning</h2><div data-i18n-html="modal.res.safety.body"></div></div></div>
+  <div id="modal-step-safety" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-step-safety')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.step.safety.title">Why: Get to Safety First</h2><div data-i18n-html="modal.step.safety.body"></div></div></div>
+  <div id="modal-step-preserve" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-step-preserve')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.step.preserve.title">Why: Preserve Physical Evidence</h2><div data-i18n-html="modal.step.preserve.body"></div></div></div>
+  <div id="modal-step-medical" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-step-medical')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.step.medical.title">Why: Seek Medical Attention</h2><div data-i18n-html="modal.step.medical.body"></div></div></div>
+  <div id="modal-step-tell" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-step-tell')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.step.tell.title">Why: Tell Someone You Trust</h2><div data-i18n-html="modal.step.tell.body"></div></div></div>
+  <div id="modal-step-document" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-step-document')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.step.document.title">Why: Document Evidence</h2><div data-i18n-html="modal.step.document.body"></div></div></div>
+  <div id="modal-step-hotline" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-step-hotline')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.step.hotline.title">Why: Contact a Crisis Hotline</h2><div data-i18n-html="modal.step.hotline.body"></div></div></div>
+
+  <div id="modal-hl-us" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-hl-us')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.hl.us.title">US Crisis Lines</h2><div data-i18n-html="modal.hl.us.body"></div></div></div>
+  <div id="modal-hl-lgbtq" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-hl-lgbtq')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.hl.lgbtq.title">LGBTQ+ Crisis Lines</h2><div data-i18n-html="modal.hl.lgbtq.body"></div></div></div>
+  <div id="modal-hl-ca" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-hl-ca')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.hl.ca.title">Canadian Crisis Lines</h2><div data-i18n-html="modal.hl.ca.body"></div></div></div>
+  <div id="modal-hl-mx" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-hl-mx')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.hl.mx.title">Líneas de Crisis en México</h2><div data-i18n-html="modal.hl.mx.body"></div></div></div>
+
+  <div id="modal-lgbtq-us" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-lgbtq-us')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.lgbtq.us.title">US LGBTQ+ Organizations</h2><div data-i18n-html="modal.lgbtq.us.body"></div></div></div>
+  <div id="modal-lgbtq-ca" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-lgbtq-ca')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.lgbtq.ca.title">Canadian LGBTQ+ Organizations</h2><div data-i18n-html="modal.lgbtq.ca.body"></div></div></div>
+  <div id="modal-lgbtq-mx" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-lgbtq-mx')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.lgbtq.mx.title">Organizaciones LGBTQ+ en México</h2><div data-i18n-html="modal.lgbtq.mx.body"></div></div></div>
+  <div id="modal-lgbtq-survivors" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-lgbtq-survivors')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.lgbtq.survivors.title">For LGBTQ+ Survivors</h2><div data-i18n-html="modal.lgbtq.survivors.body"></div></div></div>
+  <div id="modal-lgbtq-mh" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-lgbtq-mh')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.lgbtq.mh.title">LGBTQ+-Affirming Mental Health</h2><div data-i18n-html="modal.lgbtq.mh.body"></div></div></div>
+  <div id="modal-lgbtq-community" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-lgbtq-community')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.lgbtq.community.title">Online Community Spaces</h2><div data-i18n-html="modal.lgbtq.community.body"></div></div></div>
+
+  <div id="modal-legal-ro" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-legal-ro')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.legal.ro.title">Protective &amp; Restraining Orders</h2><div data-i18n-html="modal.legal.ro.body"></div></div></div>
+  <div id="modal-legal-le" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-legal-le')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.legal.le.title">Reporting to Law Enforcement</h2><div data-i18n-html="modal.legal.le.body"></div></div></div>
+  <div id="modal-legal-civil" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-legal-civil')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.legal.civil.title">Civil Lawsuit</h2><div data-i18n-html="modal.legal.civil.body"></div></div></div>
+  <div id="modal-legal-eeoc" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-legal-eeoc')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.legal.eeoc.title">Workplace Protections (EEOC)</h2><div data-i18n-html="modal.legal.eeoc.body"></div></div></div>
+  <div id="modal-legal-titleix" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-legal-titleix')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.legal.titleix.title">Title IX (Schools)</h2><div data-i18n-html="modal.legal.titleix.body"></div></div></div>
+  <div id="modal-legal-comp" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-legal-comp')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.legal.comp.title">Victim Compensation Programs</h2><div data-i18n-html="modal.legal.comp.body"></div></div></div>
+  <div id="modal-legal-free" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-legal-free')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.legal.free.title">Free Legal Help</h2><div data-i18n-html="modal.legal.free.body"></div></div></div>
+
+  <div id="modal-heal-therapist" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-heal-therapist')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.heal.therapist.title">Finding a Therapist</h2><div data-i18n-html="modal.heal.therapist.body"></div></div></div>
+  <div id="modal-heal-communities" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-heal-communities')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.heal.communities.title">Online Support Communities</h2><div data-i18n-html="modal.heal.communities.body"></div></div></div>
+  <div id="modal-heal-social" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-heal-social')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.heal.social.title">Social Media Communities</h2><div data-i18n-html="modal.heal.social.body"></div></div></div>
+  <div id="modal-heal-podcasts" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-heal-podcasts')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.heal.podcasts.title">Podcasts for Survivors</h2><div data-i18n-html="modal.heal.podcasts.body"></div></div></div>
+  <div id="modal-heal-books" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-heal-books')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.heal.books.title">Books for Recovery</h2><div data-i18n-html="modal.heal.books.body"></div></div></div>
+  <div id="modal-heal-apps" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-heal-apps')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.heal.apps.title">Healing &amp; Grounding Apps</h2><div data-i18n-html="modal.heal.apps.body"></div></div></div>
+  <div id="modal-heal-somatic" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-heal-somatic')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.heal.somatic.title">Body-Based Healing</h2><div data-i18n-html="modal.heal.somatic.body"></div></div></div>
+  <div id="modal-heal-supporting" class="modal-overlay" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-heal-supporting')" aria-label="Close">&#x2715;</button><h2 data-i18n="modal.heal.supporting.title">Supporting Someone Else</h2><div data-i18n-html="modal.heal.supporting.body"></div></div></div>
+
+</body>
+</html>
